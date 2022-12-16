@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login", saljemo).subscribe(
       (x:LoginInformacije)=>{
         if(x.isLogiran){
-          porukaSuccess("login upsjesan");
+          porukaSuccess("login upjesan");
           AutentifikacijaHelper.setLoginInfo(x);
           this.router.navigateByUrl("/oprema");
         }

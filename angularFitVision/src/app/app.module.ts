@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import {OpremaComponent} from "./oprema/oprema.component";
 import { RegistracijaAdminComponent } from './registracija-admin/registracija-admin.component';
 import { RegistracijaKorisnikComponent } from './registracija-korisnik/registracija-korisnik.component';
+import { PostavkeProfilaComponent } from './postavke-profila/postavke-profila.component';
+import { PostavkaAdminComponent } from './postavke-profila/postavka-admin/postavka-admin.component';
+import { PostavkaKorisnikComponent } from './postavke-profila/postavka-korisnik/postavka-korisnik.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { RegistracijaKorisnikComponent } from './registracija-korisnik/registrac
     LoginComponent,
     OpremaComponent,
     RegistracijaAdminComponent,
-    RegistracijaKorisnikComponent
+    RegistracijaKorisnikComponent,
+    PostavkeProfilaComponent,
+    PostavkaAdminComponent,
+    PostavkaKorisnikComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,8 @@ import { RegistracijaKorisnikComponent } from './registracija-korisnik/registrac
       {path: 'login', component: LoginComponent},
       {path: 'oprema', component: OpremaComponent},
       {path: 'registracija-admin', component: RegistracijaAdminComponent},
-      {path: 'registracija-korisnik', component: RegistracijaKorisnikComponent}
+      {path: 'registracija-korisnik', component: RegistracijaKorisnikComponent},
+      {path: 'postavke-profila', component: PostavkeProfilaComponent}
     ])
   ],
   providers: [],

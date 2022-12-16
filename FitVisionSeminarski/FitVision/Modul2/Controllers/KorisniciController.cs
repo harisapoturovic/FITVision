@@ -18,23 +18,7 @@ namespace FitVision.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
-        public class KorisnikGetVM
-        {
-            public int id { get; set; }
-            public string ime { get; set; }
-            public string prezime { get; set; }
-            public int godina_rodjenja { get; set; }
-            public string telefon { get; set; }
-            public string email { get; set; }
-            public string adresa { get; set; }
-            public string jmbg { get; set; }
-            public string spol { get; set; }
-            public string grad { get; set; }
-            public string visina { get; set; }
-            public string tezina { get; set; }
-            public string datum_polasaka { get; set; }
-            
-        }
+       
 
         [HttpGet]
         public ActionResult<List<KorisnikGetVM>> GetAll()
@@ -63,26 +47,7 @@ namespace FitVision.Modul2.Controllers
 
 
 
-        public class KorisnikAddVM
-        {
-            public int id { get; set; }
-            public string ime { get; set; }
-            public string prezime { get; set; }
-            public DateTime datum_rodjenja { get; set; }
-            public string telefon { get; set; }
-            public string email { get; set; }
-            public string adresa { get; set; }
-            public string jmbg { get; set; }
-            public string spol { get; set; }
-            public int grad_ID { get; set; }
-            public string visina { get; set; }
-            public string tezina { get; set; }
-            public DateTime datum_polasaka { get; set; }
-           
-
-            public string korisnickoIme { get; set; }
-            public string lozinka { get; set; }
-        }
+       
 
         [HttpGet]
         public ActionResult<KorisnikAddVM> GetById(int id)

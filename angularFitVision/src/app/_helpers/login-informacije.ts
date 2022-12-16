@@ -10,7 +10,7 @@ export class LoginInformacije{
 
 export interface AutentifikacijaToken {
 
-  id: number;
+  iD: number;
   vrijednost: string;
   korisnickiNalogId: number;
   korisnickiNalog: KorisnickiNalog;
