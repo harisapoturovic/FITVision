@@ -1,4 +1,5 @@
-﻿using FitVision.Modul2.Models;
+﻿using FitVision.Modul0_Autentifikacija.Models;
+using FitVision.Modul2.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitVision.Data
@@ -9,7 +10,12 @@ namespace FitVision.Data
         {
 
         }
-        public DbSet<Animal>  Animal { get; set; }
+        public DbSet<KorisnickiNalog> KorisnickiNalog { get; set; }
+        public DbSet<Admin> Admin { get; set; }
+        public DbSet<Korisnik> Korisnik { get; set; }
+        public DbSet<Grad> Grad { get; set; }
+        public DbSet<Drzava> Drzava { get; set; }
+        public DbSet<AutentifikacijaToken> AutentifikacijaToken { get; set; }
 
     }
 }
