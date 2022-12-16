@@ -19,9 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-    <Folder Include="Modul0_Autentifikacija\Controllers\" />
-    <Folder Include="Modul0_Autentifikacija\ViewModels\" />
     <Folder Include="Modul2\Controllers\" />
     <Folder Include="Modul2\ViewModels\" />
   </ItemGroup>
