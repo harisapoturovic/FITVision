@@ -46,13 +46,13 @@ export class PostavkaKorisnikComponent implements OnInit {
 }
 
   ucitajGradove(){
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Gradovi/GetAll").subscribe(x=>{
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Grad/GetAll").subscribe(x=>{
       this.gradovi=x;
     })
   }
 
   ucitajKorisnika(){
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Korisnici/GetById?id="+ this.loginInfo().autentifikacijaToken.korisnickiNalogId )
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Korisnik/GetById?id="+ this.loginInfo().autentifikacijaToken.korisnickiNalogId )
       .subscribe(x=>{
         this.korisnik=x;
         console.log(this.korisnik);
@@ -69,7 +69,7 @@ export class PostavkaKorisnikComponent implements OnInit {
     if (this.korisnik.ime != "" && this.korisnik.prezime != "" && this.korisnik.datum_rodjenja != null && this.korisnik.datum_polaska != null
       && this.korisnik.telefon != "" && this.korisnik.email != "" && this.korisnik.adresa != "" && this.korisnik.korisnickoIme != "" && this.korisnik.lozinka != null &&
       this.korisnik.visina != "" && this.korisnik.tezina != "" && this.korisnik.jmbg != "" && this.korisnik.spol != "" && this.korisnik.spol != "...." && this.korisnik.grad_ID != 0){
-      this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnici/Snimi", this.korisnik).subscribe(x=>{
+      this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnik/Snimi", this.korisnik).subscribe(x=>{
 
       });
       porukaSuccess("Upjesna promjena podataka");

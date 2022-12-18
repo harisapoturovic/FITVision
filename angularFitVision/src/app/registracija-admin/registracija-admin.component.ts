@@ -39,7 +39,7 @@ export class RegistracijaAdminComponent implements OnInit {
 
 
   ucitajGradove(){
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Gradovi/GetAll").subscribe(x=>{
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Grad/GetAll").subscribe(x=>{
       this.gradovi=x;
     })
   }
