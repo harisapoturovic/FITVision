@@ -51,10 +51,10 @@ namespace FitVision.Modul1_TestniPodaci.Controller
         {
             var drzave = new List<Drzava>();
 
-            drzave.Add(new Drzava { Naziv = "BiH", BrojStanovnika = 3700000, Kontinent="Evropa" });
-            drzave.Add(new Drzava { Naziv = "Hrvatska", BrojStanovnika = 4300000, Kontinent = "Evropa" });
-            drzave.Add(new Drzava { Naziv = "Srbija", BrojStanovnika = 8000000, Kontinent = "Evropa" });
-            drzave.Add(new Drzava { Naziv = "Crna Gora", BrojStanovnika = 1700000, Kontinent = "Evropa" });
+            drzave.Add(new Drzava { Naziv = "Bosna i Hercegovina", Skracenica="BiH"});
+            drzave.Add(new Drzava { Naziv = "Hrvatska", Skracenica = "Hrv" });
+            drzave.Add(new Drzava { Naziv = "Srbija", Skracenica = "Srb" });
+            drzave.Add(new Drzava { Naziv = "Crna Gora", Skracenica = "CG" });
 
 
             var gradovi = new List<Grad>();

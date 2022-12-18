@@ -80,15 +80,11 @@ namespace FitVision.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("BrojStanovnika")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Kontinent")
+                    b.Property<string>("Naziv")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Naziv")
-                        .IsRequired()
+                    b.Property<string>("Skracenica")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
