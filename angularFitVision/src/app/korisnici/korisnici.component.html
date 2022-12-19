@@ -20,7 +20,6 @@
     <th>Grad</th>
     <th>Visina</th>
     <th>Tezina</th>
-    <th>Uredi</th>
     <th>Obrisi</th>
     </thead>
     <tbody >
@@ -39,95 +38,11 @@
       <td>{{k.visina}}</td>
       <td>{{k.tezina}}</td>
       <td>
-        <button class="btn btn-danger" (click)="odabraniKorisnik=k">Uredi</button>
-      </td>
-      <td>
-        <button class="btn btn-danger" (click)="odabraniKorisnik=k">Obrisi</button>
+        <button class="btn btn-danger" (click)="obrisi(k)">Obrisi</button>
       </td>
     </tr>
     </tbody>
   </table>
 
-  <!--<button class="form-label" (click)="noviKorisnik()">Novi korisnik</button>-->
 </div>
-<!--
-<div *ngIf="this.odabraniKorisnik!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel"> Dodaj/uredi korisnika </h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="odabraniKorisnik=null"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label class="form-label">Ime</label>
-          <input class="form-control"  placeholder="Ime" [(ngModel)]="odabraniKorisnik.ime">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Prezime</label>
-          <input class="form-control" placeholder="Prezime" [(ngModel)]="odabraniKorisnik.prezime"/>
-        </div>
 
-        <div class="mb-3">
-          <label class="form-label">Rodjenje</label>
-          <input class="form-control" placeholder="Rodjenje" [(ngModel)]="odabraniKorisnik.datum_rodjenja"/>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Telefon</label>
-          <input class="form-control" placeholder="Telefon" [(ngModel)]="odabraniKorisnik.telefon"/>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Email</label>
-          <input class="form-control" placeholder="Email" [(ngModel)]="odabraniKorisnik.email"/>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">JMBG</label>
-          <input class="form-control" placeholder="JMBG" [(ngModel)]="odabraniKorisnik.jmbg"/>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Spol</label>
-          <select class="form-control" >
-            <option>Muski</option>
-            <option>Zenski</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Adresa</label>
-          <input class="form-control" placeholder="Adresa" [(ngModel)]="odabraniKorisnik.adresa"/>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Datum polaska</label>
-          <input class="form-control" placeholder="Datum polaska" [(ngModel)]="odabraniKorisnik.datum_polasaka"/>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Grad</label>
-          <select class="form-control" >
-            <option *ngFor="let o of gradovi" [value]="o.id">{{o.naziv}}</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Visina</label>
-          <input class="form-control" placeholder="Visina" [(ngModel)]="odabraniKorisnik.visina"/>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Tezina</label>
-          <input class="form-control" placeholder="Tezina" [(ngModel)]="odabraniKorisnik.tezina"/>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="odabraniKorisnik=null">Close</button>
-        <button type="button" class="btn btn-primary" (click)="snimi()" >Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
--->

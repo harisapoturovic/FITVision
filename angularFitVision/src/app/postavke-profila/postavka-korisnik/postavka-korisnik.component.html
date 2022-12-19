@@ -22,7 +22,7 @@
                [(ngModel)]="korisnik.telefon">
       </div>
       <div class="mb-3">
-        <label for="email" class="form-label">Emial</label>
+        <label for="email" class="form-label">Email</label>
         <input type="email" name="Email" class="form-control" id="email"
                [(ngModel)]="korisnik.email" >
       </div>
@@ -47,7 +47,7 @@
       <div class="mb-3">
         <label for="email" class="form-label">Grad</label>
         <select class="form-control" [(ngModel)]="korisnik.grad_ID" name="grad">
-          <option *ngFor="let g of gradovi" [value]="g.id">{{g.opis}}</option>
+          <option *ngFor="let g of gradovi" [value]="g.id">{{g.naziv}}</option>
         </select>
       </div>
       <div class="mb-3">

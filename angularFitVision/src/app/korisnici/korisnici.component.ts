@@ -14,13 +14,11 @@ export class KorisniciComponent implements OnInit {
   korisnici:any;
   ime_prezime:string = '';
   filter_ime_prezime: boolean;
-  odabraniKorisnik:any;
-  gradovi:any;
+
   constructor(private httpKlijent:HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.ucitajKorisnike();
-    //this.getGradove();
   }
 
   ucitajKorisnike(){
@@ -37,25 +35,10 @@ export class KorisniciComponent implements OnInit {
           || (x.prezime + ' ' + x.ime).toLowerCase().startsWith(this.ime_prezime)));
   }
 
-  //noviKorisnik() {
-  //  this.odabraniKorisnik={
-  //    id:0,
-  //    ime:'...',
-  //    prezime:'...'
-  //  };
-  //}
-//
-  //snimi() {
-  //  this.httpKlijent.post(MojConfig.adresa_servera + '/Korisnik/Snimi', this.odabraniKorisnik, MojConfig.http_opcije()).subscribe((x:any)=>{
-  //    this.getPodaci();
-  //    this.odabraniKorisnik=null;
-  //  });
-  //}
-//
-  //getGradove(){
-  //  this.httpKlijent.get(MojConfig.adresa_servera+"/Grad/GetAll").subscribe(x=>{
-  //    this.gradovi=x;
-  //  })
-  //}
-
+  obrisi(k: any) {
+    // @ts-ignore
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Korisnik/Obrisi/${k.id}`, MojConfig.http_opcije()).subscribe(x=>{
+      this.getPodaci();
+    });
+  }
 }
