@@ -4,6 +4,7 @@ import {LoginInformacije} from "../../_helpers/login-informacije";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
 import {Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 declare function porukaSuccess(a: string):any;
 
@@ -45,7 +46,7 @@ export class PostavkaAdminComponent implements OnInit {
   }
 
   ucitajGradove(){
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Gradovi/GetAll").subscribe(x=>{
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Grad/GetAll").subscribe(x=>{
       this.gradovi=x;
     })
   }

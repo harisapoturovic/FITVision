@@ -12,6 +12,7 @@ import { RegistracijaKorisnikComponent } from './registracija-korisnik/registrac
 import { PostavkeProfilaComponent } from './postavke-profila/postavke-profila.component';
 import { PostavkaAdminComponent } from './postavke-profila/postavka-admin/postavka-admin.component';
 import { PostavkaKorisnikComponent } from './postavke-profila/postavka-korisnik/postavka-korisnik.component';
+import { KorisniciComponent } from './korisnici/korisnici.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PostavkaKorisnikComponent } from './postavke-profila/postavka-korisnik/
     RegistracijaKorisnikComponent,
     PostavkeProfilaComponent,
     PostavkaAdminComponent,
-    PostavkaKorisnikComponent
+    PostavkaKorisnikComponent,
+    KorisniciComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { PostavkaKorisnikComponent } from './postavke-profila/postavka-korisnik/
       {path: 'oprema', component: OpremaComponent},
       {path: 'registracija-admin', component: RegistracijaAdminComponent},
       {path: 'registracija-korisnik', component: RegistracijaKorisnikComponent},
-      {path: 'postavke-profila', component: PostavkeProfilaComponent}
+      {path: 'postavke-profila', component: PostavkeProfilaComponent},
+      {path: 'korisnici', component: KorisniciComponent}
     ])
   ],
   providers: [],

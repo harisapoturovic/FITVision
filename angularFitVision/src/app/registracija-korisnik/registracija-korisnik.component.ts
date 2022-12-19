@@ -38,7 +38,7 @@ export class RegistracijaKorisnikComponent implements OnInit {
 
 
   ucitajGradove() {
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Gradovi/GetAll").subscribe(x => {
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Grad/GetAll").subscribe(x => {
       this.gradovi = x;
     })
   }
@@ -65,7 +65,7 @@ export class RegistracijaKorisnikComponent implements OnInit {
         korisnickoIme: this.korisnickoIme,
         lozinka: this.lozinka
       }
-      this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnici/Snimi", korisnik).subscribe(x => {
+      this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnik/Snimi", korisnik).subscribe(x => {
 
       })
       this.router.navigateByUrl("/login");

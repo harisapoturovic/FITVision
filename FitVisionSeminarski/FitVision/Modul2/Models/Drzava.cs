@@ -7,8 +7,7 @@ namespace FitVision.Modul2.Models
         [Key]
         public int ID { get; set; }
         public string Naziv { get; set; }
-        public int BrojStanovnika { get; set; }
-        public string Kontinent { get; set; }
+        public string? Skracenica { get; set; }
     }
 
 }
