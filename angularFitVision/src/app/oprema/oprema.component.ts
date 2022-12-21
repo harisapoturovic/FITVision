@@ -4,6 +4,9 @@ import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 import {LoginInformacije} from "../_helpers/login-informacije";
 import {HttpClient} from "@angular/common/http";
 
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
+
 @Component({
   selector: 'app-oprema',
   templateUrl: './oprema.component.html',
@@ -40,6 +43,7 @@ if(this.opremaObject.broj>0 && this.opremaObject.naziv!="") {
     this.opremaObject = null;
     this.ucitajOpremu();
   })
+  porukaSuccess("Uspjesno dodana oprema");
 }
 else if(this.opremaObject.broj<1)
   alert("Broj mora biti veći od 0");
@@ -79,10 +83,18 @@ else if(this.opremaObject.naziv=="")
         this.urediOprema= null;
         this.ucitajOpremu();
       })
+      porukaSuccess("Uspjesno promjenuta oprema");
     }
     else if(this.urediOprema.broj<1)
       alert("Broj mora biti veći od 0");
     else if(this.urediOprema.naziv=="")
       alert("Niste unijeli naziv");
+  }
+
+  obrisiOpremu(o: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera + `/Oprema/Obrisi/${o.id}`, null).subscribe(x=>{
+      this.ucitajOpremu();
+    })
+    porukaSuccess("Uspjesno obrisana oprema");
   }
 }

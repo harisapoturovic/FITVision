@@ -13,6 +13,7 @@
           <p class="card-text"> ID: {{o.id}}, Broj: {{o.broj}}</p>
           <button  class="btn btn-warning" *ngIf="loginInfo().isPremisijaAdmin" (click)="urediFunc(o)"
           >Uredi</button>
+          <button class="btn btn-danger float-end" *ngIf="loginInfo().isPremisijaAdmin" (click)="obrisiOpremu(o)">Obrisi</button>
         </div>
       </div>
     </div>
@@ -34,8 +35,8 @@
         <div class="modal-body">
           <div class="modal-body">
 
-              <input class="form-control" type="text" [(ngModel)]="opremaObject.id" disabled>
-            </div>
+
+           
             <label class="form-label">Naziv opreme</label>
             <input class="form-control" type="text" [(ngModel)]="opremaObject.naziv">
             <label class="form-label">Kolicina</label>
