@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {MojConfig} from "../moj-config";
+import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
+import {LoginInformacije} from "../_helpers/login-informacije";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-oprema',
@@ -7,9 +11,44 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OpremaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private httpKlijent:HttpClient) { }
 
   ngOnInit(): void {
   }
+
+  oprema:any;
+  opremaObject:any;
+
+
+
+
+
+  loginInfo():LoginInformacije {
+    return AutentifikacijaHelper.getLoginInfo();
+  }
+
+  dodajOpremu() {
+
+    this.httpKlijent.post(MojConfig.adresa_servera +"/Oprema/Snimi", this.opremaObject).subscribe(x=>{
+      this.opremaObject=null;
+
+    })
+
+  }
+
+
+  dodajFunc() {
+    this.opremaObject={
+      id:0,
+      naziv:"",
+      broj:0,
+      slika:"assets/empty.png"
+    }
+  }
+
+
+
+
+
 
 }

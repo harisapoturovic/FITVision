@@ -16,6 +16,7 @@ namespace FitVision.Data
         public DbSet<Grad> Grad { get; set; }
         public DbSet<Drzava> Drzava { get; set; }
         public DbSet<AutentifikacijaToken> AutentifikacijaToken { get; set; }
+        public DbSet<Oprema> Oprema { get; set; }
 
     }
 }

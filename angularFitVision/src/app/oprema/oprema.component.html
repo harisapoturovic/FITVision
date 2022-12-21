@@ -1,1 +1,40 @@
-<p>oprema works!</p>
+<div class="continer mt-4">
+  <div class="mb-5 d-flex justify-content-end">
+    <button class="btn btn-primary m-3 "
+            *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()">Dodaj Opremu</button>
+  </div>
+  <div class="d-flex justify-content-around flex-wrap">
+
+
+  <!--Modal-->
+
+
+
+  <div *ngIf="opremaObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel">Dodaj opremu </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="opremaObject=null"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+            <div *ngIf="opremaObject.id>0">
+              <label class="form-label">ID</label>
+              <input class="form-control" type="text" [(ngModel)]="opremaObject.id" disabled>
+            </div>
+            <label class="form-label">Naziv opreme</label>
+            <input class="form-control" type="text" [(ngModel)]="opremaObject.naziv">
+            <label class="form-label">Kolicina</label>
+            <input class="form-control" type="number" [(ngModel)]="opremaObject.broj">
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="dodajOpremu()">Snimi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
