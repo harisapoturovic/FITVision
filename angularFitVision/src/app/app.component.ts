@@ -23,9 +23,10 @@ export class AppComponent {
   }
 
   odjava() {
+    let token = MojConfig.http_opcije();
     AutentifikacijaHelper.setLoginInfo(null);
 
-    this.httpKlijent.post(MojConfig.adresa_servera + "/Autentifikacija/Logout/", null, MojConfig.http_opcije())
+    this.httpKlijent.post(MojConfig.adresa_servera + "/Autentifikacija/Logout/", null, token)
       .subscribe((x: any) => {
         this.router.navigateByUrl("/login");
         porukaSuccess("logout uspjesan");

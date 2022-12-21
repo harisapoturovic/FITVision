@@ -66,10 +66,10 @@ export class RegistracijaAdminComponent implements OnInit {
         lozinka:this.lozinka
       }
       this.httpKlijent.post(MojConfig.adresa_servera + "/Admin/Snimi", korisnik).subscribe(x=>{
-
+        porukaSuccess("Ospjesna regstracija");
       })
       this.router.navigateByUrl("/login");
-      porukaSuccess("Ospjesna regstracija");
+
 
     }
     else{

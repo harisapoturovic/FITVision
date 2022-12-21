@@ -66,10 +66,10 @@ export class RegistracijaKorisnikComponent implements OnInit {
         lozinka: this.lozinka
       }
       this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnik/Snimi", korisnik).subscribe(x => {
-
+        porukaSuccess("Ospjesna regstracija");
       })
       this.router.navigateByUrl("/login");
-      porukaSuccess("Ospjesna regstracija");
+
 
     } else {
       alert("niste unijeli sve podatke");

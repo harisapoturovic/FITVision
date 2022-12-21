@@ -32,7 +32,7 @@ export class PostavkaKorisnikComponent implements OnInit {
   id:0,
   ime:"",
   prezime:"",
-  datum_rodjenja:Date,datum_polasaka:Date,
+  datum_rodjenja:Date,datum_polaska:Date,
   telefon:"",
   adresa:"",
   email:"",
@@ -70,9 +70,9 @@ export class PostavkaKorisnikComponent implements OnInit {
       && this.korisnik.telefon != "" && this.korisnik.email != "" && this.korisnik.adresa != "" && this.korisnik.korisnickoIme != "" && this.korisnik.lozinka != null &&
       this.korisnik.visina != "" && this.korisnik.tezina != "" && this.korisnik.jmbg != "" && this.korisnik.spol != "" && this.korisnik.spol != "...." && this.korisnik.grad_ID != 0){
       this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnik/Snimi", this.korisnik).subscribe(x=>{
-
+        porukaSuccess("Upjesna promjena podataka");
       });
-      porukaSuccess("Upjesna promjena podataka");
+
       this.router.navigateByUrl("/oprema");
     }
     else {

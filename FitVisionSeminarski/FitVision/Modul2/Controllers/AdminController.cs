@@ -61,9 +61,9 @@ namespace FitVision.Modul2.Controllers
                 spol = admin.Spol,
                 jmbg = admin.JMBG,
                 grad_ID = admin.gradid,
-                datum_rodjenja = admin.DatumRodjenja,
+                datum_rodjenja = admin.DatumRodjenja.ToString("yyyy-MM-dd"),
                 strucna_sprema = admin.StrucnaSprema,
-                datum_zaposlenja = admin.DatumZaposlenja,
+                datum_zaposlenja = admin.DatumZaposlenja.ToString("yyyy-MM-dd"),
                 korisnickoIme = admin.KorisnickoIme,
                 lozinka = admin.Lozinka
 
@@ -90,13 +90,13 @@ namespace FitVision.Modul2.Controllers
             admin.ID = x.id;
             admin.Ime = x.ime;
             admin.Prezime = x.prezime;
-            admin.DatumRodjenja = x.datum_rodjenja;
+            admin.DatumRodjenja = DateTime.Parse(x.datum_rodjenja);
             admin.Telefon = x.telefon;
             admin.Email = x.email;
             admin.Adresa = x.adresa;
             admin.JMBG = x.jmbg;
             admin.Spol = x.spol;
-            admin.DatumZaposlenja = x.datum_zaposlenja;
+            admin.DatumZaposlenja = DateTime.Parse(x.datum_zaposlenja);
             admin.StrucnaSprema = x.strucna_sprema;
             admin.gradid = x.grad_ID;
             admin.KorisnickoIme = x.korisnickoIme;

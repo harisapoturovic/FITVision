@@ -66,11 +66,11 @@ namespace FitVision.Modul2.Controllers
                 spol = korisnik.Spol,
                 jmbg = korisnik.JMBG,
                 grad_ID = korisnik.gradid,
-                datum_rodjenja = korisnik.DatumRodjenja,
+                datum_rodjenja = korisnik.DatumRodjenja.ToString("yyyy-MM-dd"),
 
                 visina= korisnik.Visina,
                 tezina= korisnik.Tezina,
-                datum_polasaka= korisnik.DatumPolasaka,
+                datum_polaska= korisnik.DatumPolasaka.ToString("yyyy-MM-dd"),
                 
                 korisnickoIme = korisnik.KorisnickoIme,
                 lozinka = korisnik.Lozinka
@@ -95,7 +95,7 @@ namespace FitVision.Modul2.Controllers
             korisnik.ID=x.id;
             korisnik.Ime=x.ime;
             korisnik.Prezime=x.prezime;
-            korisnik.DatumRodjenja=x.datum_rodjenja; 
+            korisnik.DatumRodjenja=DateTime.Parse(x.datum_rodjenja); 
             korisnik.Email=x.email;
             korisnik.Adresa = x.adresa;
             korisnik.JMBG=x.jmbg;
@@ -105,13 +105,12 @@ namespace FitVision.Modul2.Controllers
 
             korisnik.Visina=x.visina;
             korisnik.Tezina=x.tezina;
-            korisnik.DatumPolasaka=x.datum_polasaka;
+            korisnik.DatumPolasaka=DateTime.Parse(x.datum_polaska);
 
             korisnik.KorisnickoIme = x.korisnickoIme;
             korisnik.Lozinka=x.lozinka;
 
-            if (x.id == 0)
-            {
+           
                 List<Admin> adminList = _dbContext.Admin.ToList();
                 foreach (var a in adminList)
                 {
@@ -127,12 +126,14 @@ namespace FitVision.Modul2.Controllers
                 }
 
                 //provjera da li postoje korsnici koji imaju isto korIme i lozinku
+               
+            if (x.id == 0)
+            {
+
                 _dbContext.Korisnik.Add(korisnik);
             }
 
-
-            
-            _dbContext.SaveChanges();
+                _dbContext.SaveChanges();
             return Ok("Uspjesno snimanje");
         }
 
