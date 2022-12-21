@@ -18,6 +18,21 @@ namespace FitVision.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
+        [HttpGet]
+        public ActionResult<List<OpremaGetVM>> GetAll()
+        {
+            var data = _dbContext.Oprema
+                .Select(o => new OpremaGetVM
+                {
+                    id = o.ID,
+                    naziv = o.Naziv,
+                    broj = o.Broj,
+                    slika = o.Slika
+                  
+                });
+            return data.Take(100).ToList();
+        }
+
 
         [HttpPost]
         public ActionResult Snimi([FromBody] OpremaSnimiVM x)
