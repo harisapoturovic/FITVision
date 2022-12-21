@@ -19,6 +19,8 @@ export class OpremaComponent implements OnInit {
 
   oprema:any;
   opremaObject:any;
+  urediOprema:any;
+  url="";
 
   ucitajOpremu(){
     this.httpKlijent.get(MojConfig.adresa_servera + "/Oprema/GetAll").subscribe(x=>{
@@ -56,5 +58,31 @@ else if(this.opremaObject.naziv=="")
   }
 
 
+  urediFunc(o: any) {
+    this.urediOprema=o;
+  }
 
+  ChosenFile($event: Event) {
+    let file = (event.target as HTMLInputElement).files[0];
+    var reader= new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload=(e:any)=>{
+      this.url=e.target.result;
+      this.urediOprema.slika=this.url;
+      console.log(this.url);
+    }
+  }
+
+  urediOpremu() {
+    if(this.urediOprema.broj>0 && this.urediOprema.naziv!="") {
+      this.httpKlijent.post(MojConfig.adresa_servera + "/Oprema/Snimi", this.urediOprema).subscribe(x => {
+        this.urediOprema= null;
+        this.ucitajOpremu();
+      })
+    }
+    else if(this.urediOprema.broj<1)
+      alert("Broj mora biti veći od 0");
+    else if(this.urediOprema.naziv=="")
+      alert("Niste unijeli naziv");
+  }
 }

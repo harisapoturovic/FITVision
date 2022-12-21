@@ -10,8 +10,9 @@
         <img [src]="o.slika" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
           <h5 class="card-title">{{o.naziv}}</h5>
-          <p class="card-text"> ID: {{o.id}}</p>
-
+          <p class="card-text"> ID: {{o.id}}, Broj: {{o.broj}}</p>
+          <button  class="btn btn-warning" *ngIf="loginInfo().isPremisijaAdmin" (click)="urediFunc(o)"
+          >Uredi</button>
         </div>
       </div>
     </div>
@@ -19,10 +20,10 @@
   </div>
 
 
-  <!--Modal-->
 
 
 
+  <!--Modal dodaj-->
   <div *ngIf="opremaObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -32,8 +33,7 @@
         </div>
         <div class="modal-body">
           <div class="modal-body">
-            <div *ngIf="opremaObject.id>0">
-              <label class="form-label">ID</label>
+
               <input class="form-control" type="text" [(ngModel)]="opremaObject.id" disabled>
             </div>
             <label class="form-label">Naziv opreme</label>
@@ -51,3 +51,36 @@
     </div>
   </div>
 </div>
+
+<!--Modal uredi-->
+<div *ngIf="urediOprema!=null" class="modal fade show" id="exampleMo" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleM">Uredi opremu </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="urediOprema=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div >
+            <label class="form-label">ID</label>
+            <input class="form-control" type="text" [(ngModel)]="urediOprema.id" disabled>
+          </div>
+          <label class="form-label">Naziv opreme</label>
+          <input class="form-control" type="text" [(ngModel)]="urediOprema.naziv">
+          <label class="form-label">Kolicina</label>
+          <input class="form-control" type="number" [(ngModel)]="urediOprema.broj">
+          <div >
+            <label class="form-label">Odaberi sliku</label>
+            <input type="file" class="form-control" (change)="ChosenFile($event)">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="urediOpremu()">Snimi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
