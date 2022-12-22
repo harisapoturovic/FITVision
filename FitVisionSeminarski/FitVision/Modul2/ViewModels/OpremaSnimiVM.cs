@@ -7,6 +7,7 @@
         public int broj { get; set; }
         public string slika { get; set; }
         public string opis { get; set; }
+        public int tip_opreme_id { get; set; }
     }
 }
 

@@ -22,6 +22,25 @@ namespace FitVision.Modul2.Controllers
             public string naziv { get; set; }
         }
 
+        public class TipOpremeGetVM
+        {
+            public int id { get; set; }
+            public string naziv { get; set; }
+        }
+
+        [HttpGet]
+        public ActionResult<List<TipOpremeGetVM>> GetAll()
+        {
+            var data = _dbContext.TipOpreme
+                .Select(o => new TipOpremeGetVM
+                {
+                    id = o.ID,
+                    naziv = o.Naziv,
+
+                });
+            return data.Take(100).ToList();
+        }
+
         [HttpPost]
         public ActionResult Snimi([FromBody] TipOpremeSnimiVM x )
         {

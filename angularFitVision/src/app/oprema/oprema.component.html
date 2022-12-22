@@ -42,6 +42,10 @@
             <input class="form-control" type="text" [(ngModel)]="opremaObject.naziv">
             <label class="form-label">Kolicina</label>
             <input class="form-control" type="number" [(ngModel)]="opremaObject.broj">
+            <label class="form-label">Tip Opreme</label>
+            <select class="form-control" [(ngModel)]="opremaObject.tip_opreme_id" name="tipOpeme">
+              <option  *ngFor="let t of tipoviOpreme" [value]="t.id">{{t.naziv}}</option>
+            </select>
             <label class="form-label">Opis</label>
             <textarea class="form-control" rows="3" [(ngModel)]="opremaObject.opis"></textarea>
           <div class="modal-footer">
@@ -72,6 +76,10 @@
           <input class="form-control" type="text" [(ngModel)]="urediOprema.naziv">
           <label class="form-label">Kolicina</label>
           <input class="form-control" type="number" [(ngModel)]="urediOprema.broj">
+          <label class="form-label">Tip Opreme</label>
+          <select class="form-control" [(ngModel)]="urediOprema.tip_opreme_id" name="tipOpeme">
+            <option  *ngFor="let t of tipoviOpreme" [value]="t.id">{{t.naziv}}</option>
+          </select>
           <div >
             <label class="form-label">Odaberi sliku</label>
             <input type="file" class="form-control" (change)="ChosenFile($event)">
@@ -97,9 +105,10 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="detaljiOprema=null"></button>
         </div>
         <div class="modal-body">
-
-            <label class="form-label">Opis</label>
-            <textarea class="form-control" rows="3" [(ngModel)]="detaljiOprema.opis" disabled></textarea>
+          <label class="form-label">Tip opreme</label>
+          <input class="form-control" type="text" [value]="detaljiOprema.tipOpreme">
+          <label class="form-label">Opis</label>
+          <textarea class="form-control" rows="3" [(ngModel)]="detaljiOprema.opis" disabled></textarea>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="detaljiOprema=null">Close</button>

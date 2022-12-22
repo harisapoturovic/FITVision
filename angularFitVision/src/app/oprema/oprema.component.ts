@@ -18,13 +18,23 @@ export class OpremaComponent implements OnInit {
 
   ngOnInit(): void {
     this.ucitajOpremu()
+    this.ucitajTipove();
   }
 
+
+  tipoviOpreme:any;
   oprema:any;
   opremaObject:any;
   urediOprema:any;
   url="";
   detaljiOprema:any;
+
+  ucitajTipove(){
+
+    this.httpKlijent.get(MojConfig.adresa_servera +"/TipOpreme/GetAll").subscribe(x=>{
+      this.tipoviOpreme=x;
+    })
+  }
 
   ucitajOpremu(){
     this.httpKlijent.get(MojConfig.adresa_servera + "/Oprema/GetAll").subscribe(x=>{
@@ -39,18 +49,16 @@ export class OpremaComponent implements OnInit {
   }
 
   dodajOpremu() {
-if(this.opremaObject.broj>0 && this.opremaObject.naziv!="") {
-  this.httpKlijent.post(MojConfig.adresa_servera + "/Oprema/Snimi", this.opremaObject).subscribe(x => {
-    this.opremaObject = null;
-    this.ucitajOpremu();
-  })
-  porukaSuccess("Uspjesno dodana oprema");
-}
-else if(this.opremaObject.broj<1)
-  alert("Broj mora biti veći od 0");
-else if(this.opremaObject.naziv=="")
-  alert("Niste unijeli naziv");
+    if (this.opremaObject.broj > 0 && this.opremaObject.naziv != "" && this.opremaObject.tip_opreme_id > 0) {
+      this.httpKlijent.post(MojConfig.adresa_servera + "/Oprema/Snimi", this.opremaObject).subscribe(x => {
+        this.opremaObject = null;
+        this.ucitajOpremu();
+      })
+      porukaSuccess("Uspjesno dodana oprema");
+    } else
+      alert("Niste unijeli sve podatke");
   }
+
 
 
   dodajFunc() {
@@ -59,7 +67,8 @@ else if(this.opremaObject.naziv=="")
       naziv:"",
       broj:0,
       slika:"assets/empty.png",
-      opis:""
+      opis:"",
+      tip_opreme_id:0
     }
   }
 
@@ -80,17 +89,16 @@ else if(this.opremaObject.naziv=="")
   }
 
   urediOpremu() {
-    if(this.urediOprema.broj>0 && this.urediOprema.naziv!="") {
+    if(this.urediOprema.broj>0 && this.urediOprema.naziv!="" && this.urediOprema.tip_opreme_id>0) {
       this.httpKlijent.post(MojConfig.adresa_servera + "/Oprema/Snimi", this.urediOprema).subscribe(x => {
         this.urediOprema= null;
         this.ucitajOpremu();
       })
       porukaSuccess("Uspjesno promjenuta oprema");
     }
-    else if(this.urediOprema.broj<1)
-      alert("Broj mora biti veći od 0");
-    else if(this.urediOprema.naziv=="")
-      alert("Niste unijeli naziv");
+    else
+      alert("Niste unijeli sve podatke");
+
   }
 
   obrisiOpremu(o: any) {

@@ -7,5 +7,6 @@
         public int broj { get; set; }
         public string slika { get; set; }
         public string opis { get; set; }
+        public string tipOpreme { get; set; }
     }
 }
