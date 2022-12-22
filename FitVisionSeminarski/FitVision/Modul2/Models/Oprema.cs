@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FitVision.Modul2.Models
 {
@@ -10,5 +11,10 @@ namespace FitVision.Modul2.Models
         public int Broj { get; set; }
         public string Slika { get; set; }
         public string Opis { get; set; }
-    }
+
+        [ForeignKey(nameof(tipOpreme))]
+        public int tipOpremeID { get; set; }
+        public TipOpreme tipOpreme { get; set; }
+    
+     }
 }

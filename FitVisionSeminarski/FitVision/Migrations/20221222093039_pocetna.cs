@@ -16,8 +16,7 @@ namespace FitVision.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BrojStanovnika = table.Column<int>(type: "int", nullable: false),
-                    Kontinent = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Skracenica = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -36,6 +35,19 @@ namespace FitVision.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_KorisnickiNalog", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipOpreme",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipOpreme", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,6 +89,29 @@ namespace FitVision.Migrations
                         name: "FK_AutentifikacijaToken_KorisnickiNalog_KorisnickiNalogId",
                         column: x => x.KorisnickiNalogId,
                         principalTable: "KorisnickiNalog",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Oprema",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Broj = table.Column<int>(type: "int", nullable: false),
+                    Slika = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    tipOpremeID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Oprema", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Oprema_TipOpreme_tipOpremeID",
+                        column: x => x.tipOpremeID,
+                        principalTable: "TipOpreme",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -167,6 +202,11 @@ namespace FitVision.Migrations
                 name: "IX_Korisnik_gradid",
                 table: "Korisnik",
                 column: "gradid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Oprema_tipOpremeID",
+                table: "Oprema",
+                column: "tipOpremeID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -181,10 +221,16 @@ namespace FitVision.Migrations
                 name: "Korisnik");
 
             migrationBuilder.DropTable(
+                name: "Oprema");
+
+            migrationBuilder.DropTable(
                 name: "Grad");
 
             migrationBuilder.DropTable(
                 name: "KorisnickiNalog");
+
+            migrationBuilder.DropTable(
+                name: "TipOpreme");
 
             migrationBuilder.DropTable(
                 name: "Drzava");

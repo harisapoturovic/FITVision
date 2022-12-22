@@ -140,9 +140,31 @@ namespace FitVision.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("tipOpremeID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
+                    b.HasIndex("tipOpremeID");
+
                     b.ToTable("Oprema");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.TipOpreme", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TipOpreme");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Admin", b =>
@@ -269,6 +291,17 @@ namespace FitVision.Migrations
                         .IsRequired();
 
                     b.Navigation("drzava");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Oprema", b =>
+                {
+                    b.HasOne("FitVision.Modul2.Models.TipOpreme", "tipOpreme")
+                        .WithMany()
+                        .HasForeignKey("tipOpremeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("tipOpreme");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Admin", b =>
