@@ -24,6 +24,7 @@ export class OpremaComponent implements OnInit {
   opremaObject:any;
   urediOprema:any;
   url="";
+  detaljiOprema:any;
 
   ucitajOpremu(){
     this.httpKlijent.get(MojConfig.adresa_servera + "/Oprema/GetAll").subscribe(x=>{
@@ -57,7 +58,8 @@ else if(this.opremaObject.naziv=="")
       id:0,
       naziv:"",
       broj:0,
-      slika:"assets/empty.png"
+      slika:"assets/empty.png",
+      opis:""
     }
   }
 
@@ -96,5 +98,10 @@ else if(this.opremaObject.naziv=="")
       this.ucitajOpremu();
     })
     porukaSuccess("Uspjesno obrisana oprema");
+  }
+
+
+  detaljno(o: any) {
+    this.detaljiOprema=o;
   }
 }

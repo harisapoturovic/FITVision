@@ -6,6 +6,7 @@
         public string naziv { get; set; }
         public int broj { get; set; }
         public string slika { get; set; }
-       
+        public string opis { get; set; }
     }
 }
+

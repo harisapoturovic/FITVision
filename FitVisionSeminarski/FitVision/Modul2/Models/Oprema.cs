@@ -9,5 +9,6 @@ namespace FitVision.Modul2.Models
         public string Naziv { get; set; }
         public int Broj { get; set; }
         public string Slika { get; set; }
+        public string Opis { get; set; }
     }
 }

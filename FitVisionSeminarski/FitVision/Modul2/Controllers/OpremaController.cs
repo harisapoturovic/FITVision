@@ -27,7 +27,8 @@ namespace FitVision.Modul2.Controllers
                     id = o.ID,
                     naziv = o.Naziv,
                     broj = o.Broj,
-                    slika = o.Slika
+                    slika = o.Slika,
+                    opis= o.Opis
                   
                 });
             return data.Take(100).ToList();
@@ -52,6 +53,7 @@ namespace FitVision.Modul2.Controllers
             oprema.Naziv = x.naziv;
             oprema.Broj = x.broj;
             oprema.Slika = x.slika;
+            oprema.Opis = x.opis;
            
 
             _dbContext.SaveChanges();
