@@ -8,5 +8,6 @@
         public string slika { get; set; }
         public string opis { get; set; }
         public string tipOpreme { get; set; }
+        public int tip_opreme_id { get; set; }//zbog ovoga se nije učitavalo tipi opreme prilikom azuriranja
     }
 }

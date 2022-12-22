@@ -62,5 +62,16 @@ namespace FitVision.Modul2.Controllers
             return Ok(tipOpreme);
                    
         }
+
+        [HttpPost("{id}")]
+        public ActionResult Obrisi(int id)
+        {
+            TipOpreme? tipOpreme = _dbContext.TipOpreme.Find(id);
+            if (tipOpreme == null)
+                return BadRequest("pogrešan ID");
+            _dbContext.Remove(tipOpreme);
+            _dbContext.SaveChanges();
+            return Ok(tipOpreme);
+        }
     }
 }

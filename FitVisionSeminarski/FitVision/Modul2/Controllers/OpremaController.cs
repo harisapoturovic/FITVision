@@ -29,7 +29,8 @@ namespace FitVision.Modul2.Controllers
                     broj = o.Broj,
                     slika = o.Slika,
                     opis= o.Opis,
-                    tipOpreme=o.tipOpreme.Naziv
+                    tipOpreme=o.tipOpreme.Naziv,
+                    tip_opreme_id=o.tipOpremeID
                   
                 });
             return data.Take(100).ToList();
