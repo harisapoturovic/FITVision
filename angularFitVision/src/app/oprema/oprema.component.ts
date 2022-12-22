@@ -28,8 +28,11 @@ export class OpremaComponent implements OnInit {
   urediOprema:any;
   url="";
   detaljiOprema:any;
+
   filter_naziv:boolean=false;
   naziv:string="";
+  filter_tip:boolean=false;
+  tip_naziv:string="";
 
   ucitajTipove(){
 
@@ -121,7 +124,9 @@ export class OpremaComponent implements OnInit {
     return this.oprema.filter(
       (x:any)=>
         (!this.filter_naziv ||
-          (x.naziv).toLowerCase().startsWith(this.naziv)
-          ));
+          (x.naziv).toLowerCase().startsWith(this.naziv.toLowerCase())
+          ) && (!this.filter_tip ||
+          (x.tipOpreme).toLowerCase().startsWith(this.tip_naziv.toLowerCase())
+        )) ;
   }
 }

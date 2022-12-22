@@ -1,8 +1,11 @@
 <div class="continer mt-4">
   <div>
-    <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Ime / prezime</span> <br>
+    <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Naziv</span> <br>
     <input [(ngModel)]="naziv" [disabled]="!filter_naziv"><br>
-
+  </div>
+  <div>
+    <input [(ngModel)] = "filter_tip" type="checkbox"> Filter by <span style="font-weight: bold">Tip</span> <br>
+    <input [(ngModel)]="tip_naziv" [disabled]="!filter_tip"><br>
   </div>
   <div class="mb-5 d-flex justify-content-end">
     <button class="btn btn-primary m-3 "
