@@ -28,6 +28,8 @@ export class OpremaComponent implements OnInit {
   urediOprema:any;
   url="";
   detaljiOprema:any;
+  filter_naziv:boolean=false;
+  naziv:string="";
 
   ucitajTipove(){
 
@@ -49,7 +51,7 @@ export class OpremaComponent implements OnInit {
   }
 
   dodajOpremu() {
-    if (this.opremaObject.broj > 0 && this.opremaObject.naziv != "" && this.opremaObject.tip_opreme_id > 0) {
+    if (this.opremaObject.broj > 0 && this.opremaObject.naziv != "" && this.opremaObject.tip_opreme_id > 0 && this.opremaObject.opis!="") {
       this.httpKlijent.post(MojConfig.adresa_servera + "/Oprema/Snimi", this.opremaObject).subscribe(x => {
         this.opremaObject = null;
         this.ucitajOpremu();
@@ -89,7 +91,7 @@ export class OpremaComponent implements OnInit {
   }
 
   urediOpremu() {
-    if(this.urediOprema.broj>0 && this.urediOprema.naziv!="" && this.urediOprema.tip_opreme_id>0) {
+    if(this.urediOprema.broj>0 && this.urediOprema.naziv!="" && this.urediOprema.opis!="") {
       this.httpKlijent.post(MojConfig.adresa_servera + "/Oprema/Snimi", this.urediOprema).subscribe(x => {
         this.urediOprema= null;
         this.ucitajOpremu();
@@ -111,5 +113,15 @@ export class OpremaComponent implements OnInit {
 
   detaljno(o: any) {
     this.detaljiOprema=o;
+  }
+
+  filtrirano() {
+    if(this.oprema==null)
+      return [];
+    return this.oprema.filter(
+      (x:any)=>
+        (!this.filter_naziv ||
+          (x.naziv).toLowerCase().startsWith(this.naziv)
+          ));
   }
 }

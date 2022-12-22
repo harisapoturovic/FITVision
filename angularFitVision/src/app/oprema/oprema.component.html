@@ -1,11 +1,17 @@
 <div class="continer mt-4">
+  <div>
+    <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Ime / prezime</span> <br>
+    <input [(ngModel)]="naziv" [disabled]="!filter_naziv"><br>
+
+  </div>
   <div class="mb-5 d-flex justify-content-end">
     <button class="btn btn-primary m-3 "
             *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()">Dodaj Opremu</button>
   </div>
+
   <div class="d-flex justify-content-around flex-wrap">
 
-    <div *ngFor="let o of oprema">
+    <div *ngFor="let o of filtrirano()">
       <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240);">
         <img [src]="o.slika" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
