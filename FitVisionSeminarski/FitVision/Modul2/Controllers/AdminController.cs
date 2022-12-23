@@ -111,8 +111,8 @@ namespace FitVision.Modul2.Controllers
                         return BadRequest("Korisnicko ime i lozinka vec postoje");
                 }
 
-                List<Korisnik> korisniks = _dbContext.Korisnik.ToList();
-                foreach (var k in korisniks)
+                List<Korisnik> korisnici = _dbContext.Korisnik.ToList();
+                foreach (var k in korisnici)
                 {
                     if (admin.KorisnickoIme == k.KorisnickoIme && admin.Lozinka == k.Lozinka)
                         return BadRequest("Korisnicko ime i lozinka vec postoje");
@@ -121,11 +121,9 @@ namespace FitVision.Modul2.Controllers
                 _dbContext.Add(admin);
                 //provjeriti da ne postoje dva ista korisnicka imena i lozinke
             }
-
-
-            
+                        
             _dbContext.SaveChanges();
-            return Ok("Uspjesno snimanje");
+            return Ok(admin);
         }
     }
 }

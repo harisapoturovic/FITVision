@@ -4,8 +4,8 @@ import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 import {LoginInformacije} from "../_helpers/login-informacije";
 import {HttpClient} from "@angular/common/http";
 
-declare function porukaSuccess(a: string):any;
-declare function porukaError(a: string):any;
+//declare function porukaSuccess(a: string):any;
+//declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-oprema',
@@ -59,7 +59,7 @@ export class OpremaComponent implements OnInit {
         this.opremaObject = null;
         this.ucitajOpremu();
       })
-      porukaSuccess("Uspjesno dodana oprema");
+      //porukaSuccess("Uspjesno dodana oprema");
     } else
       alert("Niste unijeli sve podatke");
   }
@@ -99,7 +99,7 @@ export class OpremaComponent implements OnInit {
         this.urediOprema= null;
         this.ucitajOpremu();
       })
-      porukaSuccess("Uspjesno promjenuta oprema");
+      //porukaSuccess("Uspjesno promjenuta oprema");
     }
     else
       alert("Niste unijeli sve podatke");
@@ -110,7 +110,7 @@ export class OpremaComponent implements OnInit {
     this.httpKlijent.post(MojConfig.adresa_servera + `/Oprema/Obrisi/${o.id}`, null).subscribe(x=>{
       this.ucitajOpremu();
     })
-    porukaSuccess("Uspjesno obrisana oprema");
+    //porukaSuccess("Uspjesno obrisana oprema");
   }
 
 

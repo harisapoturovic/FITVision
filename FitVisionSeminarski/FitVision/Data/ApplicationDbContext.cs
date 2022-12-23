@@ -18,6 +18,7 @@ namespace FitVision.Data
         public DbSet<AutentifikacijaToken> AutentifikacijaToken { get; set; }
         public DbSet<Oprema> Oprema { get; set; }
         public DbSet<TipOpreme> TipOpreme { get; set; }
+        public DbSet<Kategorija> Kategorija { get; set; }
 
     }
 }
