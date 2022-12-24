@@ -1,9 +1,6 @@
 a{
   color: white;
 }
-body{
-  background-color: bisque;
-}
 
 span{
   font-family: "Times New Roman";
@@ -11,6 +8,7 @@ span{
   color: dimgrey;
   font-style: italic;
 }
+
 .d-inline-block{
   display: flex;
   flex-direction: row;
@@ -18,3 +16,4 @@ span{
 .nav-item2{
   width: 100%;
 }
+

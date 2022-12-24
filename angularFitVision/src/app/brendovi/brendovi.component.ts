@@ -11,6 +11,8 @@ import {MojConfig} from "../moj-config";
 })
 export class BrendoviComponent implements OnInit {
   brendovi: any;
+  odabraniBrend:any;
+  urediBrend:any;
 
   constructor(private httpKlijent: HttpClient) {
   }
@@ -26,6 +28,34 @@ export class BrendoviComponent implements OnInit {
   ucitajBrendove() {
     this.httpKlijent.get(MojConfig.adresa_servera + "/Brend/GetAll").subscribe(x => {
       this.brendovi = x;
+    })
+  }
+
+  noviBrend() {
+    this.odabraniBrend={
+      id:0,
+      naziv:"",
+      opis:""
+    };
+  }
+
+  dodajBrend() {
+    this.httpKlijent.post(MojConfig.adresa_servera+"/Brend/Snimi", this.odabraniBrend).subscribe(x=>{
+      this.odabraniBrend=null;
+      this.ucitajBrendove();
+    })
+  }
+
+  UrediBrend(b: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera+"/Brend/Snimi", b).subscribe(x=>{
+      this.urediBrend=null;
+      this.ucitajBrendove();
+    })
+  }
+
+  obrisi(b: any) {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Brend/Obrisi/${b.id}`, null).subscribe(x=>{
+      this.ucitajBrendove();
     })
   }
 }
