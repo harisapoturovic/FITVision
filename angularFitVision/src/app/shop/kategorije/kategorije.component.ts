@@ -4,7 +4,6 @@ import {MojConfig} from "../../moj-config";
 import {LoginInformacije} from "../../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 
-
 @Component({
   selector: 'app-kategorije',
   templateUrl: './kategorije.component.html',
@@ -13,10 +12,10 @@ import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 export class KategorijeComponent implements OnInit {
   kategorije:any;
   odabranaKategorija:any;
-  //urediKat:any;
   brendovi: any;
-  odabranaBrendovi:any;
-  odabraniBrend:any;
+  //odabranaBrendovi:any;
+  //odabraniBrend:any;
+  odabranaDodatno:any;
 
   constructor(private httpKlijent:HttpClient) { }
 
@@ -36,8 +35,9 @@ export class KategorijeComponent implements OnInit {
 
   dodajKategoriju() {
     this.httpKlijent.post(MojConfig.adresa_servera + "/Kategorija/Snimi", this.odabranaKategorija).subscribe(x=>{
-      this.ucitajKategorije();
       this.odabranaKategorija=null;
+      this.ucitajKategorije();
+
     })
   }
 
@@ -49,14 +49,32 @@ export class KategorijeComponent implements OnInit {
     };
   }
 
-  prikazi(k: any) {
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Brend/GetAll").subscribe(x=>{
-      this.brendovi=x;
-      this.odabranaBrendovi=k;
-      })
+ // prikaziBrendove(k: any) {
+ //   this.httpKlijent.get(MojConfig.adresa_servera + "/Brend/GetAll").subscribe(x=>{
+ //     this.brendovi=x;
+ //     this.odabranaBrendovi=k;
+ //     })
+ // }
+
+  //detaljnoBrendovi(b: any) {
+  //  this.odabraniBrend=b;
+  //}
+
+  prikaziDodatno(k: any) {
+    this.odabranaDodatno=k;
   }
 
-  detaljno(b: any) {
-    this.odabraniBrend=b;
+  obrisiKategoriju(k: any) {
+    this.httpKlijent.post(`${MojConfig.adresa_servera}/Kategorija/Obrisi/${k.id}`, null).subscribe(x=>{
+      this.odabranaDodatno=null;
+      this.ucitajKategorije();
+    })
+  }
+
+  urediKategoriju(k: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera + "/Kategorija/Snimi", k).subscribe(x=> {
+      this.odabranaDodatno=null;
+      this.ucitajKategorije();
+    })
   }
 }
