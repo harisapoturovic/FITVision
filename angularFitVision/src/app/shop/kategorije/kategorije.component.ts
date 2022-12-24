@@ -13,7 +13,10 @@ import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 export class KategorijeComponent implements OnInit {
   kategorije:any;
   odabranaKategorija:any;
-  urediKat:any;
+  //urediKat:any;
+  brendovi: any;
+  odabranaBrendovi:any;
+  odabraniBrend:any;
 
   constructor(private httpKlijent:HttpClient) { }
 
@@ -45,5 +48,15 @@ export class KategorijeComponent implements OnInit {
       opis:""
     };
   }
-  
+
+  prikazi(k: any) {
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Brend/GetAll").subscribe(x=>{
+      this.brendovi=x;
+      this.odabranaBrendovi=k;
+      })
+  }
+
+  detaljno(b: any) {
+    this.odabraniBrend=b;
+  }
 }

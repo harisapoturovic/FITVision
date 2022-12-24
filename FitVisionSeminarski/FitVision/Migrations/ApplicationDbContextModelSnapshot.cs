@@ -72,6 +72,27 @@ namespace FitVision.Migrations
                     b.ToTable("KorisnickiNalog");
                 });
 
+            modelBuilder.Entity("FitVision.Modul2.Models.Brend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brend");
+                });
+
             modelBuilder.Entity("FitVision.Modul2.Models.Drzava", b =>
                 {
                     b.Property<int>("ID")

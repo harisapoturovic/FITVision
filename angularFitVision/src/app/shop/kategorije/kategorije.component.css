@@ -4,3 +4,17 @@ a{
 body{
   background-color: bisque;
 }
+
+span{
+  font-family: "Times New Roman";
+  font-size: 30px;
+  color: dimgrey;
+  font-style: italic;
+}
+.d-inline-block{
+  display: flex;
+  flex-direction: row;
+}
+.nav-item2{
+  width: 100%;
+}

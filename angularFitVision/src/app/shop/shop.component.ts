@@ -13,7 +13,7 @@ import {MojConfig} from "../moj-config";
 })
 export class ShopComponent implements OnInit {
 
-  constructor() { }
+  constructor(private httpKlijent:HttpClient) { }
 
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
@@ -21,4 +21,5 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
 }

@@ -1,13 +1,32 @@
-<ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(151, 180, 255)">
-  <li class="nav-item" *ngFor="let k of kategorije">
-    <a class="nav-link " >{{k.naziv}}</a>
-  </li>
-</ul>
 
-<div class="mb-5 d-flex justify-content-end">
-  <button class="btn btn-primary m-3 "
-          *ngIf="loginInfo().isPremisijaAdmin" (click)="novaKategorija()">Dodaj kategoriju</button>
+<div class="row">
+  <div class="col">
+    <div >
+      <ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(151, 180, 255)">
+        <li class="nav-item" *ngFor="let k of kategorije">
+          <a class="nav-link" (mouseover)="prikazi(k)">{{k.naziv}}</a>
+        </li>
+      </ul>
+
+      <div class="mb-5 d-flex justify-content-end">
+        <button class="btn btn-primary m-3 "
+                *ngIf="loginInfo().isPremisijaAdmin" (click)="novaKategorija()">Dodaj kategoriju</button>
+      </div>
+    </div>
+  </div>
 </div>
+      <br>
+      <div *ngIf="odabranaBrendovi!=null">
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
+        <span>Brendovi</span>
+        <ul class="nav  nav-lg  pb-2 pt-2" *ngFor="let b of brendovi">
+          <li class="nav-item2" style="background-color:rgb(151, 180, 0)">
+            <a class="nav-link" (click)="detaljno(b)">{{b.naziv}}</a>
+          </li>
+        </ul>
+
+  </div>
+
 
 <!--Modal dodaj-->
 <div *ngIf="loginInfo().isPremisijaAdmin">
@@ -35,3 +54,26 @@
   </div>
 </div>
 </div>
+
+        <!--Modal detalji-->
+        <div *ngIf="odabraniBrend!=null" class="modal fade show" id="exa" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampl">Detljne informacije </h5>
+                <button type="button" class="btn-close" aria-label="Close" (click)="odabraniBrend=null"></button>
+              </div>
+              <div class="modal-body">
+                <label class="form-label">Naziv</label>
+                <input class="form-control" type="text" [value]="odabraniBrend.naziv" disabled>
+                <label class="form-label">Opis</label>
+                <textarea class="form-control" rows="3" [(ngModel)]="odabraniBrend.opis" disabled></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="odabraniBrend=null">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+

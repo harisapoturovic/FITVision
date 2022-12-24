@@ -26,6 +26,7 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             data.Add("Admina", _dbContext.Admin.Count());
             data.Add("Korisnika", _dbContext.Korisnik.Count());
             data.Add("Kategorija", _dbContext.Korisnik.Count());
+            data.Add("Brendova", _dbContext.Brend.Count());
             return Ok(data);
         }
 
@@ -37,6 +38,7 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             var admin = _dbContext.Admin.ToList();
             var korsnik = _dbContext.Korisnik.ToList();
             var kategorija = _dbContext.Kategorija.ToList();
+            var brendovi = _dbContext.Brend.ToList();
 
 
             _dbContext.Drzava.RemoveRange(drzave);
@@ -44,6 +46,7 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             _dbContext.Admin.RemoveRange(admin);
             _dbContext.Korisnik.RemoveRange(korsnik);
             _dbContext.Kategorija.RemoveRange(kategorija);
+            _dbContext.Brend.RemoveRange(brendovi);
             _dbContext.SaveChanges();
             return Count();
         }
@@ -122,12 +125,18 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             kategorije.Add(new Kategorija { Naziv = "Shakeri i boce", Opis = "Ako se bavite bilo kakvim sportom, uvijek na trening nosite vodu. Dakle, potrebna vam je dobra bočica za vodu, odnosno bidon. Na kraju, ako koristite dodatke prehrani koji su često u obliku praha, morate ih u nečemu moći dobro promućkati da se razbiju sve grudice. Tu nastupa shaker. Bidone i shakere možete pronaći u ovoj kategoriji i odabrati nešto za sebe." });
             kategorije.Add(new Kategorija { Naziv = "Rekviziti", Opis = "U ovoj kategoriji ćete pronaći različite rekvizite za različite tipove treninga, no namijenjene svima: mladima ili starijim osobama, muškarcima i ženama, amaterima i vježbačkim početnicima, rekreativnim vježbačima ili profesionalnim sportašima. Bez obzira u kakvoj ste trenutnoj formi, u ovoj kategoriji ćete pronaći rekvizite koji će vam pomoći da formu podignete na jednu višu stepenicu." });
 
+            var brendovi = new List<Brend>();
+
+            brendovi.Add(new Brend { Naziv = "Biona", Opis= "Biona organic brend je nastao pod palicom Windmill Organics Ltd, britanske tvrtke koja u portfelju ima organske brendove 100% sigurnog porijekla, visoke kvalitete, etičke proizvodnje u skladu sa svim visokim ekološkim standardima. Biona organic proizvodi nastaju bez korištenja pesticida, herbicida i GMO biljaka. Svi proizvodi su visoke kvalitete, potpuno prirodni i primjereni vegetarijancima." });
+            brendovi.Add(new Brend { Naziv = "Nutrigold ", Opis= "Nutrigold je brend koji je nastao iz istraživanja potreba kupaca. Cilj im je prihvatljivim cijenama, kvalitetom i pouzdanošću doprijeti u sva kućanstva i zadovoljiti različite prehrambene potrebe ljudi. Nutrigold je brend koji je pobornicima zdrave prehrane približio zdravlje i kroz velik izbor namirnica i proizvoda im dao mogućnost odabira i svijest da je zdrava prehrana cjenovno prihvatljiva, ukusna i kvalitetna." });
+            brendovi.Add(new Brend { Naziv = "HealthyCo ", Opis= "HealthyCo je švedski brend prehrambenih namirnica koje će donijeti zadovoljstvo vašem nepcu, a očuvati vaše zdravlje i vitku liniju. HealthyCo razvija, proizvodi i distribuira namirnice s naglaskom na organsko porijeklo, reducirani udio šećera, zdravlje i moderan dizajn, po prihvatljivim cijenama. HealthyCo zadovoljava zahtjeve modernog i dobro informiranog kupca koji od proizvoda traži organsko porijeklo, zdravstvenu prihvatljivost i funkcionalnost, uz važnu stavku - cjenovnu pristupačnost." });
 
             _dbContext.AddRange(drzave);
             _dbContext.AddRange(gradovi);
             _dbContext.AddRange(admini);
             _dbContext.AddRange(korisnici);
             _dbContext.AddRange(kategorije);
+            _dbContext.AddRange(brendovi);
 
             _dbContext.SaveChanges();
 
