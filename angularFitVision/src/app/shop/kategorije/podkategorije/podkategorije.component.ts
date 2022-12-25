@@ -4,6 +4,7 @@ import {LoginInformacije} from "../../../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../../../_helpers/autentifikacija-helper";
 import {MojConfig} from "../../../moj-config";
 
+
 @Component({
   selector: 'app-podkategorije',
   templateUrl: './podkategorije.component.html',
@@ -13,11 +14,13 @@ export class PodkategorijeComponent implements OnInit {
   podkategorije:any;
   odabranaPodkat:any;
   urediPodkat:any;
+  kategorije:any;
 
   constructor(private httpKlijent: HttpClient) { }
 
   ngOnInit(): void {
     this.ucitajPodkategorije();
+    this.ucitajKategorije();
   }
 
   loginInfo(): LoginInformacije {
@@ -56,6 +59,12 @@ export class PodkategorijeComponent implements OnInit {
   obrisi(p: any) {
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Podkategorija/Obrisi/${p.id}`, null).subscribe(x=>{
       this.ucitajPodkategorije();
+    })
+  }
+
+  ucitajKategorije() {
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Kategorija/GetAll").subscribe(x=>{
+      this.kategorije=x;
     })
   }
 }

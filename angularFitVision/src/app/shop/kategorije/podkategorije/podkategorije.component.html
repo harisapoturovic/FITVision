@@ -4,6 +4,7 @@
 <ul class="list-group list-group-flush" *ngFor="let p of podkategorije">
   <li class="list-group-item" style="font-size: larger">{{p.naziv}}</li>
   <li class="list-group-item">{{p.opis}}</li>
+  <li class="list-group-item" >{{p.nazivKat}}</li>
 
   <div *ngIf="loginInfo().isPremisijaAdmin">
     <button type="button" class="btn btn-warning" (click)="urediPodkat=p">Uredi</button>
@@ -35,8 +36,12 @@
             <label class="form-label">Opis</label>
             <textarea class="form-control" rows="5" [(ngModel)]="odabranaPodkat.opis"></textarea>
 
-            <label class="form-label">ID kategorije </label>
-            <input class="form-control" type="text" [(ngModel)]="odabranaPodkat.kategorija_id">
+            <div class="mb-3">
+            <label class="form-label">Kategorija</label>
+            <select class="form-control" [(ngModel)]="odabranaPodkat.kategorija_id">
+              <option *ngFor="let k of kategorije" [value]="k.id">{{k.naziv}}</option>
+            </select>
+          </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" (click)="odabranaPodkat=null">Close</button>
               <button type="button" class="btn btn-primary" (click)="dodajPodkat()">Snimi</button>
@@ -64,8 +69,12 @@
             <input class="form-control" type="text" [(ngModel)]="urediPodkat.naziv">
             <label class="form-label">Opis</label>
             <textarea class="form-control" rows="3" [(ngModel)]="urediPodkat.opis"></textarea>
-            <label class="form-label">ID kategorije</label>
-            <input class="form-control" type="text" [(ngModel)]="urediPodkat.kategorija_id">
+            <div class="mb-3">
+              <label class="form-label">Kategorija</label>
+              <select class="form-control" [(ngModel)]="urediPodkat.kategorija_id" name="kategorija">
+                <option *ngFor="let k of kategorije" [value]="k.id">{{k.naziv}}</option>
+              </select>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="urediPodkat=null">Close</button>

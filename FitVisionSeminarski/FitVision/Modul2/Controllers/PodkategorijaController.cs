@@ -25,7 +25,8 @@ namespace FitVision.Modul2.Controllers
                     id = k.Id,
                     naziv = k.Naziv,
                     opis = k.Opis,
-                    kategorija_id=k.KategorijaId
+                    kategorija_id=k.KategorijaId,
+                    nazivKat=k.kategorija.Naziv
                 });
             return data.Take(100).ToList();
         }
@@ -48,6 +49,7 @@ namespace FitVision.Modul2.Controllers
             objekat.Naziv = x.naziv;
             objekat.Opis = x.opis;
             objekat.KategorijaId = x.kategorija_id;
+
 
             _dbContext.SaveChanges();
             return Ok(objekat);
