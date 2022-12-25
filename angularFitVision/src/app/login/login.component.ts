@@ -5,8 +5,8 @@ import {LoginInformacije} from "../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 import {MojConfig} from "../moj-config";
 
-declare function porukaSuccess(a: string):any;
-declare function porukaError(a: string):any;
+//declare function porukaSuccess(a: string):any;
+//declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-login',
@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
     this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login", saljemo).subscribe(
       (x:LoginInformacije)=>{
         if(x.isLogiran){
-          porukaSuccess("login upjesan");
+          //porukaSuccess("login upjesan");
           AutentifikacijaHelper.setLoginInfo(x);
           this.router.navigateByUrl("/oprema");
         }
         else{
           AutentifikacijaHelper.setLoginInfo(null);
-          porukaError("nesuspjesan login");
+          //porukaError("nesuspjesan login");
         }
       }
     )

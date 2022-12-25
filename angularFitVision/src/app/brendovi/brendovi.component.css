@@ -1,0 +1,16 @@
+h2{
+  font-style: italic;
+  border-bottom: 1px solid black;
+  width: 4cm;
+}
+
+button{
+  width: 2cm;
+}
+
+#brend{
+  background-color: beige;
+}
+ li{
+   background-color: bisque;
+ }

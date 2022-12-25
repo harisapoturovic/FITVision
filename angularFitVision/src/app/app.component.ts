@@ -5,8 +5,8 @@ import {MojConfig} from "./moj-config";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
-declare function porukaSuccess(a: string):any;
-declare function porukaError(a: string):any;
+//declare function porukaSuccess(a: string):any;
+//declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-root',
@@ -29,7 +29,7 @@ export class AppComponent {
     this.httpKlijent.post(MojConfig.adresa_servera + "/Autentifikacija/Logout/", null, token)
       .subscribe((x: any) => {
         this.router.navigateByUrl("/login");
-        porukaSuccess("logout uspjesan");
+        //porukaSuccess("logout uspjesan");
       });
   }
 

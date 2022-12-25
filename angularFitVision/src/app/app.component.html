@@ -1,6 +1,6 @@
-<ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(220,220,220)">
+<ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(220,220,220)" >
 
-  <li class="nav-item" *ngIf="!loginInfo().isLogiran" style="background-color: rgb(180,180,180)">
+ <li class="nav-item" *ngIf="!loginInfo().isLogiran" style="background-color: rgb(180,180,180)">
     <a class="nav-link " routerLink="/login" routerLinkActive="active">Login</a>
   </li>
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
@@ -8,6 +8,9 @@
   </li>
   <li class="nav-item" *ngIf="loginInfo().isPremisijaAdmin">
     <a class="nav-link " routerLink="/korisnici" routerLinkActive="active">Korisnici</a>
+  </li>
+  <li class="nav-item" *ngIf="loginInfo().isLogiran">
+    <a class="nav-link " routerLink="/shop" routerLinkActive="active">Shop</a>
   </li>
   <div class="dropdown" *ngIf="loginInfo().isLogiran">
     <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -23,3 +26,4 @@
 
   <router-outlet></router-outlet>
 </div>
+

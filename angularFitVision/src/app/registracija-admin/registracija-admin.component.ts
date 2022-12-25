@@ -4,7 +4,7 @@ import {MojConfig} from "../moj-config";
 import {Router} from "@angular/router";
 
 
-declare function porukaSuccess(a: string):any;
+//declare function porukaSuccess(a: string):any;
 
 @Component({
   selector: 'app-registracija-admin',
@@ -66,7 +66,7 @@ export class RegistracijaAdminComponent implements OnInit {
         lozinka:this.lozinka
       }
       this.httpKlijent.post(MojConfig.adresa_servera + "/Admin/Snimi", korisnik).subscribe(x=>{
-        porukaSuccess("Ospjesna regstracija");
+        //porukaSuccess("Ospjesna regstracija");
       })
       this.router.navigateByUrl("/login");
 

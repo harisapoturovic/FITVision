@@ -110,7 +110,11 @@ namespace FitVision.Modul2.Controllers
             korisnik.KorisnickoIme = x.korisnickoIme;
             korisnik.Lozinka=x.lozinka;
 
-           
+                
+            //provjera da li postoje korsnici koji imaju isto korIme i lozinku
+               
+            if (x.id == 0)
+            {
                 List<Admin> adminList = _dbContext.Admin.ToList();
                 foreach (var a in adminList)
                 {
@@ -118,23 +122,18 @@ namespace FitVision.Modul2.Controllers
                         return BadRequest("Korisnicko ime i lozinka vec postoje");
                 }
 
-                List<Korisnik> korisniks = _dbContext.Korisnik.ToList();
-                foreach (var k in korisniks)
+                 List<Korisnik> korisnici = _dbContext.Korisnik.ToList();
+                foreach (var k in korisnici)
                 {
                     if (korisnik.KorisnickoIme == k.KorisnickoIme && korisnik.Lozinka == k.Lozinka)
                         return BadRequest("Korisnicko ime i lozinka vec postoje");
                 }
 
-                //provjera da li postoje korsnici koji imaju isto korIme i lozinku
-               
-            if (x.id == 0)
-            {
-
                 _dbContext.Korisnik.Add(korisnik);
             }
 
                 _dbContext.SaveChanges();
-            return Ok("Uspjesno snimanje");
+            return Ok(korisnik);
         }
 
         [HttpPost("{id}")]
