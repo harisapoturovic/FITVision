@@ -1,5 +1,6 @@
 <h2>Brendovi</h2>
 <br>
+<div id="brend">
 <ul class="list-group list-group-flush" *ngFor="let b of brendovi">
   <li class="list-group-item" style="font-size: larger">{{b.naziv}}</li>
   <li class="list-group-item">{{b.opis}}</li>
@@ -12,9 +13,8 @@
 <div class="mb-5 d-flex justify-content-end">
   <button class="btn btn-primary m-3 "
           *ngIf="loginInfo().isPremisijaAdmin" (click)="noviBrend()">Dodaj brend</button>
-
 </div>
-
+</div>
 
 <!--Modal dodaj-->
 <div *ngIf="loginInfo().isPremisijaAdmin">

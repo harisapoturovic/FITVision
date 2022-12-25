@@ -113,7 +113,13 @@
 </div>
 
 
-<div>
+<div *ngIf="loginInfo().isPremisijaAdmin">
   <button type="button" class="btn btn-info" routerLink="/brendovi" routerLinkActive="active">Brendovi</button>
-  <button type="button" class="btn btn-success">Podkategorije</button>
+  <button type="button" class="btn btn-success" routerLink="/podkategorije" routerLinkActive="active">Podkategorije</button>
+</div>
+
+<div id="zaKorisnika" *ngIf="loginInfo().isPremisijaKorisnik">
+  <app-brendovi></app-brendovi>
+  <br>
+  <app-podkategorije></app-podkategorije>
 </div>

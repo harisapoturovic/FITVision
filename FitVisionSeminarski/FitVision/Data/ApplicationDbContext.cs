@@ -20,6 +20,7 @@ namespace FitVision.Data
         public DbSet<TipOpreme> TipOpreme { get; set; }
         public DbSet<Kategorija> Kategorija { get; set; }
         public DbSet<Brend> Brend { get; set; }
+        public DbSet<Podkategorija> Podkategorija { get; set; }
 
     }
 }

@@ -16,6 +16,7 @@ import { KorisniciComponent } from './korisnici/korisnici.component';
 import { ShopComponent } from './shop/shop.component';
 import { KategorijeComponent } from './shop/kategorije/kategorije.component';
 import { BrendoviComponent } from './brendovi/brendovi.component';
+import { PodkategorijeComponent } from './shop/kategorije/podkategorije/podkategorije.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BrendoviComponent } from './brendovi/brendovi.component';
     KorisniciComponent,
     ShopComponent,
     KategorijeComponent,
-    BrendoviComponent
+    BrendoviComponent,
+    PodkategorijeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,8 @@ import { BrendoviComponent } from './brendovi/brendovi.component';
       {path: 'korisnici', component: KorisniciComponent},
       {path: 'shop', component: ShopComponent},
       {path: 'kategorije', component: KategorijeComponent},
-      {path: 'brendovi', component: BrendoviComponent}
+      {path: 'brendovi', component: BrendoviComponent},
+      {path: 'podkategorije', component: PodkategorijeComponent}
     ])
   ],
   providers: [],

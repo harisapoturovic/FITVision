@@ -17,3 +17,7 @@ span{
   width: 100%;
 }
 
+#zaKorisnika{
+  display: flex;
+  flex-direction: row;
+}
