@@ -28,6 +28,8 @@ export class KorisniciComponent implements OnInit {
   }
 
   getPodaci() {
+    if(this.korisnici==null)
+      return [];
     return this.korisnici.filter(
       (x:any)=>
         (!this.filter_ime_prezime ||

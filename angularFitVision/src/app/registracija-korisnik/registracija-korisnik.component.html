@@ -47,7 +47,7 @@
       <div class="mb-3">
         <label for="email" class="form-label">Grad</label>
         <select class="form-control" [(ngModel)]="grad_ID" name="grad">
-          <option *ngFor="let g of gradovi" [value]="g.id">{{g.opis}}</option>
+          <option *ngFor="let g of gradovi" [value]="g.id">{{g.naziv}}</option>
         </select>
       </div>
       <div class="mb-3">

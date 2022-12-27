@@ -1,1 +1,129 @@
-<p>oprema works!</p>
+<div class="continer mt-4">
+  <div>
+    <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Naziv</span> <br>
+    <input [(ngModel)]="naziv" [disabled]="!filter_naziv"><br>
+  </div>
+  <div>
+    <input [(ngModel)] = "filter_tip" type="checkbox"> Filter by <span style="font-weight: bold">Tip</span> <br>
+    <input [(ngModel)]="tip_naziv" [disabled]="!filter_tip"><br>
+  </div>
+  <div class="mb-5 d-flex justify-content-end">
+    <button class="btn btn-primary m-3 "
+            *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()">Dodaj Opremu</button>
+  </div>
+
+  <div class="d-flex justify-content-around flex-wrap">
+
+    <div *ngFor="let o of filtrirano()">
+      <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240);">
+        <img [src]="o.slika" class="card-img-top" alt="..." style="height:220px">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">{{o.naziv}}</h5>
+        <button class="btn mb-3" style="background-color:rgb(200,200,200) " (click)="detaljno(o)">Pogledaj detalje</button>
+          <p class="card-text">Kolicina: {{o.broj}}</p>
+          <button  class="btn btn-warning" *ngIf="loginInfo().isPremisijaAdmin" (click)="urediFunc(o)"
+          >Uredi</button>
+          <button class="btn btn-danger float-end" *ngIf="loginInfo().isPremisijaAdmin" (click)="obrisiOpremu(o)">Obrisi</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+  <!--Modal dodaj-->
+  <div *ngIf="opremaObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel">Dodaj opremu </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="opremaObject=null"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+
+
+
+            <label class="form-label">Naziv opreme</label>
+            <input class="form-control" type="text" [(ngModel)]="opremaObject.naziv">
+            <label class="form-label">Kolicina</label>
+            <input class="form-control" type="number" [(ngModel)]="opremaObject.broj">
+            <label class="form-label">Tip Opreme</label>
+            <select class="form-control" [(ngModel)]="opremaObject.tip_opreme_id" name="tipOpeme">
+              <option  *ngFor="let t of tipoviOpreme" [value]="t.id">{{t.naziv}}</option>
+            </select>
+            <label class="form-label">Opis</label>
+            <textarea class="form-control" rows="3" [(ngModel)]="opremaObject.opis"></textarea>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="opremaObject=null">Close</button>
+            <button type="button" class="btn btn-primary" (click)="dodajOpremu()">Snimi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal uredi-->
+<div *ngIf="urediOprema!=null" class="modal fade show" id="exampleMo" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleM">Uredi opremu </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="urediOprema=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <div >
+            <label class="form-label">ID</label>
+            <input class="form-control" type="text" [(ngModel)]="urediOprema.id" disabled>
+          </div>
+          <label class="form-label">Naziv opreme</label>
+          <input class="form-control" type="text" [(ngModel)]="urediOprema.naziv">
+          <label class="form-label">Kolicina</label>
+          <input class="form-control" type="number" [(ngModel)]="urediOprema.broj">
+          <label class="form-label">Tip Opreme</label>
+          <select class="form-control" [(ngModel)]="urediOprema.tip_opreme_id" name="tipOpeme">
+            <option  *ngFor="let t of tipoviOpreme" [value]="t.id">{{t.naziv}}</option>
+          </select>
+          <div >
+            <label class="form-label">Odaberi sliku</label>
+            <input type="file" class="form-control" (change)="ChosenFile($event)">
+          </div>
+          <label class="form-label">Opis</label>
+          <textarea class="form-control" rows="3" [(ngModel)]="urediOprema.opis"></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="urediOprema=null">Close</button>
+          <button type="button" class="btn btn-primary" (click)="urediOpremu()">Snimi</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!--Modal detalji-->
+  <div *ngIf="detaljiOprema" class="modal fade show" id="exa" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampl">Detljne informacije </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="detaljiOprema=null"></button>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Tip opreme</label>
+          <input class="form-control" type="text" [value]="detaljiOprema.tipOpreme" disabled>
+          <label class="form-label">Opis</label>
+          <textarea class="form-control" rows="3" [(ngModel)]="detaljiOprema.opis" disabled></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="detaljiOprema=null">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

@@ -6,7 +6,7 @@ import {MojConfig} from "../../moj-config";
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
 
-declare function porukaSuccess(a: string):any;
+//declare function porukaSuccess(a: string):any;
 
 @Component({
   selector: 'app-postavka-admin',
@@ -70,9 +70,9 @@ export class PostavkaAdminComponent implements OnInit {
       && this.admin.telefon!="" && this.admin.email!="" && this.admin.adresa!="" && this.admin.korisnickoIme!="" && this.admin.lozinka!="" &&
       this.admin.strucna_sprema!=""  && this.admin.jmbg!="" && this.admin.spol!="" && this.admin.spol!="...." && this.admin.grad_ID!=0){
     this.httpKlijent.post(MojConfig.adresa_servera + "/Admin/Snimi", this.admin).subscribe(x=>{
-
+      //porukaSuccess("Upjesna promjena podataka");
     })
-    porukaSuccess("Upjesna promjena podataka");
+
       this.router.navigateByUrl("/oprema");
     }
     else{

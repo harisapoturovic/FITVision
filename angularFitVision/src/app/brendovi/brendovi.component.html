@@ -1,0 +1,72 @@
+<h2>Brendovi</h2>
+<br>
+<div id="brend">
+<ul class="list-group list-group-flush" *ngFor="let b of brendovi">
+  <li class="list-group-item" style="font-size: larger">{{b.naziv}}</li>
+  <li class="list-group-item">{{b.opis}}</li>
+  <div *ngIf="loginInfo().isPremisijaAdmin">
+  <button type="button" class="btn btn-warning" (click)="urediBrend=b">Uredi</button>
+  <button type="button" class="btn btn-danger"(click)="obrisi(b)">Obriši</button>
+  </div>
+  <br>
+</ul>
+<div class="mb-5 d-flex justify-content-end">
+  <button class="btn btn-primary m-3 "
+          *ngIf="loginInfo().isPremisijaAdmin" (click)="noviBrend()">Dodaj brend</button>
+</div>
+</div>
+
+<!--Modal dodaj-->
+<div *ngIf="loginInfo().isPremisijaAdmin">
+  <div *ngIf="odabraniBrend!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel">Dodaj brend </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="odabraniBrend=null"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+            <label class="form-label">Naziv </label>
+            <input class="form-control" type="text" [(ngModel)]="odabraniBrend.naziv">
+
+            <label class="form-label">Opis</label>
+            <textarea class="form-control" rows="5" [(ngModel)]="odabraniBrend.opis"></textarea>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="odabraniBrend=null">Close</button>
+              <button type="button" class="btn btn-primary" (click)="dodajBrend()">Snimi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Modal uredi-->
+<div *ngIf="loginInfo().isPremisijaAdmin">
+  <div *ngIf="urediBrend!=null" class="modal fade show" id="exampleMo" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleM">Uredi brend </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="urediBrend=null"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+            <label class="form-label">Naziv</label>
+            <input class="form-control" type="text" [(ngModel)]="urediBrend.naziv">
+            <label class="form-label">Opis</label>
+            <textarea class="form-control" rows="3" [(ngModel)]="urediBrend.opis"></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="urediBrend=null">Close</button>
+            <button type="button" class="btn btn-primary" (click)="UrediBrend(urediBrend)">Snimi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
