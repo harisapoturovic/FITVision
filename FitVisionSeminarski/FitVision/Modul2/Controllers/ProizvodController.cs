@@ -104,5 +104,26 @@ namespace FitVision.Modul2.Controllers
             _dbContext.SaveChanges();
             return Ok(x);
         }
+
+
+        [HttpPost("{id}")]
+        public ActionResult Obrisi(int id)
+        {
+            /*Oprema? oprema = _dbContext.Oprema.Find(id);
+
+            if (oprema == null)
+                return BadRequest("pogresan ID");
+
+            _dbContext.Remove(oprema);
+
+            _dbContext.SaveChanges();
+            return Ok(oprema);*/
+            Proizvod? proizvod = _dbContext.Proizvod.Find(id);
+            if (proizvod == null) return BadRequest("Pogresan ID");
+
+            _dbContext.Remove(proizvod);
+            _dbContext.SaveChanges();
+            return Ok(proizvod);
+        }
     }
 }

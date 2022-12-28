@@ -100,7 +100,15 @@ export class ProizvodiComponent implements OnInit {
     reader.onload = (e: any) => {
       this.url = e.target.result;
       this.proizvodObject.slika = this.url;
-   
+
     }
+  }
+
+  obrisiProizvod(p: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera + `/Proizvod/Obrisi/${p.id}`, null).subscribe(x=>{
+      this.ucitajProizvode();
+
+    })
+    porukaSuccess("uspjesno brisanje");
   }
 }
