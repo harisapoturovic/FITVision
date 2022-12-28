@@ -1,0 +1,43 @@
+
+  <div class="mb-5 d-flex justify-content-end">
+    <button class="btn btn-primary m-3 "
+            *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()">Dodaj proizvod</button>
+  </div>
+
+  <!--Modal dodaj-->
+  <div *ngIf="proizvodObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLiveLabel">Dodaj proizvod </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="proizvodObject=null"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+            <label class="form-label">Naziv proizvoda</label>
+            <input class="form-control" type="text" [(ngModel)]="proizvodObject.naziv">
+            <label class="form-label">Jedinicna cijena</label>
+            <input class="form-control" type="number" [(ngModel)]="proizvodObject.jedinicna_cijena">
+            <label class="form-label">Jedinicna mjera</label>
+            <input class="form-control" type="text" [(ngModel)]="proizvodObject.jedinicna_mjera">
+            <label class="form-label">Zaliha</label>
+            <input class="form-control" type="number" [(ngModel)]="proizvodObject.zaliha">
+            <label class="form-label">Brend</label>
+            <select class="form-control"  name="brendovi" [(ngModel)]="proizvodObject.brend_id">
+              <option  *ngFor="let t of brendovi" [value]="t.id">{{t.naziv}}</option>
+            </select>
+            <label class="form-label">Potkategorija</label>
+            <select class="form-control"  name="PotKategorija" [(ngModel)]="proizvodObject.pod_kategorija_id">
+              <option  *ngFor="let p of podKategorije" [value]="p.id">{{p.naziv}}</option>
+            </select>
+            <label class="form-label">Sastav</label>
+            <textarea class="form-control" rows="3" [(ngModel)]="proizvodObject.sastav" [(ngModel)]="proizvodObject.sastav"></textarea>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="proizvodObject=null">Close</button>
+              <button type="button" class="btn btn-primary" (click)="snimiProizvod()">Snimi</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
