@@ -23,6 +23,13 @@ export class ProizvodiComponent implements OnInit {
   ngOnInit(): void {
     this.ucitajBrendove();
     this.ucitajPodKategorije();
+    this.ucitajProizvode();
+  }
+
+  ucitajProizvode(){
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Proizvod/GetAll").subscribe(x=>{
+      this.proivodi=x;
+    })
   }
 
   ucitajBrendove(){
@@ -40,6 +47,7 @@ export class ProizvodiComponent implements OnInit {
   proizvodObject:any;
   brendovi:any;
   podKategorije:any
+  proivodi: any;
 
 
   dodajFunc() {
@@ -62,7 +70,7 @@ export class ProizvodiComponent implements OnInit {
       this.proizvodObject.pod_kategorija_id>0 && this.proizvodObject.jedinicna_mjera!="" && this.proizvodObject.sastav!="" &&
       this.proizvodObject.jedinicna_cijena>0){
       this.httpKlijent.post(MojConfig.adresa_servera + "/Proizvod/Snimi", this.proizvodObject, MojConfig.http_opcije())
-        .subscribe(x=>{this.proizvodObject=null});
+        .subscribe(x=>{this.proizvodObject=null; this.ucitajProizvode();});
       porukaSuccess("uspjesno dodan proizvod");
     }
     else{
