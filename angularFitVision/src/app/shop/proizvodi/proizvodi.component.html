@@ -1,3 +1,8 @@
+<div>
+  <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Naziv proizvoda</span> <br>
+  <input [(ngModel)]="naziv" [disabled]="!filter_naziv"><br>
+  <hr>
+</div>
 
   <div class="mb-5 d-flex justify-content-end">
     <button class="btn btn-primary m-3 "
@@ -5,7 +10,7 @@
   </div>
   <div class="d-flex justify-content-around flex-wrap">
 
-    <div *ngFor="let p of proivodi">
+    <div *ngFor="let p of getProizvode()">
       <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240);">
         <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">

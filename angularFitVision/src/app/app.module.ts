@@ -50,7 +50,8 @@ import { ProizvodiComponent } from './shop/proizvodi/proizvodi.component';
       {path: 'shop', component: ShopComponent},
       {path: 'kategorije', component: KategorijeComponent},
       {path: 'brendovi', component: BrendoviComponent},
-      {path: 'podkategorije', component: PodkategorijeComponent}
+      {path: 'podkategorije', component: PodkategorijeComponent},
+      {path: 'proizvodi', component: ProizvodiComponent}
     ])
   ],
   providers: [],
