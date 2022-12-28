@@ -10,8 +10,10 @@
         <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
           <h5 class="card-title text-center mb-4">{{p.naziv}}</h5>
-          <p>Na zalihi: {{p.zaliha}} , Cijena: {{p.jedinicna_cijena}} KM</p>
           <button class="btn mb-3" style="background-color:rgb(200,200,200) " (click)="detaljno(p)">Pogledaj detalje</button>
+          <p>Na zalihi: {{p.zaliha}} , Cijena: {{p.jedinicna_cijena}} KM</p>
+          <button  class="btn btn-warning" *ngIf="loginInfo().isPremisijaAdmin" (click)="urediFunc(p)"
+          >Uredi</button>
         </div>
       </div>
     </div>
@@ -26,6 +28,10 @@
         </div>
         <div class="modal-body">
           <div class="modal-body">
+            <div *ngIf="proizvodObject.id!=0" >
+              <label class="form-label">ID</label>
+              <input class="form-control" type="text" [(ngModel)]="proizvodObject.id" disabled>
+            </div>
             <label class="form-label">Naziv proizvoda</label>
             <input class="form-control" type="text" [(ngModel)]="proizvodObject.naziv">
             <label class="form-label">Jedinicna cijena</label>
@@ -44,6 +50,10 @@
             </select>
             <label class="form-label">Sastav</label>
             <textarea class="form-control" rows="3" [(ngModel)]="proizvodObject.sastav" [(ngModel)]="proizvodObject.sastav"></textarea>
+            <div >
+              <label class="form-label">Odaberi sliku</label>
+              <input type="file" class="form-control" (change)="ChosenFile($event)">
+            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" (click)="proizvodObject=null">Close</button>
               <button type="button" class="btn btn-primary" (click)="snimiProizvod()">Snimi</button>
