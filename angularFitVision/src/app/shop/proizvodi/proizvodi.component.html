@@ -5,12 +5,13 @@
   </div>
   <div class="d-flex justify-content-around flex-wrap">
 
-    <div *ngFor="let o of proivodi">
+    <div *ngFor="let p of proivodi">
       <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240);">
-        <img [src]="o.slika" class="card-img-top" alt="..." style="height:220px">
+        <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
-          <h5 class="card-title text-center mb-4">{{o.naziv}}</h5>
-
+          <h5 class="card-title text-center mb-4">{{p.naziv}}</h5>
+          <p>Na zalihi: {{p.zaliha}} , Cijena: {{p.jedinicna_cijena}} KM</p>
+          <button class="btn mb-3" style="background-color:rgb(200,200,200) " (click)="detaljno(p)">Pogledaj detalje</button>
         </div>
       </div>
     </div>
@@ -51,4 +52,31 @@
         </div>
       </div>
     </div>
+  </div>
+  </div>
 
+  <!--Modal detalji-->
+  <div *ngIf="detaljiProizvod" class="modal fade show" id="exa" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampl">Detljne informacije </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="detaljiProizvod=null"></button>
+        </div>
+        <div class="modal-body">
+          <label class="form-label">Brend</label>
+          <input class="form-control" type="text" [value]="detaljiProizvod.brend" disabled>
+          <label class="form-label">Potategorija</label>
+          <input class="form-control" type="text" [value]="detaljiProizvod.pod_kategorija" disabled>
+          <label class="form-label">Jedinicna mjera</label>
+          <input class="form-control" type="text" [value]="detaljiProizvod.jedinicna_mjera" disabled>
+
+          <label class="form-label">Sastav</label>
+          <textarea class="form-control" rows="3" [(ngModel)]="detaljiProizvod.sastav" disabled></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="detaljiProizvod=null">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

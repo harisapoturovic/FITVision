@@ -48,6 +48,7 @@ export class ProizvodiComponent implements OnInit {
   brendovi:any;
   podKategorije:any
   proivodi: any;
+  detaljiProizvod:any;
 
 
   dodajFunc() {
@@ -78,5 +79,9 @@ export class ProizvodiComponent implements OnInit {
     }
 
 
+  }
+
+  detaljno(p: any) {
+    this.detaljiProizvod=p;
   }
 }
