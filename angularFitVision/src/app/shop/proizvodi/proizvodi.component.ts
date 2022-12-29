@@ -65,6 +65,7 @@ export class ProizvodiComponent implements OnInit {
   akcijabool=false;
   akcije:any;
   akcijaObject:any;
+  akcijaProizvod:any;
 
 
   dodajFunc() {
@@ -167,6 +168,17 @@ export class ProizvodiComponent implements OnInit {
 
   obrisiAkciju(a: any) {
     this.httpKlijent.post(MojConfig.adresa_servera +`/Akcija/Obrisi/${a.id}`, null).subscribe(x=>{
+      this.ucitajAkcije();
+    })
+  }
+
+  proizvodAkcijaOtvori(a: any) {
+    this.akcijaProizvod=a;
+  }
+
+  dodajProizvodUakciju(z: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera + `/Akcija/DodajProizvod?akcijaId=${this.akcijaProizvod.id}&proizvdId=${z.id}`,
+      null).subscribe(x=>{
       this.ucitajAkcije();
     })
   }

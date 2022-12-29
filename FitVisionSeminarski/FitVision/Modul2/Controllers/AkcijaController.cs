@@ -2,6 +2,7 @@
 using FitVision.Modul2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitVision.Modul2.Controllers
 {
@@ -94,6 +95,30 @@ namespace FitVision.Modul2.Controllers
             return Ok(akcija);
         }
 
+        [HttpPost]
+        public ActionResult DodajProizvod(int akcijaId, int proizvdId)
+        {
+            List<Akcija> akcijas = _dbContext.Akcija.Include(a => a.Proizvodi).ToList();
+            Akcija? akcija = akcijas.FirstOrDefault(a => a.ID == akcijaId);
+            if (akcija == null) return BadRequest("akcija ne postoji");
 
+            Proizvod? proizvod = _dbContext.Proizvod.Find(proizvdId);
+            if (proizvod == null)
+                return BadRequest("proizvod ne postoji");
+
+
+
+            foreach (var pro in akcija.Proizvodi)
+            {
+                if (pro.ID == proizvod.ID)
+                    return BadRequest("Proizvod je vec dodan");
+            }
+
+            akcija.Proizvodi.Add(proizvod);
+
+
+            _dbContext.SaveChanges();
+            return Ok(akcija);
+        }
     }
 }
