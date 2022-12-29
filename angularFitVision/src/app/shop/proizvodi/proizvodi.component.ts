@@ -64,6 +64,7 @@ export class ProizvodiComponent implements OnInit {
   naziv: any;
   akcijabool=false;
   akcije:any;
+  akcijaObject:any;
 
 
   dodajFunc() {
@@ -135,4 +136,26 @@ export class ProizvodiComponent implements OnInit {
         ));
   }
 
+  dodajAkciju() {
+    this.akcijaObject={
+      id:0,
+      naziv:"",
+      iznos: 0,
+      datum_pocetka:"",
+      datum_zavrsetka:""
+    }
+  }
+
+  snimiAkciju() {
+   if(this.akcijaObject.naziv!="" && this.akcijaObject.iznos>0 && this.akcijaObject.datum_pocetka!="" &&
+     this.akcijaObject.datum_zavrsetka!=""){
+     this.httpKlijent.post(MojConfig.adresa_servera + "/Akcija/Snimi", this.akcijaObject).subscribe(x=>{
+       this.ucitajAkcije();
+       this.akcijaObject=null;
+     })
+     //porukaSuccess("uspjesno snimljena akcija");
+   }
+   else
+     alert("Nista unijeli sve podatke");
+  }
 }

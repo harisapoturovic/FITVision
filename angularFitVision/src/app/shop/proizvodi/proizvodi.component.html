@@ -1,9 +1,16 @@
 
 <div class="  mt-5">
-  <hr>
+  <hr class="w-100">
+  <div>
+    <button class="btn btn-primary float-end mb-3 mt-3" (click)="dodajAkciju()">Dodaj akciju</button>
+  </div>
+
+  <hr class="w-100">
   <div *ngFor="let a of akcije" class="w-100"  >
     <h4 class="">{{a.naziv}}</h4>
+    <p>Od: {{a.datum_pocetka}},     Do: {{a.datum_pocetka}}</p>
     <p>Iznos: {{a.iznos}} %</p>
+
     <div class="d-flex justify-content-around flex-wrap">
 
       <div *ngFor="let z of a.proizvodi">
@@ -12,6 +19,7 @@
           <div class="card-body">
             <h5 class="card-title">{{z.naziv}}</h5>
             <p>Na zalihi: {{z.zaliha}} , Cijena: {{z.jedinicnaCijena}} KM</p>
+
           </div>
         </div>
       </div>
@@ -49,10 +57,10 @@
     </div>
 
 
-    <!--Akcije prikaz-->
 
 
-  <!--Modal dodaj-->
+
+  <!--Modal dodaj proizvod-->
   <div *ngIf="proizvodObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -124,3 +132,32 @@
       </div>
     </div>
   </div>
+
+
+<!--Modal dodaj akciju-->
+<div *ngIf="akcijaObject!=null" class="modal fade show" id="exampleModalLive3" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel3">Nova akcija </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="akcijaObject=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <label class="form-label">Naziv</label>
+          <input class="form-control" type="text" [(ngModel)]="akcijaObject.naziv">
+          <label class="form-label">Iznos</label>
+          <input class="form-control" type="number" [(ngModel)]="akcijaObject.iznos">
+          <label class="form-label">Datum pocetka</label>
+          <input class="form-control" type="date"  [(ngModel)]="akcijaObject.datum_pocetka">
+          <label class="form-label">Datum zavrsetka</label>
+          <input class="form-control" type="date"  [(ngModel)]="akcijaObject.datum_zavrsetka">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="akcijaObject=null">Close</button>
+            <button type="button" class="btn btn-primary" (click)="snimiAkciju()">Snimi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
