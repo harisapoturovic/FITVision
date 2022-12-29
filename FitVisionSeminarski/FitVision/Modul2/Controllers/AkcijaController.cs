@@ -83,5 +83,17 @@ namespace FitVision.Modul2.Controllers
             return Ok(x);
         }
 
+        [HttpPost("{id}")]
+        public ActionResult Obrisi(int id)
+        {
+            Akcija? akcija = _dbContext.Akcija.Find(id);
+            if (akcija == null) return BadRequest("Pogresan ID");
+
+            _dbContext.Remove(akcija);
+            _dbContext.SaveChanges();
+            return Ok(akcija);
+        }
+
+
     }
 }

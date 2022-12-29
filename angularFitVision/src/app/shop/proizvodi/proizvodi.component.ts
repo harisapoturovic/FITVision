@@ -163,4 +163,11 @@ export class ProizvodiComponent implements OnInit {
   urediAkciju(a: any) {
     this.akcijaObject=a;
   }
+
+
+  obrisiAkciju(a: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera +`/Akcija/Obrisi/${a.id}`, null).subscribe(x=>{
+      this.ucitajAkcije();
+    })
+  }
 }
