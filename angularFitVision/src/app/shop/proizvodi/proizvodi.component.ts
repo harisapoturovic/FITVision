@@ -182,4 +182,11 @@ export class ProizvodiComponent implements OnInit {
       this.ucitajAkcije();
     })
   }
+
+  ukloniProizvodAkcija(a: any, z: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera +
+      `/Akcija/UkloniProizvod?akcijaId=${a.id}&proizvdId=${z.id}`, null).subscribe(x=>{
+      this.ucitajAkcije();
+    })
+  }
 }

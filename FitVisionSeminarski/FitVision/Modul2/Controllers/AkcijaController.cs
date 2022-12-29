@@ -120,5 +120,24 @@ namespace FitVision.Modul2.Controllers
             _dbContext.SaveChanges();
             return Ok(akcija);
         }
+
+
+        [HttpPost]
+        public ActionResult UkloniProizvod(int akcijaId, int proizvdId)
+        {
+
+            Akcija? akcija = _dbContext.Akcija.Include(a => a.Proizvodi).FirstOrDefault(a => a.ID == akcijaId);
+            if (akcija == null) return BadRequest("akcija ne postoji");
+
+            Proizvod? proizvod = akcija.Proizvodi.FirstOrDefault(p => p.ID == proizvdId);
+            if (proizvod == null)
+                return BadRequest("proizvod ne postoji u ovoj akciji");
+
+            akcija.Proizvodi.Remove(proizvod);
+
+            _dbContext.SaveChanges();
+            return Ok(akcija);
+
+        }
     }
 }
