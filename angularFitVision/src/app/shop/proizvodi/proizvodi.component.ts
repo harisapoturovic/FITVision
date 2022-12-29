@@ -4,8 +4,8 @@ import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
 
-declare function porukaSuccess(a: string):any;
-declare function porukaError(a: string):any;
+//declare function porukaSuccess(a: string):any;
+//declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-proizvodi',
@@ -29,7 +29,7 @@ export class ProizvodiComponent implements OnInit {
 
   ucitajProizvode() {
     this.httpKlijent.get(MojConfig.adresa_servera + "/Proizvod/GetAll").subscribe(x => {
-      this.proivodi = x;
+      this.proizvodi = x;
     })
   }
 
@@ -48,9 +48,11 @@ export class ProizvodiComponent implements OnInit {
   proizvodObject: any;
   brendovi: any;
   podKategorije: any
-  proivodi: any;
+  proizvodi: any;
   detaljiProizvod: any;
   url: "";
+  filter_naziv: any;
+  naziv: any;
 
 
   dodajFunc() {
@@ -77,7 +79,7 @@ export class ProizvodiComponent implements OnInit {
           this.proizvodObject = null;
           this.ucitajProizvode();
         });
-      porukaSuccess("uspjesno snimljen proizvod");
+      //porukaSuccess("uspjesno snimljen proizvod");
     } else {
       alert("niste unijeli sve podatke");
     }
@@ -109,6 +111,17 @@ export class ProizvodiComponent implements OnInit {
       this.ucitajProizvode();
 
     })
-    porukaSuccess("uspjesno brisanje");
+    //porukaSuccess("uspjesno brisanje");
   }
+
+  getProizvode() {
+    if(this.proizvodi==null)
+      return [];
+    return this.proizvodi.filter(
+      (x:any)=>
+        (!this.filter_naziv ||
+          (x.naziv).toLowerCase().startsWith(this.naziv)
+        ));
+  }
+
 }
