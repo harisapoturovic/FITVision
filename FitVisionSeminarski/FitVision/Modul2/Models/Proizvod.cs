@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace FitVision.Modul2.Models
 {
@@ -21,5 +22,8 @@ namespace FitVision.Modul2.Models
         [ForeignKey(nameof(brend))]
         public int brendid { get; set; }
         public Brend brend { get; set; }
+
+        [JsonIgnore]
+        public List<Akcija> Akcije { get; set; } = new List<Akcija>();
     }
 }

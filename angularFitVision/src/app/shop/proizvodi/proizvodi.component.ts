@@ -25,6 +25,15 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajBrendove();
     this.ucitajPodKategorije();
     this.ucitajProizvode();
+    this.ucitajAkcije();
+
+  }
+
+  ucitajAkcije(){
+    this.httpKlijent.get(MojConfig.adresa_servera +"/Akcija/GetAll").subscribe(x=>{
+      this.akcije=x;
+    })
+
   }
 
   ucitajProizvode() {
@@ -53,6 +62,8 @@ export class ProizvodiComponent implements OnInit {
   url: "";
   filter_naziv: any;
   naziv: any;
+  akcijabool=false;
+  akcije:any;
 
 
   dodajFunc() {
