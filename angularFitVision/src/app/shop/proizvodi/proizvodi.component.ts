@@ -158,4 +158,9 @@ export class ProizvodiComponent implements OnInit {
    else
      alert("Nista unijeli sve podatke");
   }
+
+
+  urediAkciju(a: any) {
+    this.akcijaObject=a;
+  }
 }
