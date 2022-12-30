@@ -71,7 +71,8 @@ export class ProizvodiComponent implements OnInit {
   filter_cijena4: any;
   filter_podkat: any;
   podkatID:number;
-
+  filter_brend: any;
+  brendID:number;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -144,7 +145,8 @@ export class ProizvodiComponent implements OnInit {
         (!this.filter_cijena2 || x.jedinicna_cijena>=20 && x.jedinicna_cijena<50) &&
         (!this.filter_cijena3 || x.jedinicna_cijena>=50 && x.jedinicna_cijena<100) &&
         (!this.filter_cijena4 || x.jedinicna_cijena>=100)) &&
-        (!this.filter_podkat || x.pod_kategorija_id==this.podkatID)
+        (!this.filter_podkat || x.pod_kategorija_id==this.podkatID) &&
+        (!this.filter_brend || x.brend_id==this.brendID)
     );
 
     if(pr.length==0)

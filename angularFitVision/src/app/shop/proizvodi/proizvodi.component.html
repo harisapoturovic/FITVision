@@ -53,6 +53,14 @@
         <span> {{p.naziv}} </span> <br>
       </div>
     </section>
+  <hr>
+  <section class="example-section">
+    <h4>Brendovi:</h4>
+    <div class="podkat" *ngFor="let b of brendovi">
+      <input [(ngModel)]= "filter_brend" type="checkbox" (click)="brendID=b.id" >
+      <span> {{b.naziv}} </span> <br>
+    </div>
+  </section>
   </div>
 
 
