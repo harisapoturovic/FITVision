@@ -14,6 +14,7 @@ import {MojConfig} from "../../moj-config";
 })
 export class ProizvodiComponent implements OnInit {
 
+
   constructor(private httpKlijent: HttpClient) {
   }
 
@@ -26,7 +27,6 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajPodKategorije();
     this.ucitajProizvode();
     this.ucitajAkcije();
-
   }
 
   ucitajAkcije(){
@@ -66,7 +66,10 @@ export class ProizvodiComponent implements OnInit {
   akcije:any;
   akcijaObject:any;
   akcijaProizvod:any;
-
+  filter_cijena1: any;
+  filter_cijena2: any;
+  filter_cijena3: any;
+  filter_cijena4: any;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -130,11 +133,19 @@ export class ProizvodiComponent implements OnInit {
   getProizvode() {
     if(this.proizvodi==null)
       return [];
-    return this.proizvodi.filter(
+    var pr = this.proizvodi.filter(
       (x:any)=>
         (!this.filter_naziv ||
-          (x.naziv).toLowerCase().startsWith(this.naziv)
-        ));
+          (x.naziv).toLowerCase().startsWith(this.naziv)) &&
+        ((!this.filter_cijena1 || x.jedinicna_cijena>0 && x.jedinicna_cijena<20) &&
+        (!this.filter_cijena2 || x.jedinicna_cijena>=20 && x.jedinicna_cijena<50) &&
+        (!this.filter_cijena3 || x.jedinicna_cijena>=50 && x.jedinicna_cijena<100) &&
+        (!this.filter_cijena4 || x.jedinicna_cijena>=100))
+    );
+    if(pr.length==0)
+      console.log("Nema proizvoda");
+    else
+      return pr;
   }
 
   dodajAkciju() {

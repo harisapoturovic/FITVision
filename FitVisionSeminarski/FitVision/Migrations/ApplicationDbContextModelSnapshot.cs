@@ -233,6 +233,7 @@ namespace FitVision.Migrations
                     b.ToTable("Oprema");
                 });
 
+            
             modelBuilder.Entity("FitVision.Modul2.Models.Podkategorija", b =>
                 {
                     b.Property<int>("Id")

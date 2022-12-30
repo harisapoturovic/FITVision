@@ -36,6 +36,18 @@
   <hr>
 </div>
 
+<!-- checkbox (value umjesto ngModel kako se ne bi reflektovalo na sve) -->
+<div>
+<section class="example-section">
+  <h4>Cijena:</h4>
+  <input [(ngModel)] = "filter_cijena1" type="checkbox"> <span style="font-weight: bold"> 0-20KM</span> <br>
+  <input [(ngModel)] = "filter_cijena2" type="checkbox"> <span style="font-weight: bold"> 20-50KM</span> <br>
+  <input [(ngModel)] = "filter_cijena3" type="checkbox"> <span style="font-weight: bold"> 50-100KM</span> <br>
+  <input [(ngModel)] = "filter_cijena4" type="checkbox"> <span style="font-weight: bold"> >100KM</span> <br>
+</section>
+</div>
+
+
   <div class="mb-5 d-flex justify-content-end">
     <button class="btn btn-primary m-3 "
             *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()" >Dodaj proizvod</button>
@@ -57,7 +69,6 @@
         </div>
       </div>
     </div>
-
 
 
 
@@ -187,4 +198,6 @@
     </div>
   </div>
 </div>
+</div>
+
 
