@@ -29,15 +29,15 @@
     <hr>
   </div>
 </div>
-
-<div>
+<div class="proizvodi">
+  <div class="filteri">
+<div class="filter_naziv">
   <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Naziv proizvoda</span> <br>
   <input [(ngModel)]="naziv" [disabled]="!filter_naziv"><br>
   <hr>
 </div>
 
 <!-- checkbox (value umjesto ngModel kako se ne bi reflektovalo na sve) -->
-<div>
 <section class="example-section">
   <h4>Cijena:</h4>
   <input [(ngModel)] = "filter_cijena1" type="checkbox"> <span style="font-weight: bold"> 0-20KM</span> <br>
@@ -45,13 +45,16 @@
   <input [(ngModel)] = "filter_cijena3" type="checkbox"> <span style="font-weight: bold"> 50-100KM</span> <br>
   <input [(ngModel)] = "filter_cijena4" type="checkbox"> <span style="font-weight: bold"> >100KM</span> <br>
 </section>
-</div>
-
-
-  <div class="mb-5 d-flex justify-content-end">
-    <button class="btn btn-primary m-3 "
-            *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()" >Dodaj proizvod</button>
+<hr>
+    <section class="example-section">
+      <h4>Podkategorije:</h4>
+      <div class="podkat" *ngFor="let p of podKategorije">
+      <input [(ngModel)]= "filter_podkat" type="checkbox" (click)="podkatID=p.id" >
+        <span> {{p.naziv}} </span> <br>
+      </div>
+    </section>
   </div>
+
 
 <!--Proivodi prikaz-->
   <div class="d-flex justify-content-around flex-wrap" >
@@ -69,10 +72,8 @@
         </div>
       </div>
     </div>
-
-
-
-
+  </div>
+</div>
   <!--Modal dodaj proizvod-->
   <div *ngIf="proizvodObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
     <div class="modal-dialog">
@@ -118,7 +119,12 @@
       </div>
     </div>
   </div>
-  </div>
+
+
+<div class="mb-5 d-flex justify-content-end">
+  <button class="btn btn-primary m-3 "
+          *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()" >Dodaj proizvod</button>
+</div>
 
   <!--Modal detalji-->
   <div *ngIf="detaljiProizvod" class="modal fade show" id="exa" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">

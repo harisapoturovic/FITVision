@@ -1,0 +1,11 @@
+.proizvodi{
+  display: flex;
+  flex-direction: row;
+}
+
+.filteri{
+  display: flex;
+  flex-direction: column;
+  background-color: #d9eaff;
+  width: 400px;
+}

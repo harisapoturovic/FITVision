@@ -6,7 +6,7 @@
         {
             public int id { get; set; }
             public string naziv { get; set; }
-            public int jedinicna_cijena { get; set; }
+            public float jedinicna_cijena { get; set; }
             public string sastav { get; set; }
             public string jedinicna_mjera { get; set; }
             public int zaliha { get; set; }

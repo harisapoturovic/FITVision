@@ -14,7 +14,6 @@ import {MojConfig} from "../../moj-config";
 })
 export class ProizvodiComponent implements OnInit {
 
-
   constructor(private httpKlijent: HttpClient) {
   }
 
@@ -70,6 +69,9 @@ export class ProizvodiComponent implements OnInit {
   filter_cijena2: any;
   filter_cijena3: any;
   filter_cijena4: any;
+  filter_podkat: any;
+  podkatID:number;
+
 
   dodajFunc() {
     this.proizvodObject = {
@@ -131,6 +133,7 @@ export class ProizvodiComponent implements OnInit {
   }
 
   getProizvode() {
+
     if(this.proizvodi==null)
       return [];
     var pr = this.proizvodi.filter(
@@ -140,13 +143,15 @@ export class ProizvodiComponent implements OnInit {
         ((!this.filter_cijena1 || x.jedinicna_cijena>0 && x.jedinicna_cijena<20) &&
         (!this.filter_cijena2 || x.jedinicna_cijena>=20 && x.jedinicna_cijena<50) &&
         (!this.filter_cijena3 || x.jedinicna_cijena>=50 && x.jedinicna_cijena<100) &&
-        (!this.filter_cijena4 || x.jedinicna_cijena>=100))
+        (!this.filter_cijena4 || x.jedinicna_cijena>=100)) &&
+        (!this.filter_podkat || x.pod_kategorija_id==this.podkatID)
     );
+
     if(pr.length==0)
       console.log("Nema proizvoda");
     else
       return pr;
-  }
+    }
 
   dodajAkciju() {
     this.akcijaObject={
