@@ -26,6 +26,7 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajPodKategorije();
     this.ucitajProizvode();
     this.ucitajAkcije();
+    this.napraviKorpu();
   }
 
   ucitajAkcije(){
@@ -205,6 +206,12 @@ export class ProizvodiComponent implements OnInit {
     this.httpKlijent.post(MojConfig.adresa_servera +
       `/Akcija/UkloniProizvod?akcijaId=${a.id}&proizvdId=${z.id}`, null).subscribe(x=>{
       this.ucitajAkcije();
+    })
+  }
+
+  private napraviKorpu() {
+    this.httpKlijent.post(MojConfig.adresa_servera + '/Korpa/Dodaj', null).subscribe(x=>{
+
     })
   }
 }

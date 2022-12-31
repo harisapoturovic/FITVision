@@ -9,3 +9,17 @@
   background-color: #d9eaff;
   width: 400px;
 }
+
+.zaKorpu{
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.form-control{
+  width: 70px;
+  height: 35px;
+  border: lightskyblue;
+  margin-right: 30px;
+}
+
