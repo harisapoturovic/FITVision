@@ -1,8 +1,10 @@
 ﻿using FitVision.Data;
+using FitVision.Migrations;
 using FitVision.Modul2.Models;
 using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static FitVision.Modul2.Controllers.AkcijaController;
 
 namespace FitVision.Modul2.Controllers
@@ -69,6 +71,42 @@ namespace FitVision.Modul2.Controllers
             if (kp == null) return BadRequest("Pogresan ID");
 
             _dbContext.Remove(kp);
+            _dbContext.SaveChanges();
+            return Ok(kp);
+        }
+
+        [HttpPost]
+        public ActionResult DodajProizvod(int korpaId, int proizvdId, int kolicina)
+        {
+            Korpa? korpa = _dbContext.Korpa.Find(korpaId);
+            if (korpa == null) 
+                return BadRequest("korpa ne postoji");
+
+            Proizvod? proizvod = _dbContext.Proizvod.Find(proizvdId);
+            if (proizvod == null)
+                return BadRequest("proizvod ne postoji");
+
+            var akcije = _dbContext.Akcija.ToList();
+            int popust=0;
+            foreach (var a in akcije)
+            {
+                foreach (var p in a.Proizvodi)
+                {
+                    if (p.ID == proizvdId)
+                        popust = a.Iznos;
+                }                
+            }
+
+            KorpaProizvod kp = new KorpaProizvod()
+            {
+                Popust=popust,
+                Kolicina=kolicina,
+                Cijena=proizvod.JedinicnaCijena*kolicina,
+                korpaID=korpaId,
+                proizvodID=proizvdId
+            };
+            
+            _dbContext.Add(kp);
             _dbContext.SaveChanges();
             return Ok(kp);
         }

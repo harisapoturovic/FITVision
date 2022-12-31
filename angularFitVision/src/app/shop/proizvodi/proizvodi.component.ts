@@ -74,6 +74,8 @@ export class ProizvodiComponent implements OnInit {
   podkatID:number;
   filter_brend: any;
   brendID:number;
+  korpaID: any;
+  kolicina: any;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -211,7 +213,16 @@ export class ProizvodiComponent implements OnInit {
 
   private napraviKorpu() {
     this.httpKlijent.post(MojConfig.adresa_servera + '/Korpa/Dodaj', null).subscribe(x=>{
+      this.korpaID=x;
+    })
+  }
+
+  dodajUKorpu(p: any) {
+    // @ts-ignore
+    this.httpKlijent.post(MojConfig.adresa_servera+`/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
+      .subscribe((x:any)=>{
 
     })
   }
 }
+

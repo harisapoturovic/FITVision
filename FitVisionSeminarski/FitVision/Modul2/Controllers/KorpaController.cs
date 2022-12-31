@@ -28,7 +28,7 @@ namespace FitVision.Modul2.Controllers
 
             korpa.DatumKreiranja = DateTime.Now;
             _dbContext.SaveChanges();
-            return Ok();
+            return Ok(korpa.Id);
         }
         [HttpGet]
         public ActionResult<List<KorpaDodajVM>> GetAll()
@@ -41,6 +41,16 @@ namespace FitVision.Modul2.Controllers
                 });
 
             return data.Take(100).ToList();
+        }
+
+        [HttpPost]
+        public ActionResult Obrisi()
+        {
+            var korpe = _dbContext.Korpa.ToList();
+
+            _dbContext.RemoveRange(korpe);
+            _dbContext.SaveChanges();
+            return Ok(korpe);
         }
     }
 }

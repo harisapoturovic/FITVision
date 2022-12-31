@@ -230,9 +230,8 @@ namespace FitVision.Migrations
                     b.Property<int>("Kolicina")
                         .HasColumnType("int");
 
-                    b.Property<string>("Popust")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Popust")
+                        .HasColumnType("int");
 
                     b.Property<int>("korpaID")
                         .HasColumnType("int");
