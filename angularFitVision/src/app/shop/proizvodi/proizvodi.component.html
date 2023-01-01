@@ -1,3 +1,17 @@
+<button type="button" class="btnKorpa" (click)="prikaziSadrzaj()"> KORPA </button>
+<!-- sadrzaj korpe -->
+<div *ngIf="korpaObject!=null">
+  <h2>Moja korpa</h2>
+  <div class="mojaKorpa" *ngFor="let k of this.korpaObject">
+    <img [src]="k.slika" alt="..." style="height:220px" width="250px">
+    <div class="sadrzaj">
+    <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}g</h5>
+    <p class="list-group-item">Količina: {{k.kolicina}}</p>
+    <p class="list-group-item">Cijena: {{k.cijena}} KM</p>
+    <p class="list-group-item">Popust: {{k.popust}}</p> 
+    </div>
+  </div>
+</div>
 <hr>
 <div class="proizvodi">
   <div class="filteri">

@@ -23,3 +23,26 @@
   margin-right: 30px;
 }
 
+.btnKorpa {
+  background-color: #ff855e;
+  color: white;
+  font-size: 20px;
+  width: 250px;
+  height: 50px;
+  margin-left: 900px;
+  border: none;
+}
+
+.mojaKorpa{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid deepskyblue;
+}
+
+h5, p{
+  border: none;
+}
+
+.sadrzaj{
+  padding: 20px;
+}

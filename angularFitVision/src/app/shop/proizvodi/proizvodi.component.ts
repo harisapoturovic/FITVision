@@ -25,15 +25,7 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajBrendove();
     this.ucitajPodKategorije();
     this.ucitajProizvode();
-    this.ucitajAkcije();
-    //this.napraviKorpu();
-  }
-
-  ucitajAkcije(){
-    this.httpKlijent.get(MojConfig.adresa_servera +"/Akcija/GetAll").subscribe(x=>{
-      this.akcije=x;
-    })
-
+    this.napraviKorpu();
   }
 
   ucitajProizvode() {
@@ -62,10 +54,6 @@ export class ProizvodiComponent implements OnInit {
   url: "";
   filter_naziv: any;
   naziv: any;
-  akcijabool=false;
-  akcije:any;
-  akcijaObject:any;
-  akcijaProizvod:any;
   filter_cijena1: any;
   filter_cijena2: any;
   filter_cijena3: any;
@@ -76,6 +64,7 @@ export class ProizvodiComponent implements OnInit {
   brendID:number;
   korpaID: any;
   kolicina: any=0;
+  korpaObject:any;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -105,8 +94,6 @@ export class ProizvodiComponent implements OnInit {
     } else {
       alert("niste unijeli sve podatke");
     }
-
-
   }
 
   detaljno(p: any) {
@@ -158,59 +145,6 @@ export class ProizvodiComponent implements OnInit {
       return pr;
     }
 
-  dodajAkciju() {
-    this.akcijaObject={
-      id:0,
-      naziv:"",
-      iznos: 0,
-      datum_pocetka:"",
-      datum_zavrsetka:""
-    }
-  }
-
-  snimiAkciju() {
-   if(this.akcijaObject.naziv!="" && this.akcijaObject.iznos>0 && this.akcijaObject.datum_pocetka!="" &&
-     this.akcijaObject.datum_zavrsetka!=""){
-     this.httpKlijent.post(MojConfig.adresa_servera + "/Akcija/Snimi", this.akcijaObject).subscribe(x=>{
-       this.ucitajAkcije();
-       this.akcijaObject=null;
-     })
-     //porukaSuccess("uspjesno snimljena akcija");
-   }
-   else
-     alert("Nista unijeli sve podatke");
-  }
-
-
-  urediAkciju(a: any) {
-    this.akcijaObject=a;
-  }
-
-
-  obrisiAkciju(a: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera +`/Akcija/Obrisi/${a.id}`, null).subscribe(x=>{
-      this.ucitajAkcije();
-    })
-  }
-
-  proizvodAkcijaOtvori(a: any) {
-    this.akcijaProizvod=a;
-  }
-
-  dodajProizvodUakciju(z: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera + `/Akcija/DodajProizvod?akcijaId=${this.akcijaProizvod.id}&proizvdId=${z.id}`,
-      null).subscribe(x=>{
-      this.ucitajAkcije();
-    })
-  }
-
-  ukloniProizvodAkcija(a: any, z: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera +
-      `/Akcija/UkloniProizvod?akcijaId=${a.id}&proizvdId=${z.id}`, null).subscribe(x=>{
-      this.ucitajAkcije();
-    })
-  }
-
   private napraviKorpu() {
     this.httpKlijent.post(MojConfig.adresa_servera + '/Korpa/Dodaj', null).subscribe(x=>{
       this.korpaID=x;
@@ -225,6 +159,14 @@ export class ProizvodiComponent implements OnInit {
     }
     else
       alert("Niste odabrali količinu");
+  }
+
+
+  prikaziSadrzaj() {
+    this.httpKlijent.get(MojConfig.adresa_servera+`/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x=>{
+      this.korpaObject=x;
+    })
+
   }
 }
 

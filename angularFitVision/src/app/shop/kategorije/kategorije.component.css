@@ -21,3 +21,8 @@ span{
   display: flex;
   flex-direction: row;
 }
+
+.nav-link{
+  font-size: 18px;
+  margin: 8px;
+}

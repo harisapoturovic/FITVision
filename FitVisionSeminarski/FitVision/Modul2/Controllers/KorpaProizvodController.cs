@@ -75,6 +75,27 @@ namespace FitVision.Modul2.Controllers
             return Ok(kp);
         }
 
+        [HttpGet]
+        public ActionResult GetByKorpa(int korpa_id)
+        {
+            var data = _dbContext.KorpaProizvod.Where(x => x.korpaID == korpa_id)
+                .OrderBy(s => s.korpaID)
+                .Select(s => new KPGetByKorpaVM
+                {
+                    id = s.Id,
+                   kolicina=s.Kolicina,
+                   popust=s.Popust,
+                   cijena=s.Cijena,
+                   proizvodID=s.proizvodID,
+                   korpaID=s.korpaID,
+                   nazivProizvoda=s.proizvod.Naziv,
+                   jedinicnaMjera=s.proizvod.JedinicnaMjera,
+                   slika=s.proizvod.Slika
+                })
+                .AsQueryable();
+            return Ok(data.Take(100).ToList());
+        }
+
         [HttpPost]
         public ActionResult DodajProizvod(int korpaId, int proizvdId, int kolicina)
         {
