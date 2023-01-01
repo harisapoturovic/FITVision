@@ -85,7 +85,7 @@ namespace FitVision.Modul2.Controllers
                     id = s.Id,
                    kolicina=s.Kolicina,
                    popust=s.Popust,
-                   cijena=s.Cijena,
+                   cijena=s.Cijena*s.Kolicina, //dodano *kolicina
                    proizvodID=s.proizvodID,
                    korpaID=s.korpaID,
                    nazivProizvoda=s.proizvod.Naziv,
@@ -110,6 +110,8 @@ namespace FitVision.Modul2.Controllers
             //provjera za popust
             var akcije = _dbContext.Akcija.ToList();
             int popust=0;
+            float jedCijena = proizvod.JedinicnaCijena;
+            float cijena=0;
             foreach (var a in akcije)
             {
                 foreach (var p in a.Proizvodi)
@@ -129,15 +131,18 @@ namespace FitVision.Modul2.Controllers
             };
 
             List<KorpaProizvod> kp2 = _dbContext.KorpaProizvod.Where(x => x.proizvodID == proizvdId && x.korpaID == korpaId).ToList();
-            if (kp2.Count==0)
+            if (kp2.Count == 0)
             {
-                _dbContext.Add(kp);
-                _dbContext.SaveChanges();
-                return Ok(kp);
+                _dbContext.Add(kp);                
             }
             else
-                return BadRequest("Proizvod je već u korpi");
-            
+            {
+                kp2[0].Kolicina = kolicina;
+                cijena = kolicina * jedCijena;
+            }
+            _dbContext.SaveChanges();
+            return Ok(cijena);
+
         }
 
         [HttpPost]

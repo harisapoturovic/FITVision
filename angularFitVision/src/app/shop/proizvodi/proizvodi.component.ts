@@ -25,7 +25,8 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajBrendove();
     this.ucitajPodKategorije();
     this.ucitajProizvode();
-    this.napraviKorpu();
+    if(this.loginInfo().isPremisijaKorisnik)
+      this.napraviKorpu();
   }
 
   ucitajProizvode() {
@@ -65,6 +66,7 @@ export class ProizvodiComponent implements OnInit {
   korpaID: any;
   kolicina: any = 0;
   korpaObject: any;
+  cijenaProizvoda:any;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -156,6 +158,7 @@ export class ProizvodiComponent implements OnInit {
       // @ts-ignore
       this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
         .subscribe((x: any) => {
+          this.prikaziSadrzaj();
         })
     } else
       alert("Niste odabrali količinu");
@@ -178,5 +181,22 @@ export class ProizvodiComponent implements OnInit {
       })
   }
 
+  izmijeniKolicinu(kolicina: any, korpaID:any, proizvodID:any) {
+   // this.kolicina=kolicina;
+    // @ts-ignore
+    this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
+      .subscribe((x: any) => {
+        this.cijenaProizvoda=x;
+        for (let k of this.korpaObject) {
+          if(k.korpaID==korpaID && k.proizvodID==proizvodID)
+            k.cijena=this.cijenaProizvoda;
+        }
+      })
+  }
+
+  onKey(event: Event) {
+    // @ts-ignore
+    this.kolicina = event.target.value;
+  }
 }
 
