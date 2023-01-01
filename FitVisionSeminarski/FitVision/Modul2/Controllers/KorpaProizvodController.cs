@@ -107,6 +107,7 @@ namespace FitVision.Modul2.Controllers
             if (proizvod == null)
                 return BadRequest("proizvod ne postoji");
 
+            //provjera za popust
             var akcije = _dbContext.Akcija.ToList();
             int popust=0;
             foreach (var a in akcije)
@@ -126,10 +127,43 @@ namespace FitVision.Modul2.Controllers
                 korpaID=korpaId,
                 proizvodID=proizvdId
             };
+
+            List<KorpaProizvod> kp2 = _dbContext.KorpaProizvod.Where(x => x.proizvodID == proizvdId && x.korpaID == korpaId).ToList();
+            if (kp2.Count==0)
+            {
+                _dbContext.Add(kp);
+                _dbContext.SaveChanges();
+                return Ok(kp);
+            }
+            else
+                return BadRequest("Proizvod je već u korpi");
             
-            _dbContext.Add(kp);
+        }
+
+        [HttpPost]
+        public ActionResult UkloniProizvod(int korpaId, int proizvdId)
+        {
+            Korpa? korpa = _dbContext.Korpa.Find(korpaId);;
+            if (korpa == null) 
+                return BadRequest("akcija ne postoji");
+
+            Proizvod? proizvod = _dbContext.Proizvod.Find(proizvdId);
+            if (proizvod == null)
+                return BadRequest("proizvod ne postoji");
+
+            //List<KorpaProizvod> kp = _dbContext.KorpaProizvod.Where(x => (x.proizvodID == proizvdId && x.korpaID == korpaId)).ToList();
+            //_dbContext.KorpaProizvod.RemoveRange(kp);
+
+            List<KorpaProizvod> kp2 = _dbContext.KorpaProizvod.ToList();
+            foreach (var i in kp2.ToList())
+            {
+                if (i.proizvodID == proizvdId && i.korpaID == korpaId)
+                    _dbContext.KorpaProizvod.Remove(i);
+            }
+
             _dbContext.SaveChanges();
-            return Ok(kp);
+            return Ok();
+
         }
     }
 }

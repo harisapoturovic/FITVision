@@ -8,7 +8,8 @@
     <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}g</h5>
     <p class="list-group-item">Količina: {{k.kolicina}}</p>
     <p class="list-group-item">Cijena: {{k.cijena}} KM</p>
-    <p class="list-group-item">Popust: {{k.popust}}</p> 
+    <p class="list-group-item">Popust: {{k.popust}}</p>
+      <button type="button" class="btn btn-danger" (click)="ukloniProizvod(k.proizvodID)"> Ukloni</button>
     </div>
   </div>
 </div>
