@@ -1,34 +1,4 @@
-
-<div class="  mt-5">
-  <hr class="w-100">
-  <div>
-    <button class="btn btn-primary float-end mb-3 mt-3" (click)="dodajAkciju()">Dodaj akciju</button>
-  </div>
-
-  <hr class="w-100">
-  <div *ngFor="let a of akcije" class="w-100"  >
-    <h4 class="">{{a.naziv}}</h4>
-    <p>Od: {{a.datum_pocetka}},     Do: {{a.datum_zavrsetka}}</p>
-    <p>Iznos: {{a.iznos}} %</p>
-    <button class="btn btn-warning mb-4 me-2" (click)="urediAkciju(a)">Uredi akciju</button>
-    <button class="btn btn-danger mb-4 me-2" (click)="obrisiAkciju(a)">Obrisi akciju</button>
-    <button class="btn btn-info mb-4" (click)="proizvodAkcijaOtvori(a)">Dodaj proizvod u akciju</button>
-    <div class="d-flex justify-content-around flex-wrap">
-
-      <div *ngFor="let z of a.proizvodi">
-        <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240)">
-          <img [src]="z.slika" class="card-img-top" alt="..." style="height:220px">
-          <div class="card-body">
-            <h5 class="card-title">{{z.naziv}}</h5>
-            <p>Na zalihi: {{z.zaliha}} , Cijena: {{z.jedinicnaCijena}} KM</p>
-            <button class="btn btn-danger" (click)="ukloniProizvodAkcija(a,z)">Ukloni sa akcije</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr>
-  </div>
-</div>
+<hr>
 <div class="proizvodi">
   <div class="filteri">
 <div class="filter_naziv">
@@ -164,58 +134,5 @@
     </div>
   </div>
 
-
-<!--Modal dodaj akciju-->
-<div *ngIf="akcijaObject!=null" class="modal fade show" id="exampleModalLive3" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel3">Nova akcija </h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="akcijaObject=null"></button>
-      </div>
-      <div class="modal-body">
-        <div class="modal-body">
-          <label class="form-label">Naziv</label>
-          <input class="form-control" type="text" [(ngModel)]="akcijaObject.naziv">
-          <label class="form-label">Iznos</label>
-          <input class="form-control" type="number" [(ngModel)]="akcijaObject.iznos">
-          <label class="form-label">Datum pocetka</label>
-          <input class="form-control" type="date"  [(ngModel)]="akcijaObject.datum_pocetka">
-          <label class="form-label">Datum zavrsetka</label>
-          <input class="form-control" type="date"  [(ngModel)]="akcijaObject.datum_zavrsetka">
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="akcijaObject=null">Close</button>
-            <button type="button" class="btn btn-primary" (click)="snimiAkciju()">Snimi</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="akcijaProizvod!=null" class="modal fade show" id="exampleModalLive2" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel2">Dodaj proivod u akciju</h5>
-        <button type="button" class="btn-close" aria-label="Close" (click)="akcijaProizvod=null"></button>
-      </div>
-      <div class="modal-body">
-
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            Odaberite proizvod
-          </button>
-          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li *ngFor="let z of proizvodi"><a class="dropdown-item" (click)="dodajProizvodUakciju(z)">{{z.naziv}}</a></li>
-
-          </ul>
-
-      </div>
-
-    </div>
-  </div>
-</div>
-</div>
 
 

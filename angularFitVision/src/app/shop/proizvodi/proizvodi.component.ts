@@ -26,7 +26,7 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajPodKategorije();
     this.ucitajProizvode();
     this.ucitajAkcije();
-    this.napraviKorpu();
+    //this.napraviKorpu();
   }
 
   ucitajAkcije(){
@@ -75,7 +75,7 @@ export class ProizvodiComponent implements OnInit {
   filter_brend: any;
   brendID:number;
   korpaID: any;
-  kolicina: any;
+  kolicina: any=0;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -218,11 +218,13 @@ export class ProizvodiComponent implements OnInit {
   }
 
   dodajUKorpu(p: any) {
-    // @ts-ignore
-    this.httpKlijent.post(MojConfig.adresa_servera+`/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
-      .subscribe((x:any)=>{
-
-    })
+    if(this.kolicina!=0) {
+      // @ts-ignore
+      this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
+        .subscribe((x: any) => {})
+    }
+    else
+      alert("Niste odabrali količinu");
   }
 }
 
