@@ -85,7 +85,7 @@ namespace FitVision.Modul2.Controllers
                     id = s.Id,
                    kolicina=s.Kolicina,
                    popust=s.Popust,
-                   cijena=s.Cijena*s.Kolicina, //dodano *kolicina
+                   cijena=s.Cijena, //dodano *kolicina
                    proizvodID=s.proizvodID,
                    korpaID=s.korpaID,
                    nazivProizvoda=s.proizvod.Naziv,
@@ -112,20 +112,25 @@ namespace FitVision.Modul2.Controllers
             int popust=0;
             float jedCijena = proizvod.JedinicnaCijena;
             float cijena=0;
-            foreach (var a in akcije)
+            //foreach (var a in akcije)
+            //{
+            //    foreach (var p in a.Proizvodi)
+            //    {
+            //        if (p.ID == proizvdId)
+            //            popust = a.Iznos;
+            //    }                
+            //}
+
+            foreach (var i in proizvod.Akcije) //prazno
             {
-                foreach (var p in a.Proizvodi)
-                {
-                    if (p.ID == proizvdId)
-                        popust = a.Iznos;
-                }                
+                popust += i.Iznos;
             }
 
             KorpaProizvod kp = new KorpaProizvod()
             {
                 Popust=popust,
                 Kolicina=kolicina,
-                Cijena=proizvod.JedinicnaCijena*kolicina,
+                Cijena=jedCijena*kolicina,
                 korpaID=korpaId,
                 proizvodID=proizvdId
             };
