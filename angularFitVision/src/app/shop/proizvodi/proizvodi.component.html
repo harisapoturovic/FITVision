@@ -61,7 +61,7 @@
           <button class="btn mb-3" style="background-color:rgb(200,200,200) " (click)="detaljno(p)">Pogledaj detalje</button>
           <p>Na zalihi: {{p.zaliha}} , Cijena: {{p.jedinicna_cijena}} KM</p>
           <div class="zaKorpu" *ngIf="loginInfo().isPremisijaKorisnik">
-          <input class="form-control" type="number" placeholder="0" (change)="onKey($event)">
+          <input class="form-control" type="number" value=0 (change)="onKey($event)">
           <button class="btn btn-info mb-4" (click)="dodajUKorpu(p)">Dodaj u korpu</button>
           </div>
           <button  class="btn btn-warning" *ngIf="loginInfo().isPremisijaAdmin" (click)="urediFunc(p)"

@@ -159,6 +159,7 @@ export class ProizvodiComponent implements OnInit {
       this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
         .subscribe((x: any) => {
           this.prikaziSadrzaj();
+          this.kolicina=0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
         })
     } else
       alert("Niste odabrali količinu");
@@ -196,7 +197,10 @@ export class ProizvodiComponent implements OnInit {
 
   onKey(event: Event) {
     // @ts-ignore
-    this.kolicina = event.target.value;
+    if(event.target.value!=0)
+      { // @ts-ignore
+        this.kolicina = event.target.value;
+      }
   }
 }
 
