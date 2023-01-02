@@ -79,13 +79,13 @@ namespace FitVision.Modul2.Controllers
         public ActionResult GetByKorpa(int korpa_id)
         {
             var data = _dbContext.KorpaProizvod.Where(x => x.korpaID == korpa_id)
-                .OrderBy(s => s.korpaID)
+                .OrderBy(s => s.korpaID) 
                 .Select(s => new KPGetByKorpaVM
                 {
-                    id = s.Id,
+                   id = s.Id,
                    kolicina=s.Kolicina,
                    popust=s.Popust,
-                   cijena=s.Cijena, //dodano *kolicina
+                   cijena=s.Cijena, 
                    proizvodID=s.proizvodID,
                    korpaID=s.korpaID,
                    nazivProizvoda=s.proizvod.Naziv,
@@ -142,8 +142,9 @@ namespace FitVision.Modul2.Controllers
             }
             else
             {
-                kp2[0].Kolicina = kolicina;
-                cijena = kolicina * jedCijena;
+                kp2[0].Kolicina = kolicina; //kp2[0] -> [0] zato što uvijek radimo sa jednim objektom, a ne nizom
+                kp2[0].Cijena = kolicina * jedCijena;
+                cijena = kp2[0].Cijena;
             }
             _dbContext.SaveChanges();
             return Ok(cijena);

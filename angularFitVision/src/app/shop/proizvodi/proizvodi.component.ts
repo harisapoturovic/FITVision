@@ -186,7 +186,7 @@ export class ProizvodiComponent implements OnInit {
     // @ts-ignore
     this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
       .subscribe((x: any) => {
-        this.cijenaProizvoda=x;
+        this.cijenaProizvoda=x; //nova cijena
         for (let k of this.korpaObject) {
           if(k.korpaID==korpaID && k.proizvodID==proizvodID)
             k.cijena=this.cijenaProizvoda;
