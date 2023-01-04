@@ -1,1 +1,45 @@
-<p>poruke works!</p>
+<div class="d-flex justify-content-end" *ngIf="loginInfo().isPremisijaKorisnik">
+  <button class="btn btn-primary mb-4 mt-4" (click)="otvoriPoruku()">Nova poruka</button>
+
+</div>
+
+<div id="poruke-hub-admin " class="mt-4" >
+  <div *ngFor="let p of poruke" >
+    <div class="w-100 bg-info m-2 p-2">
+      <h3> Korinsik: {{p.korisnickiNalog.korisnickoIme}}</h3>
+      <p > Pitanje: {{p.sadrzaj}} ?</p>
+      <p>Datum: {{p.datumKreiranja}}</p>
+      <button class="btn btn-warning" (click)="otvoriOdgovore(p)">Otvori</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="porukaObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel"> Novi odgovor </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="porukaObject=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <label class="form-label">Naslov</label>
+          <input class="form-control" type="text" [(ngModel)]="porukaObject.naslov">
+          <label class="form-label">Pitanje</label>
+          <input class="form-control" type="text" [(ngModel)]="porukaObject.sadrzaj">
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="porukaObject=null">Close</button>
+            <button type="button" class="btn btn-primary" (click)="dodajPitanje()">Dodaj</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

@@ -2,10 +2,11 @@
 using FitVision.Modul2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitVision.Modul2.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[action]")]
     [ApiController]
     public class PorukaController : ControllerBase
     {
@@ -15,6 +16,25 @@ namespace FitVision.Modul2.Controllers
         {
             this._dbContext = dbContext;
         }
+
+
+        [HttpGet]
+        public ActionResult<List<Poruka>> GetAll()
+        {
+            var data = _dbContext.Poruka
+                .Include(p => p.korisnickiNalog).AsQueryable();
+
+            return data.Take(100).ToList();
+        }
+
+        [HttpGet]
+        public ActionResult<List<Poruka>> GetByKorsinikId(int id)
+        {
+            List<Poruka> poruke = _dbContext.Poruka.Include(p => p.korisnickiNalog).Where(p => p.korisnickiNalog.ID == id).ToList();
+
+            return poruke;
+        }
+
 
         public class PorukaAddVM
         {
