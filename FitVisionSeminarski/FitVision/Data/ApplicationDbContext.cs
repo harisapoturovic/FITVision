@@ -26,6 +26,7 @@ namespace FitVision.Data
         public DbSet<Korpa> Korpa { get; set; }
         public DbSet<KorpaProizvod> KorpaProizvod { get; set; }
         public DbSet<Poruka> Poruka { get; set; }
+        public DbSet<Odgovor> Odgovor { get; set; }
 
 
     }

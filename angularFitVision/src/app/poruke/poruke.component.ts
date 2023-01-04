@@ -61,7 +61,7 @@ export class PorukeComponent implements OnInit {
   }
 
   obrsisiPoruku(p: any) {
-   
+
     this.httpKlijent.post(MojConfig.adresa_servera + `/Poruka/Obrisi?id=${p.id}`, null).subscribe(x=>{
       this.ucitajPoruke();
     })
