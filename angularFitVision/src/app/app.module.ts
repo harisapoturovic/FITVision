@@ -20,6 +20,7 @@ import { PodkategorijeComponent } from './shop/kategorije/podkategorije/podkateg
 import { ProizvodiComponent } from './shop/proizvodi/proizvodi.component';
 import { AkcijeComponent } from './akcije/akcije.component';
 import { PorukeComponent } from './poruke/poruke.component';
+import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PorukeComponent } from './poruke/poruke.component';
     PodkategorijeComponent,
     ProizvodiComponent,
     AkcijeComponent,
-    PorukeComponent
+    PorukeComponent,
+    PorukaOdgovorComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { PorukeComponent } from './poruke/poruke.component';
       {path: 'podkategorije', component: PodkategorijeComponent},
       {path: 'proizvodi', component: ProizvodiComponent},
       {path: 'akcije', component: AkcijeComponent},
-      {path: 'poruke', component: PorukeComponent}
+      {path: 'poruke', component: PorukeComponent},
+      {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent}
     ])
   ],
   providers: [],

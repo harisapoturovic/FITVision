@@ -1,0 +1,17 @@
+
+
+<div *ngIf="porukaOdgovori!=null">
+  <div class="w-100 bg-info m-2 p-2" >
+    <h3> Korinsik: {{porukaOdgovori.korisnicki_nalog.korisnickoIme}}</h3>
+    <p > Pitanje: {{porukaOdgovori.naslov}} ?</p>
+    <p>Opis: {{porukaOdgovori.sadrzaj}}</p>
+    <p>Datum: {{porukaOdgovori.datum_kreiranja}}</p>
+  </div>
+  <div class="w-100 bg-secondary m-2 p-2 text-white" *ngFor="let o of porukaOdgovori.odgovori">
+    <h3> Admin : {{o.admin_name}}</h3>
+    <p > Odgovor : {{o.sadrzaj}} </p>
+
+  </div>
+</div>
+
+

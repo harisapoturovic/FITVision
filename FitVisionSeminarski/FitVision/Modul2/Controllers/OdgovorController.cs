@@ -1,5 +1,7 @@
 ﻿using FitVision.Data;
+using FitVision.Modul0_Autentifikacija.Models;
 using FitVision.Modul2.Models;
+using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +18,17 @@ namespace FitVision.Modul2.Controllers
         {
             this._dbContext = dbContext;
         }
+
+        [HttpGet]
+        public ActionResult<List<Odgovor>> GetAll()
+        {
+            var data = _dbContext.Odgovor;
+            return data.Take(100).ToList();
+        }
+
+
+      
+
 
         public class OdgovorAddVM
         {

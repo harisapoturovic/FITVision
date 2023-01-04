@@ -42,7 +42,7 @@ export class PorukeComponent implements OnInit {
   poruke:any;
 
   otvoriOdgovore(p: any) {
-    //this.router.navigate(['/poruka-odgovor',p.id]);
+    this.router.navigate(['/poruka-odgovor',p.id]);
   }
 
   dodajPitanje() {

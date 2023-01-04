@@ -1,5 +1,7 @@
 ﻿using FitVision.Data;
+using FitVision.Modul0_Autentifikacija.Models;
 using FitVision.Modul2.Models;
+using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +37,42 @@ namespace FitVision.Modul2.Controllers
             return poruke;
         }
 
+        public class OdgovorPorukaGetVM
+        {
+            public string naslov { get; set; }
+            public string sadrzaj { get; set; }
+            public string datum_kreiranja { get; set; }
+            public KorisnickiNalog korisnicki_nalog { get; set; }
+            public List<OdgovorGetVM> odgovori { get; set; }
+        }
+
+
+
+        [HttpGet]
+        public ActionResult<OdgovorPorukaGetVM> GetPorukaOdgovori(int id)
+        {
+            var poruka = _dbContext.Poruka.Include(k => k.korisnickiNalog).FirstOrDefault(p => p.ID == id);
+            if (poruka == null)
+                return BadRequest("ne postoji poruka");
+            var obj = new OdgovorPorukaGetVM();
+
+            obj.naslov = poruka.Naslov;
+            obj.sadrzaj = poruka.Sadrzaj;
+            obj.datum_kreiranja = poruka.DatumKreiranja.ToString("yyyy-MM--dd");
+            obj.korisnicki_nalog = poruka.korisnickiNalog;
+            obj.odgovori = _dbContext.Odgovor.Where(O => O.poruka_id == poruka.ID).Select(
+                z => new OdgovorGetVM()
+                {
+                    id = z.ID,
+                    sadrzaj = z.Sadrzaj,
+                    datum_kreiranja = z.DatumKreiranja.ToString("yyyy-MM--dd"),
+                    admin_name = z.AdminIme
+                }
+                ).ToList();
+
+            return obj;
+
+        }
 
         public class PorukaAddVM
         {
