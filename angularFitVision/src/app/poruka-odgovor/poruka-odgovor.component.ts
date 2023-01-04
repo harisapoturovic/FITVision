@@ -16,6 +16,7 @@ export class PorukaOdgovorComponent implements OnInit {
 
   porukaID:any;
   porukaOdgovori:any;
+  odgovorObject:any;
 
 
   loginInfo():LoginInformacije {
@@ -27,12 +28,29 @@ export class PorukaOdgovorComponent implements OnInit {
       this.porukaID = +params['porukaid'];
     });
     this.ucitajPorukuOdgovor();
+    console.log(this.loginInfo().autentifikacijaToken.korisnickiNalog);
   }
 
   ucitajPorukuOdgovor(){
     this.httpKlijent.get(MojConfig.adresa_servera + "/Poruka/GetPorukaOdgovori?id=" + this.porukaID).subscribe(x=>{
       this.porukaOdgovori=x;
-      console.log(this.porukaOdgovori);
+
+    });
+  }
+
+  odgovori() {
+    this.odgovorObject={
+      sadrzaj:"",
+      admin_name: this.loginInfo().autentifikacijaToken.korisnickiNalog.korisnickoIme,
+      poruka_id:this.porukaID
+    }
+
+  }
+
+  dodajOdgovor() {
+    this.httpKlijent.post(MojConfig.adresa_servera + "/Odgovor/Dodaj", this.odgovorObject).subscribe(x=>{
+      this.ucitajPorukuOdgovor();
+      this.odgovorObject=null;
     });
   }
 
