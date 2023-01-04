@@ -54,5 +54,10 @@ export class PorukaOdgovorComponent implements OnInit {
     });
   }
 
+  obrisiOdgovor(o:any) {
+    this.httpKlijent.post(MojConfig.adresa_servera + "/Odgovor/Obrisi?id=" + o.id, null).subscribe(x=>{
+      this.ucitajPorukuOdgovor();
+    })
+  }
 
 }

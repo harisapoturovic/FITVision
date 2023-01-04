@@ -52,5 +52,18 @@ namespace FitVision.Modul2.Controllers
             return new JsonResult(true);
 
         }
+
+        [HttpPost]
+        public ActionResult Obrisi(int id)
+        {
+            Odgovor odgovor = _dbContext.Odgovor.FirstOrDefault(f => f.ID == id);
+            if (odgovor == null)
+            {
+                return BadRequest("ne postoji taj odgovor");
+            }
+            _dbContext.Remove(odgovor);
+            _dbContext.SaveChanges();
+            return new JsonResult(true);
+        }
     }
 }

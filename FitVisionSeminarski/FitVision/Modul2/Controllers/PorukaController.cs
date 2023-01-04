@@ -58,14 +58,14 @@ namespace FitVision.Modul2.Controllers
 
             obj.naslov = poruka.Naslov;
             obj.sadrzaj = poruka.Sadrzaj;
-            obj.datum_kreiranja = poruka.DatumKreiranja.ToString("yyyy-MM--dd");
+            obj.datum_kreiranja = poruka.DatumKreiranja.ToString("yyyy-MM-dd");
             obj.korisnicki_nalog = poruka.korisnickiNalog;
             obj.odgovori = _dbContext.Odgovor.Where(O => O.poruka_id == poruka.ID).Select(
                 z => new OdgovorGetVM()
                 {
                     id = z.ID,
                     sadrzaj = z.Sadrzaj,
-                    datum_kreiranja = z.DatumKreiranja.ToString("yyyy-MM--dd"),
+                    datum_kreiranja = z.DatumKreiranja.ToString("yyyy-MM-dd"),
                     admin_name = z.AdminIme
                 }
                 ).ToList();

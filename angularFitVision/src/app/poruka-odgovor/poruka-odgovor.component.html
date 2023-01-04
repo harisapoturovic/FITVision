@@ -12,6 +12,8 @@
     <h3> Admin : {{o.admin_name}}</h3>
     <p > Odgovor : {{o.sadrzaj}} </p>
 
+    <button class="btn btn-danger" (click)="obrisiOdgovor(o)" *ngIf="o.admin_name==loginInfo().autentifikacijaToken.korisnickiNalog.korisnickoIme">Obrisi</button>
+
   </div>
 </div>
 
