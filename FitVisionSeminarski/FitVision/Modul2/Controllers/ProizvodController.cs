@@ -92,6 +92,6 @@ namespace FitVision.Modul2.Controllers
             return Ok(proizvod);
         }
 
-      
-        }
+
     }
+}

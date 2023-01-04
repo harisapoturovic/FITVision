@@ -8,25 +8,13 @@ namespace FitVision.Modul2.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
-    public class AkcijaController : ControllerBase
+    public partial class AkcijaController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
 
         public AkcijaController(ApplicationDbContext dbContext)
         {
             this._dbContext = dbContext;
-        }
-
-
-        public class AkcijaGetVM
-        {
-            public int id { get; set; }
-            public string naziv { get; set; }
-            public int iznos { get; set; }
-            public string datum_pocetka { get; set; }
-            public string datum_zavrsetka { get; set; }
-            public List<Proizvod> proizvodi { get; set; }
-
         }
 
         [HttpGet]
@@ -45,16 +33,6 @@ namespace FitVision.Modul2.Controllers
                 });
 
             return data.Take(100).ToList();
-
-        }
-
-        public class AkcijaSnimiVM
-        {
-            public int id { get; set; }
-            public string naziv { get; set; }
-            public int iznos { get; set; }
-            public string datum_pocetka { get; set; }
-            public string datum_zavrsetka { get; set; }
 
         }
 
