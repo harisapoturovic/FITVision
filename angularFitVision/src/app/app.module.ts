@@ -17,6 +17,8 @@ import { ShopComponent } from './shop/shop.component';
 import { KategorijeComponent } from './shop/kategorije/kategorije.component';
 import { BrendoviComponent } from './brendovi/brendovi.component';
 import { PodkategorijeComponent } from './shop/kategorije/podkategorije/podkategorije.component';
+import { ProizvodiComponent } from './shop/proizvodi/proizvodi.component';
+import { AkcijeComponent } from './akcije/akcije.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { PodkategorijeComponent } from './shop/kategorije/podkategorije/podkateg
     ShopComponent,
     KategorijeComponent,
     BrendoviComponent,
-    PodkategorijeComponent
+    PodkategorijeComponent,
+    ProizvodiComponent,
+    AkcijeComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,9 @@ import { PodkategorijeComponent } from './shop/kategorije/podkategorije/podkateg
       {path: 'shop', component: ShopComponent},
       {path: 'kategorije', component: KategorijeComponent},
       {path: 'brendovi', component: BrendoviComponent},
-      {path: 'podkategorije', component: PodkategorijeComponent}
+      {path: 'podkategorije', component: PodkategorijeComponent},
+      {path: 'proizvodi', component: ProizvodiComponent},
+      {path: 'akcije', component: AkcijeComponent}
     ])
   ],
   providers: [],

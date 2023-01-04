@@ -1,0 +1,48 @@
+.proizvodi{
+  display: flex;
+  flex-direction: row;
+}
+
+.filteri{
+  display: flex;
+  flex-direction: column;
+  background-color: #d9eaff;
+  width: 400px;
+}
+
+.zaKorpu{
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.form-control{
+  width: 70px;
+  height: 35px;
+  border: lightskyblue;
+  margin-right: 30px;
+}
+
+.btnKorpa {
+  background-color: #ff855e;
+  color: white;
+  font-size: 20px;
+  width: 250px;
+  height: 50px;
+  margin-left: 900px;
+  border: none;
+}
+
+.mojaKorpa{
+  display: flex;
+  flex-direction: row;
+  border: 1px solid deepskyblue;
+}
+
+h5, p{
+  border: none;
+}
+
+.sadrzaj{
+  padding: 20px;
+}

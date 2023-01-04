@@ -21,6 +21,11 @@ namespace FitVision.Data
         public DbSet<Kategorija> Kategorija { get; set; }
         public DbSet<Brend> Brend { get; set; }
         public DbSet<Podkategorija> Podkategorija { get; set; }
+        public DbSet<Proizvod> Proizvod { get; set; }
+        public DbSet<Akcija> Akcija { get; set; }
+        public DbSet<Korpa> Korpa { get; set; }
+        public DbSet<KorpaProizvod> KorpaProizvod { get; set; }
+
 
     }
 }

@@ -4,6 +4,7 @@ using FitVision.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitVision.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221229141214_akcija")]
+    partial class akcija
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,54 +200,6 @@ namespace FitVision.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Kategorija");
-                });
-
-            modelBuilder.Entity("FitVision.Modul2.Models.Korpa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("DatumKreiranja")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Korpa");
-                });
-
-            modelBuilder.Entity("FitVision.Modul2.Models.KorpaProizvod", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<float>("Cijena")
-                        .HasColumnType("real");
-
-                    b.Property<int>("Kolicina")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Popust")
-                        .HasColumnType("int");
-
-                    b.Property<int>("korpaID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("proizvodID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("korpaID");
-
-                    b.HasIndex("proizvodID");
-
-                    b.ToTable("KorpaProizvod");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Oprema", b =>
@@ -508,25 +462,6 @@ namespace FitVision.Migrations
                         .IsRequired();
 
                     b.Navigation("drzava");
-                });
-
-            modelBuilder.Entity("FitVision.Modul2.Models.KorpaProizvod", b =>
-                {
-                    b.HasOne("FitVision.Modul2.Models.Korpa", "korpa")
-                        .WithMany()
-                        .HasForeignKey("korpaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FitVision.Modul2.Models.Proizvod", "proizvod")
-                        .WithMany()
-                        .HasForeignKey("proizvodID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("korpa");
-
-                    b.Navigation("proizvod");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Oprema", b =>
