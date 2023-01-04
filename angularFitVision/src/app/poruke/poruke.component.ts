@@ -23,6 +23,11 @@ export class PorukeComponent implements OnInit {
   }
   porukaObject:any;
 
+  filter_naslov:boolean=false;
+  naslov:string="";
+  filter_korisnik:boolean=false;
+  korisnik_naziv:string="";
+
 
 
   ucitajPoruke(){
@@ -65,5 +70,17 @@ export class PorukeComponent implements OnInit {
     this.httpKlijent.post(MojConfig.adresa_servera + `/Poruka/Obrisi?id=${p.id}`, null).subscribe(x=>{
       this.ucitajPoruke();
     })
+  }
+
+  filtrirano() {
+    if(this.poruke==null)
+      return [];
+    return this.poruke.filter(
+      (x:any)=>
+        (!this.filter_naslov ||
+          (x.naslov).toLowerCase().startsWith(this.naslov.toLowerCase())
+        ) && (!this.filter_korisnik ||
+          (x.korisnickiNalog.korisnickoIme).toLowerCase().startsWith(this.korisnik_naziv.toLowerCase())
+        )) ;
   }
 }
