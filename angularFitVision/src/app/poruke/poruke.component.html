@@ -10,6 +10,7 @@
       <p > Pitanje: {{p.sadrzaj}} ?</p>
       <p>Datum: {{p.datumKreiranja}}</p>
       <button class="btn btn-warning" (click)="otvoriOdgovore(p)">Otvori</button>
+      <button class="btn btn-danger ms-2" *ngIf="loginInfo().isPremisijaKorisnik" (click)="obrsisiPoruku(p)">Ukloni</button>
     </div>
   </div>
 </div>

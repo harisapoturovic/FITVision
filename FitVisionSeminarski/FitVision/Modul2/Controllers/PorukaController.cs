@@ -57,5 +57,19 @@ namespace FitVision.Modul2.Controllers
             _dbContext.SaveChanges();
             return Ok(x);
         }
+
+
+        [HttpPost]
+        public ActionResult Obrisi(int id)
+        {
+            Poruka poruka = _dbContext.Poruka.FirstOrDefault(p => p.ID == id);
+            if (poruka == null)
+            {
+                return BadRequest("ne postoji ta poruka");
+            }
+            _dbContext.Remove(poruka);
+            _dbContext.SaveChanges();
+            return new JsonResult(true);
+        }
     }
 }
