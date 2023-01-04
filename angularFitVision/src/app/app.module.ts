@@ -21,6 +21,7 @@ import { ProizvodiComponent } from './shop/proizvodi/proizvodi.component';
 import { AkcijeComponent } from './akcije/akcije.component';
 import { PorukeComponent } from './poruke/poruke.component';
 import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.component';
+import { ForumComponent } from './forum/forum.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.componen
     ProizvodiComponent,
     AkcijeComponent,
     PorukeComponent,
-    PorukaOdgovorComponent
+    PorukaOdgovorComponent,
+    ForumComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.componen
       {path: 'proizvodi', component: ProizvodiComponent},
       {path: 'akcije', component: AkcijeComponent},
       {path: 'poruke', component: PorukeComponent},
-      {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent}
+      {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent},
+      {path: 'forum', component: ForumComponent},
     ])
   ],
   providers: [],

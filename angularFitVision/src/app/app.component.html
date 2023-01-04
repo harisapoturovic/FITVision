@@ -15,6 +15,9 @@
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
     <a class="nav-link " routerLink="/poruke" routerLinkActive="active">Poruke</a>
   </li>
+  <li class="nav-item" *ngIf="loginInfo().isLogiran">
+    <a class="nav-link " routerLink="/forum" routerLinkActive="active">Forum</a>
+  </li>
   <div class="dropdown" *ngIf="loginInfo().isLogiran">
     <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
       Profil
