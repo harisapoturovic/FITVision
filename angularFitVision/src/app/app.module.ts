@@ -22,6 +22,7 @@ import { AkcijeComponent } from './akcije/akcije.component';
 import { PorukeComponent } from './poruke/poruke.component';
 import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.component';
 import { ForumComponent } from './forum/forum.component';
+import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ForumComponent } from './forum/forum.component';
     AkcijeComponent,
     PorukeComponent,
     PorukaOdgovorComponent,
-    ForumComponent
+    ForumComponent,
+    ForumOdgovoriComponent
   ],
   imports: [
     BrowserModule,

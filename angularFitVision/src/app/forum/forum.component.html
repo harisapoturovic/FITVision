@@ -10,7 +10,7 @@
       <p>Pitanje: {{t.tema}}</p>
       <p > Sadrzaj: {{t.pitanje}} ?</p>
       <p>Datum: {{t.datum_kreiranja}}</p>
-
+      <button class="btn btn-danger " *ngIf="loginInfo().isPremisijaAdmin" (click)="obrsisiTemu(t)">Ukloni</button>
     </div>
   </div>
 </div>

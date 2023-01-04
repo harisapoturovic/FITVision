@@ -50,4 +50,11 @@ export class ForumComponent implements OnInit {
     }
 
   }
+
+  obrsisiTemu(t: any) {
+    this.httpKlijent.post(MojConfig.adresa_servera +`/ForumTema/Obrisi?id=${t.id}`,null ).subscribe(x=>{
+
+      this.ucitajTeme();
+    })
+  }
 }

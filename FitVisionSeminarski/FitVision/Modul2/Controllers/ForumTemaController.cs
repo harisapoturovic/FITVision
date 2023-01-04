@@ -65,5 +65,18 @@ namespace FitVision.Modul2.Controllers
             _dbContext.SaveChanges();
             return Ok(x);
         }
+
+        [HttpPost]
+        public ActionResult Obrisi(int id)
+        {
+            ForumTema tema = _dbContext.ForumTema.FirstOrDefault(p => p.ID == id);
+            if (tema == null)
+            {
+                return BadRequest("ne postoji ta tema");
+            }
+            _dbContext.Remove(tema);
+            _dbContext.SaveChanges();
+            return new JsonResult(true);
+        }
     }
 }
