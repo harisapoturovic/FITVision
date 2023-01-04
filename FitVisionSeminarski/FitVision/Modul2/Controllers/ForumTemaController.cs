@@ -2,6 +2,7 @@
 using FitVision.Modul2.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitVision.Modul2.Controllers
 {
@@ -15,6 +16,33 @@ namespace FitVision.Modul2.Controllers
         {
             this._dbContext = dbContext;
         }
+
+        public class ForumTemaGetAllVM
+        {
+            public int id { get; set; }
+            public string tema { get; set; }
+            public string pitanje { get; set; }
+            public string datum_kreiranja { get; set; }
+            public string autor { get; set; }
+        }
+
+
+        [HttpGet]
+        public ActionResult<List<ForumTemaGetAllVM>> GetAll()
+        {
+            var data = _dbContext.ForumTema
+                .Include(f => f.korisnickiNalog).Select(f=>new ForumTemaGetAllVM()
+                {
+                    id=f.ID,
+                    tema=f.Tema,
+                    pitanje=f.Pitanje,
+                    datum_kreiranja=f.DatumKreiranja.ToString("yyyy-dd-MM"),
+                    autor=f.korisnickiNalog.KorisnickoIme
+                });
+
+            return data.Take(100).ToList();
+        }
+
 
         public class ForumTemaAddVM
         {
@@ -33,7 +61,7 @@ namespace FitVision.Modul2.Controllers
             tema.DatumKreiranja = DateTime.Now;
             tema.korisnickiNalogID = x.korsinciki_nalog_id;
 
-            _dbContext.Add(tema);
+            _dbContext.ForumTema.Add(tema);
             _dbContext.SaveChanges();
             return Ok(x);
         }

@@ -51,10 +51,16 @@ export class PorukeComponent implements OnInit {
   }
 
   dodajPitanje() {
-    this.httpKlijent.post(MojConfig.adresa_servera + "/Poruka/Dodaj", this.porukaObject).subscribe(x=>{
-      this.ucitajPoruke();
-      this.porukaObject=null;
-    })
+    if(this.porukaObject.naslov!="" && this.porukaObject.sadrzaj!=""){
+      this.httpKlijent.post(MojConfig.adresa_servera + "/Poruka/Dodaj", this.porukaObject).subscribe(x=>{
+        this.ucitajPoruke();
+        this.porukaObject=null;
+      })
+    }
+    else{
+      alert("niste unijeli sve podatke");
+    }
+
   }
 
   otvoriPoruku() {

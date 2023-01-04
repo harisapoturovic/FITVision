@@ -1,1 +1,43 @@
-<p>forum works!</p>
+<div class="d-flex justify-content-end" *ngIf="loginInfo().isPremisijaKorisnik">
+  <button class="btn btn-primary mb-4 mt-4" (click)="otvoriTemu()">Nova tema</button>
+
+</div>
+
+<div id="poruke-hub-admin " class="mt-4" >
+  <div *ngFor="let t of teme" >
+    <div class="w-100 bg-success text-warning m-2 p-2 text-brightng ">
+      <h3> Autor: {{t.autor}}</h3>
+      <p>Pitanje: {{t.tema}}</p>
+      <p > Sadrzaj: {{t.pitanje}} ?</p>
+      <p>Datum: {{t.datum_kreiranja}}</p>
+
+    </div>
+  </div>
+</div>
+
+
+<!--Modal-->
+<div *ngIf="temaObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel"> Novi odgovor </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="temaObject=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <label class="form-label">Naziv teme</label>
+          <input class="form-control" type="text" [(ngModel)]="temaObject.tema">
+          <label class="form-label">Pitanje</label>
+          <input class="form-control" type="text" [(ngModel)]="temaObject.pitanje">
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="temaObject=null">Close</button>
+            <button type="button" class="btn btn-primary" (click)="dodajTemu()">Dodaj</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
