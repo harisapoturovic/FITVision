@@ -20,9 +20,15 @@ namespace FitVision.Modul2.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Odgovor>> GetAll()
+        public ActionResult<List<OdgovorGetVM>> GetAll()
         {
-            var data = _dbContext.Odgovor;
+            var data = _dbContext.Odgovor.Select(o => new OdgovorGetVM()
+            {
+                id=o.ID,
+                sadrzaj= o.Sadrzaj,
+                admin_name=o.AdminIme,
+                datum_kreiranja= o.DatumKreiranja.ToString("yyyy-dd-MM")
+            });
             return data.Take(100).ToList();
         }
 

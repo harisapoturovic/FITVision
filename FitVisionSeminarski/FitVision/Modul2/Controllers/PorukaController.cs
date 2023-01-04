@@ -19,6 +19,10 @@ namespace FitVision.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
+        public class PorukaGetVM
+        {
+
+        }
 
         [HttpGet]
         public ActionResult<List<Poruka>> GetAll()

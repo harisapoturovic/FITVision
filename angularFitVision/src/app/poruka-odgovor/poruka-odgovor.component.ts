@@ -19,6 +19,10 @@ export class PorukaOdgovorComponent implements OnInit {
   odgovorObject:any;
 
 
+  filter_admin:boolean=false;
+  admin_naziv:string="";
+
+
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
   }
@@ -59,5 +63,7 @@ export class PorukaOdgovorComponent implements OnInit {
       this.ucitajPorukuOdgovor();
     })
   }
+
+
 
 }
