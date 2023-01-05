@@ -23,6 +23,7 @@ import { PorukeComponent } from './poruke/poruke.component';
 import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.component';
 import { ForumComponent } from './forum/forum.component';
 import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.component';
+import { PocetnaComponent } from './pocetna/pocetna.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.componen
     PorukeComponent,
     PorukaOdgovorComponent,
     ForumComponent,
-    ForumOdgovoriComponent
+    ForumOdgovoriComponent,
+    PocetnaComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.componen
       {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent},
       {path: 'forum', component: ForumComponent},
       {path:"forum-odgovor/:forumid", component:ForumOdgovoriComponent},
+      {path:"pocetna", component:PocetnaComponent}
     ])
   ],
   providers: [],

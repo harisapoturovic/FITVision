@@ -1,0 +1,8 @@
+<h2>Statistika podataka</h2>
+<button (click)="pogledaj()">Pregledaj statistiku</button>
+<div *ngIf="offers.length>0" class="alert alert-warning" role="alert">
+  <li *ngFor="let item of offers">
+    Offers: {{item}}
+  </li>
+
+</div>
