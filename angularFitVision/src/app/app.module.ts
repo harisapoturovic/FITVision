@@ -24,6 +24,7 @@ import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.componen
 import { ForumComponent } from './forum/forum.component';
 import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.component';
 import { PocetnaComponent } from './pocetna/pocetna.component';
+import { AdminComponent } from './pocetna/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PocetnaComponent } from './pocetna/pocetna.component';
     PorukaOdgovorComponent,
     ForumComponent,
     ForumOdgovoriComponent,
-    PocetnaComponent
+    PocetnaComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

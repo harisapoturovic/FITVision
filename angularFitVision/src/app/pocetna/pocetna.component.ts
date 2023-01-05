@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
-import {HttpClient} from "@angular/common/http";
-import {MojConfig} from "../moj-config";
+import {LoginInformacije} from "../_helpers/login-informacije";
+import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
+
 
 
 @Component({
@@ -10,19 +10,13 @@ import {MojConfig} from "../moj-config";
   styleUrls: ['./pocetna.component.css']
 })
 export class PocetnaComponent implements OnInit {
+  loginInfo():LoginInformacije {
+    return AutentifikacijaHelper.getLoginInfo();
+  }
 
-  private hubConnectionBuilder!: HubConnection;
-  offers: any[] = [];
-  constructor(private httpKlijent:HttpClient) {}
+  constructor() {}
   ngOnInit(): void {
-    this.hubConnectionBuilder = new HubConnectionBuilder().withUrl('https://localhost:7300/info').configureLogging(LogLevel.Information).build();
-    this.hubConnectionBuilder.start().then(() => console.log('Connection started.......!')).catch(err => console.log('Error while connect with server'));
-    this.hubConnectionBuilder.on('SendToAdmin', (result: any) => {
-      this.offers.push(result);
-    });
   }
 
-  pogledaj() {
-    this.httpKlijent.post(MojConfig.adresa_servera + "/api/AdminInfoSignalR", null).subscribe();
-  }
+
 }

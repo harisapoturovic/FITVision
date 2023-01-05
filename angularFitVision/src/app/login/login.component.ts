@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         if(x.isLogiran){
           //porukaSuccess("login upjesan");
           AutentifikacijaHelper.setLoginInfo(x);
-          this.router.navigateByUrl("/oprema");
+          this.router.navigateByUrl("/pocetna");
         }
         else{
           AutentifikacijaHelper.setLoginInfo(null);

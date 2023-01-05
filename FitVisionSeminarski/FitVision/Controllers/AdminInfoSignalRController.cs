@@ -22,7 +22,7 @@ namespace FitVision.Controllers
 
 
         [HttpPost]
-        public string Get()
+        public ActionResult Get()
         {
             List<string> data = new List<string>();
             data.Add("Broj korisnika: " + _dbContext.Korisnik.Count().ToString());
@@ -30,7 +30,7 @@ namespace FitVision.Controllers
             data.Add("Broj proizvoda " + _dbContext.Proizvod.Count().ToString());
             data.Add("Broj admina " + _dbContext.Admin.Count().ToString());
             messageHub.Clients.All.SendToAdmin(data);
-            return "Offers sent successfully to all users!";
+            return Ok();
         }
     }
 }
