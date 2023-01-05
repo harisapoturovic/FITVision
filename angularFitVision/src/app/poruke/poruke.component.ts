@@ -86,7 +86,7 @@ export class PorukeComponent implements OnInit {
         (!this.filter_naslov ||
           (x.naslov).toLowerCase().startsWith(this.naslov.toLowerCase())
         ) && (!this.filter_korisnik ||
-          (x.korisnickiNalog.korisnickoIme).toLowerCase().startsWith(this.korisnik_naziv.toLowerCase())
+          (x.korisnik).toLowerCase().startsWith(this.korisnik_naziv.toLowerCase())
         )) ;
   }
 }
