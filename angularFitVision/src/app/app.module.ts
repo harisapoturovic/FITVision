@@ -66,6 +66,7 @@ import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.componen
       {path: 'poruke', component: PorukeComponent},
       {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent},
       {path: 'forum', component: ForumComponent},
+      {path:"forum-odgovor/:forumid", component:ForumOdgovoriComponent},
     ])
   ],
   providers: [],

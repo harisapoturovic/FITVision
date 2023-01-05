@@ -11,7 +11,7 @@
   <div class="w-100 bg-secondary m-2 p-2 text-white" *ngFor="let o of porukaOdgovori.odgovori">
     <h3> Admin : {{o.admin_name}}</h3>
     <p > Odgovor : {{o.sadrzaj}} </p>
-
+    <p>Datum: {{o.datum_kreiranja}}</p>
     <button class="btn btn-danger" (click)="obrisiOdgovor(o)" *ngIf="o.admin_name==loginInfo().autentifikacijaToken.korisnickiNalog.korisnickoIme">Obrisi</button>
 
   </div>
@@ -34,7 +34,7 @@
 
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" >Close</button>
+            <button type="button" class="btn btn-secondary" (click)="odgovorObject=null">Close</button>
             <button type="button" class="btn btn-primary" (click)="dodajOdgovor()">Dodaj</button>
           </div>
         </div>

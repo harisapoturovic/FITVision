@@ -1,5 +1,7 @@
 ﻿using FitVision.Data;
+using FitVision.Modul0_Autentifikacija.Models;
 using FitVision.Modul2.Models;
+using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +43,47 @@ namespace FitVision.Modul2.Controllers
                 });
 
             return data.Take(100).ToList();
+        }
+
+
+       
+
+
+       
+        public class ForumOdgovorTemaGetVM
+        {
+            public string tema { get; set; }
+            public string pitanje { get; set; }
+            public string datum_kreiranja { get; set; }
+            public string kreator { get; set; }
+            public List<ForumOdgovorGetVM> forum_odgovori { get; set; }
+        }
+
+
+
+        [HttpGet]
+        public ActionResult<ForumOdgovorTemaGetVM> GetPorukaOdgovori(int id)
+        {
+            var tema= _dbContext.ForumTema.Include(k => k.korisnickiNalog).FirstOrDefault(z=>z.ID== id);
+            if (tema == null)
+                return BadRequest("ne postoji tema");
+            var obj = new ForumOdgovorTemaGetVM();
+
+            obj.tema = tema.Tema;
+            obj.pitanje=tema.Pitanje;
+            obj.datum_kreiranja = tema.DatumKreiranja.ToString("yyyy-dd-MM");
+            obj.kreator = tema.korisnickiNalog.KorisnickoIme;
+            obj.forum_odgovori = _dbContext.ForumOdgovor.Where(k => k.forumTema_id == tema.ID).Select(k => new ForumOdgovorGetVM()
+            {
+                id= k.ID,
+                odgovor=k.Odgovor,
+                autor_name=k.AutorIme,
+                datum_kreiranja=k.DatumKreiranja.ToString("yyyy-dd-MM")
+            }).ToList();
+            
+
+            return obj;
+
         }
 
 

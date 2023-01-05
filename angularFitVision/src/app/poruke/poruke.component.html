@@ -17,10 +17,10 @@
 <div id="poruke-hub-admin " class="mt-4" >
   <div *ngFor="let p of filtrirano()" >
     <div class="w-100 bg-info m-2 p-2 text-brightng ">
-      <h3> Korinsik: {{p.korisnickiNalog.korisnickoIme}}</h3>
+      <h3> Korinsik: {{p.korisnik}}</h3>
       <p>Pitanje: {{p.naslov}}</p>
       <p > Sadrzaj: {{p.sadrzaj}} ?</p>
-      <p>Datum: {{p.datumKreiranja}}</p>
+      <p>Datum: {{p.datum_kreiranja}}</p>
       <button class="btn btn-warning" (click)="otvoriOdgovore(p)">Otvori</button>
       <button class="btn btn-danger ms-2" *ngIf="loginInfo().isPremisijaKorisnik" (click)="obrsisiPoruku(p)">Ukloni</button>
     </div>

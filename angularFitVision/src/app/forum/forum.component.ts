@@ -57,4 +57,8 @@ export class ForumComponent implements OnInit {
       this.ucitajTeme();
     })
   }
+
+  otvoriDiskujiu(t: any) {
+    this.router.navigate(['/forum-odgovor',t.id]);
+  }
 }

@@ -1,3 +1,7 @@
+
+
+
+<div >
 <div class="d-flex justify-content-end" *ngIf="loginInfo().isPremisijaKorisnik">
   <button class="btn btn-primary mb-4 mt-4" (click)="otvoriTemu()">Nova tema</button>
 
@@ -10,10 +14,13 @@
       <p>Pitanje: {{t.tema}}</p>
       <p > Sadrzaj: {{t.pitanje}} ?</p>
       <p>Datum: {{t.datum_kreiranja}}</p>
+      <button class="btn btn-warning me-2 text-success"  (click)="otvoriDiskujiu(t)">Otvori diskusiju</button>
       <button class="btn btn-danger " *ngIf="loginInfo().isPremisijaAdmin" (click)="obrsisiTemu(t)">Ukloni</button>
     </div>
   </div>
 </div>
+</div>
+
 
 
 <!--Modal-->

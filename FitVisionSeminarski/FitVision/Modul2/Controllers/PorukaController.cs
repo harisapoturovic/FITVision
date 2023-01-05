@@ -19,21 +19,42 @@ namespace FitVision.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
-        
+        public class PorukaGetVM
+        {
+            public int id { get; set; }
+            public string naslov { get; set; }
+            public string sadrzaj { get; set; }
+            public string datum_kreiranja { get; set; }
+            public string korisnik { get; set; }
+        }
 
         [HttpGet]
-        public ActionResult<List<Poruka>> GetAll()
+        public ActionResult<List<PorukaGetVM>> GetAll()
         {
             var data = _dbContext.Poruka
-                .Include(p => p.korisnickiNalog).AsQueryable();
+                .Include(p => p.korisnickiNalog).Select(p=>new PorukaGetVM()
+                {
+                    id=p.ID,
+                    naslov=p.Naslov,
+                    sadrzaj=p.Sadrzaj,
+                    datum_kreiranja=p.DatumKreiranja.ToString("yyyy-dd-MM"),
+                    korisnik=p.korisnickiNalog.KorisnickoIme
+                });
 
             return data.Take(100).ToList();
         }
 
         [HttpGet]
-        public ActionResult<List<Poruka>> GetByKorsinikId(int id)
+        public ActionResult<List<PorukaGetVM>> GetByKorsinikId(int id)
         {
-            List<Poruka> poruke = _dbContext.Poruka.Include(p => p.korisnickiNalog).Where(p => p.korisnickiNalog.ID == id).ToList();
+            List<PorukaGetVM> poruke = _dbContext.Poruka.Include(p => p.korisnickiNalog).Where(p => p.korisnickiNalog.ID == id).Select(p => new PorukaGetVM()
+            {
+                id = p.ID,
+                naslov = p.Naslov,
+                sadrzaj = p.Sadrzaj,
+                datum_kreiranja = p.DatumKreiranja.ToString("yyyy-dd-MM"),
+                korisnik = p.korisnickiNalog.KorisnickoIme
+            }).ToList(); ;
 
             return poruke;
         }
