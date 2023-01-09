@@ -7,3 +7,16 @@
   margin-left: 900px;
   border: none;
 }
+
+.mojaKorpa{
+  display: flex;
+  flex-direction: row;
+}
+
+.sadrzaj{
+  width: 400px;
+}
+
+.list-group-item{
+  border: none;
+}

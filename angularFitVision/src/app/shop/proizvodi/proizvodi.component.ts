@@ -3,6 +3,7 @@ import {LoginInformacije} from "../../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
+import {KorpaService} from "../KorpaService";
 
 //declare function porukaSuccess(a: string):any;
 //declare function porukaError(a: string):any;
@@ -15,7 +16,7 @@ import {MojConfig} from "../../moj-config";
 export class ProizvodiComponent implements OnInit {
   korisnik_id:any;
 
-  constructor(private httpKlijent: HttpClient) {
+  constructor(private httpKlijent: HttpClient, private korpaService:KorpaService ) {
   }
 
   loginInfo(): LoginInformacije {
@@ -153,6 +154,7 @@ export class ProizvodiComponent implements OnInit {
   napraviKorpu() {
     this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
       this.korpaID = x;
+      this.korpaService.setKorpaID(x);
     })
   }
 

@@ -64,4 +64,18 @@
     <button type="button" class="btnNaruci"> NARUČI </button>
   </div>
 
+  <div class="sadrzajKorpe">
+   <!-- <a href="#" class="link-warning" (click)="prikaziSadrzaj()">PRIKAŽI SADRŽAJ KORPE</a>-->
+    <div *ngIf="korpaObject!=null">
+      <h2>Moja korpa</h2>
+      <div class="mojaKorpa" *ngFor="let k of this.korpaObject">
+        <img [src]="k.slika" alt="..." style="height:170px" width="150px">
+        <div class="sadrzaj">
+          <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}</h5>
+          <p class="list-group-item">Količina: {{k.kolicina}} </p>
+          <p class="list-group-item">Cijena: {{k.cijena}} KM</p>
+        </div>
+      </div>
+  </div>
+
 </div>
