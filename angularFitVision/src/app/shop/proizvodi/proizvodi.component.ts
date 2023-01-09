@@ -13,6 +13,7 @@ import {MojConfig} from "../../moj-config";
   styleUrls: ['./proizvodi.component.css']
 })
 export class ProizvodiComponent implements OnInit {
+  korisnik_id:any;
 
   constructor(private httpKlijent: HttpClient) {
   }
@@ -25,8 +26,10 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajBrendove();
     this.ucitajPodKategorije();
     this.ucitajProizvode();
-    if(this.loginInfo().isPremisijaKorisnik)
+    if (this.loginInfo().isPremisijaKorisnik) {
+      this.korisnik_id = this.loginInfo().autentifikacijaToken.korisnickiNalogId;
       this.napraviKorpu();
+    }
   }
 
   ucitajProizvode() {
@@ -147,17 +150,26 @@ export class ProizvodiComponent implements OnInit {
       return pr;
   }
 
-  private napraviKorpu() {
-    this.httpKlijent.post(MojConfig.adresa_servera + '/Korpa/Dodaj', null).subscribe(x => {
+  napraviKorpu() {
+    this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
       this.korpaID = x;
     })
   }
+
+
+  getByKorisnikID()
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera + `/Korpa/GetByKorisnikID?korisnik_id=${this.korisnik_id}`).subscribe(x => {
+      this.korpaID=x;
+    })
+  }
+
 
   dodajUKorpu(p: any) {
     if (this.kolicina != 0) {
       // @ts-ignore
       this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
-        .subscribe((x: any) => {
+        .subscribe(x => {
           this.prikaziSadrzaj();
           this.kolicina=0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
         })

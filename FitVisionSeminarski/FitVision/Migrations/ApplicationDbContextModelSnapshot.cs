@@ -269,7 +269,12 @@ namespace FitVision.Migrations
                     b.Property<DateTime>("DatumKreiranja")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("korisnikID")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("korisnikID");
 
                     b.ToTable("Korpa");
                 });
@@ -646,6 +651,17 @@ namespace FitVision.Migrations
                         .IsRequired();
 
                     b.Navigation("drzava");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Korpa", b =>
+                {
+                    b.HasOne("FitVision.Modul2.Models.Korisnik", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnikID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("korisnik");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.KorpaProizvod", b =>

@@ -5,7 +5,7 @@
   <div class="mojaKorpa" *ngFor="let k of this.korpaObject">
     <img [src]="k.slika" alt="..." style="height:220px" width="250px">
     <div class="sadrzaj">
-    <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}g</h5>
+    <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}</h5>
       <p>Količina:</p>
       <input class="form-control" type="number" [(ngModel)]="k.kolicina" (change)="izmijeniKolicinu(k.kolicina, k.korpaID, k.proizvodID)">
     <p class="list-group-item">Cijena: {{k.cijena}} KM</p>
@@ -13,6 +13,7 @@
       <button type="button" class="btn btn-danger" (click)="ukloniProizvod(k.proizvodID)"> Ukloni</button>
     </div>
   </div>
+  <button type="button" class="btn btn-success">Dovrši narudžbu</button>
 </div>
 <hr>
 <div class="proizvodi">

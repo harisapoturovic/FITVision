@@ -1,5 +1,4 @@
 ﻿using FitVision.Data;
-using FitVision.Migrations;
 using FitVision.Modul2.Models;
 using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;
