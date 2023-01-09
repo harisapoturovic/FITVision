@@ -1,6 +1,7 @@
 <button type="button" class="btnKorpa" (click)="prikaziSadrzaj()" *ngIf="loginInfo().isPremisijaKorisnik"> KORPA </button>
 <!-- sadrzaj korpe -->
-<div *ngIf="korpaObject!=null">
+<div *ngIf="korpaObject!=null" class="glavni">
+  <div>
   <h2>Moja korpa</h2>
   <div class="mojaKorpa" *ngFor="let k of this.korpaObject">
     <img [src]="k.slika" alt="..." style="height:220px; padding-top: 50px"  width="250px">
@@ -15,12 +16,18 @@
       <p class="list-group-item">Cijena sa popustom: {{k.cijenaPopust}} KM</p>
     <p class="list-group-item" style="color: grey">Popust: {{k.popust}}%</p>
       </div>
-      <div>
       <button type="button" class="btn btn-outline-danger" (click)="ukloniProizvod(k.proizvodID)"> X  UKLONI</button>
-      </div>
+    </div>
     </div>
   </div>
-  <button type="button" class="btn btn-success" routerLink="/narudzba">Dovrši narudžbu</button>
+  <div class="zaPlatiti">
+    <p class="list-group-item">Proizvodi: {{this.cijena2}} KM</p>
+    <p class="list-group-item">Popust: -{{this.popust2}} KM</p>
+    <p class="list-group-item">Dostava: 0KM</p>
+    <p class="list-group-item" style="font-weight: bold">Ukupno za platiti: {{this.ukupno}} KM</p>
+    <button type="button" class="btn btn-success" routerLink="/narudzba">Dovrši narudžbu</button>
+  </div>
+
 </div>
 <hr>
 <div class="proizvodi">

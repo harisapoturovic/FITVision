@@ -16,7 +16,9 @@ export class NarudzbaComponent implements OnInit {
   korpaObject: any;
   korpaID:any;
   cijena:any;
-
+  cijena2:any;
+  popust2:any;
+  ukupno:any;
   constructor(private httpKlijent: HttpClient, private korpaService:KorpaService) { }
 
   ngOnInit(): void {
@@ -41,7 +43,22 @@ export class NarudzbaComponent implements OnInit {
       this.korpaObject = x;
       if(this.korpaObject.length==0)
         alert("Korpa je prazna");
+    else {
+      let cijena=0;
+      let popust=0;
+      let ukupno=0;
+      this.korpaObject.forEach((k:any)=>cijena+=k.cijena);
+      this.korpaObject.forEach((k:any)=>popust+=(k.popust*k.cijena/100));
+      this.korpaObject.forEach((k:any)=>ukupno+=k.cijenaPopust);
+      this.zaPrikaz(cijena, popust, ukupno);
+      // console.log("Cijena" + cijena, "popust" + popust, "Ukupno" + ukupno);
+    }
     })
-
+  }
+  zaPrikaz(c:any, p:any, u:any)
+  {
+    this.cijena2=c;
+    this.popust2=p;
+    this.ukupno=u;
   }
 }

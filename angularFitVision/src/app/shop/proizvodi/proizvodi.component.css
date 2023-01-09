@@ -53,3 +53,14 @@ h5, p{
   display: flex;
   flex-direction: row;
 }
+
+.glavni{
+  display: flex;
+  flex-direction: row;
+}
+
+.zaPlatiti{
+  padding-top: 50px;
+  padding-left: 400px;
+}
+

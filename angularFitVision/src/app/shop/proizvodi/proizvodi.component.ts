@@ -72,6 +72,9 @@ export class ProizvodiComponent implements OnInit {
   kolicina: any = 0;
   korpaObject: any;
   cijenaProizvoda:any;
+  cijena2:any;
+  popust2:any;
+  ukupno:any;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -194,8 +197,25 @@ export class ProizvodiComponent implements OnInit {
         this.korpaObject = x;
         if (this.korpaObject.length == 0)
           alert("Korpa je prazna");
+        else {
+          let cijena=0;
+          let popust=0;
+          let ukupno=0;
+          this.korpaObject.forEach((k:any)=>cijena+=k.cijena);
+          this.korpaObject.forEach((k:any)=>popust+=(k.popust*k.cijena/100));
+          this.korpaObject.forEach((k:any)=>ukupno+=k.cijenaPopust);
+          this.zaPrikaz(cijena, popust, ukupno);
+         // console.log("Cijena" + cijena, "popust" + popust, "Ukupno" + ukupno);
+        }
       })
     }
+  }
+
+  zaPrikaz(c:any, p:any, u:any)
+  {
+    this.cijena2=c;
+    this.popust2=p;
+    this.ukupno=u;
   }
 
   ukloniProizvod(proizvodID: any) {
@@ -220,6 +240,7 @@ export class ProizvodiComponent implements OnInit {
             k.cijenaPopust=this.novaCijena;
           }
         }
+        this.prikaziSadrzaj();
       })
   }
 
