@@ -25,6 +25,7 @@ import { ForumComponent } from './forum/forum.component';
 import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.component';
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { AdminComponent } from './pocetna/admin/admin.component';
+import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AdminComponent } from './pocetna/admin/admin.component';
     ForumComponent,
     ForumOdgovoriComponent,
     PocetnaComponent,
-    AdminComponent
+    AdminComponent,
+    NarudzbaComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ import { AdminComponent } from './pocetna/admin/admin.component';
       {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent},
       {path: 'forum', component: ForumComponent},
       {path:"forum-odgovor/:forumid", component:ForumOdgovoriComponent},
-      {path:"pocetna", component:PocetnaComponent}
+      {path:"pocetna", component:PocetnaComponent},
+      {path:"narudzba", component:NarudzbaComponent}
     ])
   ],
   providers: [],
