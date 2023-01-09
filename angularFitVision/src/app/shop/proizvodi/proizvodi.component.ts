@@ -170,13 +170,18 @@ export class ProizvodiComponent implements OnInit {
 
   dodajUKorpu(p: any) {
       if (this.kolicina != 0) {
+        if(this.kolicina<=p.zaliha)
+        {
           // @ts-ignore
           this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
             .subscribe(x => {
               this.prikaziSadrzaj();
               this.kolicina = 0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
             })
-        }else
+        }
+        else
+          alert(`Na zalihi imamo ${p.zaliha} proizvoda`);
+      } else
         alert("Niste odabrali količinu");
   }
 
