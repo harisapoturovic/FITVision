@@ -183,7 +183,7 @@ export class ProizvodiComponent implements OnInit {
             })
         }
         else
-          alert(`Na zalihi imamo ${p.zaliha} proizvoda`);
+          alert(`Na zalihi imamo ${p.zaliha} proizvoda!`);
       } else
         alert("Niste odabrali količinu");
   }
@@ -224,26 +224,34 @@ export class ProizvodiComponent implements OnInit {
         this.prikaziSadrzaj();
       })
   }
-
+  p:any;
   izmijeniKolicinu(kolicina: any, korpaID:any, proizvodID:any) {
    // this.kolicina=kolicina;
-    // @ts-ignore
-    this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
-      .subscribe((x: any) => {
-        this.cijenaProizvoda=x._cijena;
-        this.popust=x._popust;
-        this.novaCijena=x._cijenaPopust;
-        for (let k of this.korpaObject) {
-          if (k.korpaID == korpaID && k.proizvodID == proizvodID) {
-            k.cijena = this.cijenaProizvoda;
-            k.popust = this.popust;
-            k.cijenaPopust=this.novaCijena;
-          }
-        }
-        this.prikaziSadrzaj();
-      })
-  }
+    for (let p of this.proizvodi)
+    {
+      if(p.id==proizvodID)
+        this.p=p;
+    }
 
+      if (this.p.id == proizvodID && kolicina<=this.p.zaliha) {
+        // @ts-ignore
+        this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
+          .subscribe((x: any) => {
+            this.cijenaProizvoda = x._cijena;
+            this.popust = x._popust;
+            this.novaCijena = x._cijenaPopust;
+            for (let k of this.korpaObject) {
+              if (k.korpaID == korpaID && k.proizvodID == proizvodID) {
+                k.cijena = this.cijenaProizvoda;
+                k.popust = this.popust;
+                k.cijenaPopust = this.novaCijena;
+              }
+            }
+            this.prikaziSadrzaj();
+          })
+      } else
+        alert(`Na zalihi imamo ${this.p.zaliha} proizvoda`);
+  }
 
   onKey(event: Event) {
     // @ts-ignore
