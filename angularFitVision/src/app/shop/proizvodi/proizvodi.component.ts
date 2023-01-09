@@ -28,8 +28,7 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajPodKategorije();
     this.ucitajProizvode();
     if (this.loginInfo().isPremisijaKorisnik) {
-      this.korisnik_id = this.loginInfo().autentifikacijaToken.korisnickiNalogId;
-      this.napraviKorpu();
+      this.korpaID=this.korpaService.getKorpaID();
     }
   }
 
@@ -151,12 +150,12 @@ export class ProizvodiComponent implements OnInit {
       return pr;
   }
 
-  napraviKorpu() {
-    this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
-      this.korpaID = x;
-      this.korpaService.setKorpaID(x);
-    })
-  }
+ // napraviKorpu() {
+ //   this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
+ //     this.korpaID = x;
+ //     this.korpaService.setKorpaID(x);
+ //   })
+ // }
 
 
   getByKorisnikID()
@@ -168,25 +167,28 @@ export class ProizvodiComponent implements OnInit {
 
 
   dodajUKorpu(p: any) {
-    if (this.kolicina != 0) {
-      // @ts-ignore
-      this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
-        .subscribe(x => {
-          this.prikaziSadrzaj();
-          this.kolicina=0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
-        })
-    } else
-      alert("Niste odabrali količinu");
+      if (this.kolicina != 0) {
+        // @ts-ignore
+        this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
+          .subscribe(x => {
+            this.prikaziSadrzaj();
+            this.kolicina = 0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
+          })
+      } else
+        alert("Niste odabrali količinu");
   }
 
 
   prikaziSadrzaj() {
-    this.httpKlijent.get(MojConfig.adresa_servera + `/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x => {
-      this.korpaObject = x;
-      if(this.korpaObject.length==0)
-        alert("Korpa je prazna");
-    })
-
+    if(this.korpaID==null)
+      alert("Korpa je prazna");
+    else {
+      this.httpKlijent.get(MojConfig.adresa_servera + `/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x => {
+        this.korpaObject = x;
+        if (this.korpaObject.length == 0)
+          alert("Korpa je prazna");
+      })
+    }
   }
 
   ukloniProizvod(proizvodID: any) {

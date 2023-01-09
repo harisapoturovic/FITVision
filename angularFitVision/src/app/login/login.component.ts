@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {LoginInformacije} from "../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 import {MojConfig} from "../moj-config";
+import {KorpaService} from "../shop/KorpaService";
 
 //declare function porukaSuccess(a: string):any;
 //declare function porukaError(a: string):any;
@@ -17,8 +18,8 @@ export class LoginComponent implements OnInit {
 
   txtKorisnickiIme:any;
   txtLozinka:any;
-
-  constructor(private httpKlijent:HttpClient,private  router:Router) { }
+  korisnik_id:any;
+  constructor(private httpKlijent:HttpClient,private  router:Router, private korpaService:KorpaService) { }
 
   ngOnInit(): void {
   }
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
         if(x.isLogiran){
           //porukaSuccess("login upjesan");
           AutentifikacijaHelper.setLoginInfo(x);
+          this.korisnik_id=x.autentifikacijaToken.korisnickiNalogId;
+          this.napraviKorpu();
           this.router.navigateByUrl("/pocetna");
         }
         else{
@@ -41,6 +44,12 @@ export class LoginComponent implements OnInit {
         }
       }
     )
+  }
+
+  napraviKorpu() {
+    this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
+      this.korpaService.setKorpaID(x);
+    })
   }
 
 }
