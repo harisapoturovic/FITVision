@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class KorpaService {
 
   korpaID:any;
-
   constructor() {
 
   }
@@ -18,5 +17,6 @@ export class KorpaService {
   getKorpaID(){
     return this.korpaID;
   }
+
 }
 

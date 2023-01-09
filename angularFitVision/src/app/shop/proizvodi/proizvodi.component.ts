@@ -15,6 +15,8 @@ import {KorpaService} from "../KorpaService";
 })
 export class ProizvodiComponent implements OnInit {
   korisnik_id:any;
+  popust: any;
+  novaCijena:any;
 
   constructor(private httpKlijent: HttpClient, private korpaService:KorpaService ) {
   }
@@ -158,23 +160,23 @@ export class ProizvodiComponent implements OnInit {
  // }
 
 
-  getByKorisnikID()
-  {
-    this.httpKlijent.get(MojConfig.adresa_servera + `/Korpa/GetByKorisnikID?korisnik_id=${this.korisnik_id}`).subscribe(x => {
-      this.korpaID=x;
-    })
-  }
-
+  //getByKorisnikID()
+  //{
+  //  this.httpKlijent.get(MojConfig.adresa_servera + `/Korpa/GetByKorisnikID?korisnik_id=${this.korisnik_id}`).subscribe(x => {
+  //    this.korpaID=x;
+  //  })
+  //}
+//
 
   dodajUKorpu(p: any) {
       if (this.kolicina != 0) {
-        // @ts-ignore
-        this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
-          .subscribe(x => {
-            this.prikaziSadrzaj();
-            this.kolicina = 0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
-          })
-      } else
+          // @ts-ignore
+          this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
+            .subscribe(x => {
+              this.prikaziSadrzaj();
+              this.kolicina = 0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
+            })
+        }else
         alert("Niste odabrali količinu");
   }
 
@@ -203,13 +205,19 @@ export class ProizvodiComponent implements OnInit {
     // @ts-ignore
     this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
       .subscribe((x: any) => {
-        this.cijenaProizvoda=x; //nova cijena
+        this.cijenaProizvoda=x._cijena;
+        this.popust=x._popust;
+        this.novaCijena=x._cijenaPopust;
         for (let k of this.korpaObject) {
-          if(k.korpaID==korpaID && k.proizvodID==proizvodID)
-            k.cijena=this.cijenaProizvoda;
+          if (k.korpaID == korpaID && k.proizvodID == proizvodID) {
+            k.cijena = this.cijenaProizvoda;
+            k.popust = this.popust;
+            k.cijenaPopust=this.novaCijena;
+          }
         }
       })
   }
+
 
   onKey(event: Event) {
     // @ts-ignore

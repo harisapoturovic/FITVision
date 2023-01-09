@@ -34,8 +34,11 @@ export class LoginComponent implements OnInit {
         if(x.isLogiran){
           //porukaSuccess("login upjesan");
           AutentifikacijaHelper.setLoginInfo(x);
-          this.korisnik_id=x.autentifikacijaToken.korisnickiNalogId;
-          this.napraviKorpu();
+          if(x.isPremisijaKorisnik)
+          {
+            this.korisnik_id = x.autentifikacijaToken.korisnickiNalogId;
+            this.napraviKorpu();
+          }
           this.router.navigateByUrl("/pocetna");
         }
         else{

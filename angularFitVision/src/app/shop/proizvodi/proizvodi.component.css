@@ -17,10 +17,11 @@
 }
 
 .form-control{
-  width: 70px;
+  width: 60px;
   height: 35px;
   border: lightskyblue;
   margin-right: 30px;
+  margin-left: 3px;
 }
 
 .btnKorpa {
@@ -36,7 +37,8 @@
 .mojaKorpa{
   display: flex;
   flex-direction: row;
-  border: 1px solid deepskyblue;
+  border: 1px solid #fc6000;
+  height: 350px;
 }
 
 h5, p{
@@ -45,4 +47,9 @@ h5, p{
 
 .sadrzaj{
   padding: 20px;
+}
+
+.zaKolicinu{
+  display: flex;
+  flex-direction: row;
 }

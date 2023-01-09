@@ -296,6 +296,9 @@ namespace FitVision.Migrations
                     b.Property<int>("Popust")
                         .HasColumnType("int");
 
+                    b.Property<float>("cijenaPopust")
+                        .HasColumnType("real");
+
                     b.Property<int>("korpaID")
                         .HasColumnType("int");
 

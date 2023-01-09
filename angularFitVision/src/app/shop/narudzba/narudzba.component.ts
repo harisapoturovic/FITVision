@@ -15,6 +15,7 @@ export class NarudzbaComponent implements OnInit {
   grad_ID: any;
   korpaObject: any;
   korpaID:any;
+  cijena:any;
 
   constructor(private httpKlijent: HttpClient, private korpaService:KorpaService) { }
 

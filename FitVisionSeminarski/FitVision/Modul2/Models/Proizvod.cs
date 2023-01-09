@@ -23,7 +23,7 @@ namespace FitVision.Modul2.Models
         public int brendid { get; set; }
         public Brend brend { get; set; }
 
-        [JsonIgnore]
+       // [JsonIgnore]
         public List<Akcija> Akcije { get; set; } = new List<Akcija>();
     }
 }
