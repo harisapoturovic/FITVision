@@ -1,0 +1,27 @@
+.btnNaruci{
+  background-color: #ff855e;
+  color: white;
+  font-size: 20px;
+  width: 250px;
+  height: 50px;
+  margin-left: 900px;
+  border: none;
+}
+
+.mojaKorpa{
+  display: flex;
+  flex-direction: row;
+}
+
+.sadrzaj{
+  width: 400px;
+}
+
+.list-group-item{
+  border: none;
+}
+
+.zaPlatiti{
+  background-color: #e5e3e3;
+  width: 400px;
+}

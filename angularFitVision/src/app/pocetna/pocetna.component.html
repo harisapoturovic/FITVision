@@ -1,0 +1,2 @@
+<h1 *ngIf="loginInfo().isLogiran" class="text-decoration-underline text-align-center text-center mt-3 mb-3">Dobro dosli <span class="text-warning">{{loginInfo().autentifikacijaToken.korisnickiNalog.korisnickoIme}}</span> na FitVision</h1>
+<app-admin *ngIf="loginInfo().isPremisijaAdmin"></app-admin>

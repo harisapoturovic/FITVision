@@ -18,15 +18,28 @@ namespace FitVision.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
+        //[HttpPost]
+        //public ActionResult Dodaj(int korisnik_id)
+        //{
+        //    Korpa? korpa;
+        //
+        //    korpa = new Korpa();
+        //    _dbContext.Add(korpa);
+        //
+        //    korpa.DatumKreiranja = DateTime.Now;
+        //    korpa.korisnikID = korisnik_id;
+        //    _dbContext.SaveChanges();
+        //    return Ok(korpa.Id);
+        //}
+
         [HttpPost]
-        public ActionResult Dodaj()
+        public ActionResult Snimi(int korisnikId)
         {
-            Korpa? korpa;
-
-            korpa = new Korpa();
-            _dbContext.Add(korpa);
-
+            Korpa? korpa = new Korpa();
             korpa.DatumKreiranja = DateTime.Now;
+            korpa.korisnikID = korisnikId;
+
+            _dbContext.Add(korpa);
             _dbContext.SaveChanges();
             return Ok(korpa.Id);
         }
@@ -37,12 +50,18 @@ namespace FitVision.Modul2.Controllers
                 .Select(k => new KorpaDodajVM
                 {
                     id = k.Id,
-                    datumKreiranja=k.DatumKreiranja
+                    datumKreiranja = k.DatumKreiranja,
+                    korisnikId = k.korisnikID
                 });
 
             return data.Take(100).ToList();
         }
-
+        [HttpGet]
+        public ActionResult GetByKorisnik(int korisnik_id)
+        {
+            var data = _dbContext.Korpa.Find(korisnik_id);
+            return Ok(data.Id);
+        }
         [HttpPost]
         public ActionResult Obrisi()
         {

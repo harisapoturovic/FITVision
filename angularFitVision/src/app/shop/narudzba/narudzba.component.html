@@ -1,0 +1,94 @@
+<br>
+<div class="narudzba">
+  <div class="forma">
+    <h4>1. Unesite podatke za dostavu</h4>
+    <form>
+      <!-- 2 column grid layout with text inputs for the first and last names -->
+      <div class="col">
+        <div class="form-outline">
+          <label class="form-label" for="form6Example1">Ime</label>
+          <input type="text" id="form6Example1" class="form-control" required/>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <label class="form-label" for="form6Example2">Prezime</label>
+          <input type="text" id="form6Example2" class="form-control" />
+        </div>
+      </div>
+
+      <!-- Text input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" >Država</label>
+        <select class="form-control" [(ngModel)]="drzava_ID" name="grad">
+          <option *ngFor="let d of drzave" [value]="d.id">{{d.naziv}}</option>
+        </select>
+      </div>
+
+      <!-- Text input -->
+      <div class="form-outline mb-4">
+        <label class="form-label">Grad</label>
+        <select class="form-control" [(ngModel)]="grad_ID" name="grad">
+          <option *ngFor="let g of gradovi" [value]="g.id">{{g.naziv}}</option>
+        </select>
+      </div>
+
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example5">Adresa</label>
+        <input type="text" id="form6Example5" class="form-control" />
+      </div>
+
+      <!-- Number input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example6">Poštanski broj</label>
+        <input type="text" id="form6Example6" class="form-control" />
+      </div>
+
+      <!-- Number input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example6">Email</label>
+        <input type="email" id="form6Example9" class="form-control" />
+      </div>
+
+      <!-- Number input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form6Example6">Kontakt broj telefona</label>
+        <input type="text" id="form6Example11" class="form-control" />
+      </div>
+    </form>
+  </div>
+
+  <div class="dostava">
+    <h4>2. Odaberite način dostave</h4>
+  </div>
+
+  <div class="placanje">
+    <h4>3. Način plaćanja</h4>
+    <p>Isključivo gotovinom prilikom preuzimanja paketa</p>
+  </div>
+
+  <div class="sadrzajKorpe">
+   <!-- <a href="#" class="link-warning" (click)="prikaziSadrzaj()">PRIKAŽI SADRŽAJ KORPE</a>-->
+    <div *ngIf="korpaObject!=null">
+      <h2>Moja korpa</h2>
+      <div class="mojaKorpa" *ngFor="let k of this.korpaObject">
+        <img [src]="k.slika" alt="..." style="height:170px" width="150px">
+        <div class="sadrzaj">
+          <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}</h5>
+          <p class="list-group-item">Količina: {{k.kolicina}} </p>
+          <p class="list-group-item">Cijena: {{k.cijenaPopust}} KM</p>
+        </div>
+      </div>
+      <div class="zaPlatiti">
+        <p>Proizvodi: {{this.cijena2}} KM</p>
+        <p>Popust: -{{this.popust2}} KM</p>
+        <p>Dostava: 0KM</p>
+        <p style="font-weight: bold">Ukupno za platiti: {{this.ukupno}} KM</p>
+      </div>
+      <button type="button" class="btn btn-light" routerLink="/proizvodi">UREDI SADRŽAJ KORPE</button>
+      <button type="button" class="btnNaruci"> NARUČI </button>
+  </div>
+
+</div>
+</div>

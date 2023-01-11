@@ -3,6 +3,7 @@ import {LoginInformacije} from "../../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
+import {KorpaService} from "../KorpaService";
 
 //declare function porukaSuccess(a: string):any;
 //declare function porukaError(a: string):any;
@@ -13,8 +14,11 @@ import {MojConfig} from "../../moj-config";
   styleUrls: ['./proizvodi.component.css']
 })
 export class ProizvodiComponent implements OnInit {
+  korisnik_id:any;
+  popust: any;
+  novaCijena:any;
 
-  constructor(private httpKlijent: HttpClient) {
+  constructor(private httpKlijent: HttpClient, private korpaService:KorpaService ) {
   }
 
   loginInfo(): LoginInformacije {
@@ -25,8 +29,9 @@ export class ProizvodiComponent implements OnInit {
     this.ucitajBrendove();
     this.ucitajPodKategorije();
     this.ucitajProizvode();
-    if(this.loginInfo().isPremisijaKorisnik)
-      this.napraviKorpu();
+    if (this.loginInfo().isPremisijaKorisnik) {
+      this.korpaID=this.korpaService.getKorpaID();
+    }
   }
 
   ucitajProizvode() {
@@ -67,6 +72,9 @@ export class ProizvodiComponent implements OnInit {
   kolicina: any = 0;
   korpaObject: any;
   cijenaProizvoda:any;
+  cijena2:any;
+  popust2:any;
+  ukupno:any;
 
   dodajFunc() {
     this.proizvodObject = {
@@ -147,32 +155,67 @@ export class ProizvodiComponent implements OnInit {
       return pr;
   }
 
-  private napraviKorpu() {
-    this.httpKlijent.post(MojConfig.adresa_servera + '/Korpa/Dodaj', null).subscribe(x => {
-      this.korpaID = x;
-    })
-  }
+ // napraviKorpu() {
+ //   this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
+ //     this.korpaID = x;
+ //     this.korpaService.setKorpaID(x);
+ //   })
+ // }
+
+
+  //getByKorisnikID()
+  //{
+  //  this.httpKlijent.get(MojConfig.adresa_servera + `/Korpa/GetByKorisnikID?korisnik_id=${this.korisnik_id}`).subscribe(x => {
+  //    this.korpaID=x;
+  //  })
+  //}
+//
 
   dodajUKorpu(p: any) {
-    if (this.kolicina != 0) {
-      // @ts-ignore
-      this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
-        .subscribe((x: any) => {
-          this.prikaziSadrzaj();
-          this.kolicina=0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
-        })
-    } else
-      alert("Niste odabrali količinu");
+      if (this.kolicina != 0) {
+        if(this.kolicina<=p.zaliha)
+        {
+          // @ts-ignore
+          this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
+            .subscribe(x => {
+              this.prikaziSadrzaj();
+              this.kolicina = 0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
+            })
+        }
+        else
+          alert(`Na zalihi imamo ${p.zaliha} proizvoda!`);
+      } else
+        alert("Niste odabrali količinu");
   }
 
 
   prikaziSadrzaj() {
-    this.httpKlijent.get(MojConfig.adresa_servera + `/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x => {
-      this.korpaObject = x;
-      if(this.korpaObject.length==0)
-        alert("Korpa je prazna");
-    })
+    if(this.korpaID==null)
+      alert("Korpa je prazna");
+    else {
+      this.httpKlijent.get(MojConfig.adresa_servera + `/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x => {
+        this.korpaObject = x;
+        if (this.korpaObject.length == 0)
+          alert("Korpa je prazna");
+        else {
+          let cijena=0;
+          let popust=0;
+          let ukupno=0;
+          this.korpaObject.forEach((k:any)=>cijena+=k.cijena);
+          this.korpaObject.forEach((k:any)=>popust+=(k.popust*k.cijena/100));
+          this.korpaObject.forEach((k:any)=>ukupno+=k.cijenaPopust);
+          this.zaPrikaz(cijena, popust, ukupno);
+         // console.log("Cijena" + cijena, "popust" + popust, "Ukupno" + ukupno);
+        }
+      })
+    }
+  }
 
+  zaPrikaz(c:any, p:any, u:any)
+  {
+    this.cijena2=c;
+    this.popust2=p;
+    this.ukupno=u;
   }
 
   ukloniProizvod(proizvodID: any) {
@@ -181,18 +224,33 @@ export class ProizvodiComponent implements OnInit {
         this.prikaziSadrzaj();
       })
   }
-
+  p:any;
   izmijeniKolicinu(kolicina: any, korpaID:any, proizvodID:any) {
    // this.kolicina=kolicina;
-    // @ts-ignore
-    this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
-      .subscribe((x: any) => {
-        this.cijenaProizvoda=x; //nova cijena
-        for (let k of this.korpaObject) {
-          if(k.korpaID==korpaID && k.proizvodID==proizvodID)
-            k.cijena=this.cijenaProizvoda;
-        }
-      })
+    for (let p of this.proizvodi)
+    {
+      if(p.id==proizvodID)
+        this.p=p;
+    }
+
+      if (this.p.id == proizvodID && kolicina<=this.p.zaliha) {
+        // @ts-ignore
+        this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
+          .subscribe((x: any) => {
+            this.cijenaProizvoda = x._cijena;
+            this.popust = x._popust;
+            this.novaCijena = x._cijenaPopust;
+            for (let k of this.korpaObject) {
+              if (k.korpaID == korpaID && k.proizvodID == proizvodID) {
+                k.cijena = this.cijenaProizvoda;
+                k.popust = this.popust;
+                k.cijenaPopust = this.novaCijena;
+              }
+            }
+            this.prikaziSadrzaj();
+          })
+      } else
+        alert(`Na zalihi imamo ${this.p.zaliha} proizvoda`);
   }
 
   onKey(event: Event) {

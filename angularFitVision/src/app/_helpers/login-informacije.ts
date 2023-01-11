@@ -19,7 +19,7 @@ export interface AutentifikacijaToken {
 }
 export interface KorisnickiNalog {
   ID: number;
-  korisnickomIme: string;
+  korisnickoIme: string;
   isAdmin: boolean;
   isKorisnik: boolean;
   isTrener:boolean;

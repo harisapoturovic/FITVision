@@ -19,6 +19,13 @@ import { BrendoviComponent } from './brendovi/brendovi.component';
 import { PodkategorijeComponent } from './shop/kategorije/podkategorije/podkategorije.component';
 import { ProizvodiComponent } from './shop/proizvodi/proizvodi.component';
 import { AkcijeComponent } from './akcije/akcije.component';
+import { PorukeComponent } from './poruke/poruke.component';
+import { PorukaOdgovorComponent } from './poruka-odgovor/poruka-odgovor.component';
+import { ForumComponent } from './forum/forum.component';
+import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.component';
+import { PocetnaComponent } from './pocetna/pocetna.component';
+import { AdminComponent } from './pocetna/admin/admin.component';
+import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +43,14 @@ import { AkcijeComponent } from './akcije/akcije.component';
     BrendoviComponent,
     PodkategorijeComponent,
     ProizvodiComponent,
-    AkcijeComponent
+    AkcijeComponent,
+    PorukeComponent,
+    PorukaOdgovorComponent,
+    ForumComponent,
+    ForumOdgovoriComponent,
+    PocetnaComponent,
+    AdminComponent,
+    NarudzbaComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +68,13 @@ import { AkcijeComponent } from './akcije/akcije.component';
       {path: 'brendovi', component: BrendoviComponent},
       {path: 'podkategorije', component: PodkategorijeComponent},
       {path: 'proizvodi', component: ProizvodiComponent},
-      {path: 'akcije', component: AkcijeComponent}
+      {path: 'akcije', component: AkcijeComponent},
+      {path: 'poruke', component: PorukeComponent},
+      {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent},
+      {path: 'forum', component: ForumComponent},
+      {path:"forum-odgovor/:forumid", component:ForumOdgovoriComponent},
+      {path:"pocetna", component:PocetnaComponent},
+      {path:"narudzba", component:NarudzbaComponent}
     ])
   ],
   providers: [],

@@ -9,6 +9,7 @@ namespace FitVision.Modul2.Models
         public int Kolicina { get; set; }
         public float Cijena { get; set; }
         public int Popust { get; set; }
+        public float cijenaPopust { get; set; }
 
         [ForeignKey(nameof(proizvod))]
         public int proizvodID { get; set; }

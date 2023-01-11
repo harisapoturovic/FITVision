@@ -1,0 +1,43 @@
+<div *ngIf="forumOdgovori!=null">
+  <div class="w-100 bg-success text-warning m-2 p-2" >
+    <h3> Autor: {{forumOdgovori.kreator}}</h3>
+    <p>Pitanje: {{forumOdgovori.tema}}</p>
+    <p > Sadrzaj: {{forumOdgovori.pitanje}} ?</p>
+    <p>Datum: {{forumOdgovori.datum_kreiranja}}</p>
+    <button class="btn btn-warning" (click)="odgovori()">Odgovori</button>
+  </div>
+  <div class="w-100 bg-secondary m-2 p-2 text-white" *ngFor="let o of forumOdgovori.forum_odgovori">
+    <h3> Napisao : {{o.autor_name}}</h3>
+    <p > Odgovor : {{o.odgovor}} </p>
+    <p>Datum: {{o.datum_kreiranja}}</p>
+    <button class="btn btn-danger" (click)="obrisiOdgovor(o)" *ngIf="o.autor_name==loginInfo().autentifikacijaToken.korisnickiNalog.korisnickoIme">Obrisi</button>
+
+
+  </div>
+</div>
+
+
+<div *ngIf="forumOdgovorObject!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLiveLabel"> Novi odgovor </h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="forumOdgovorObject=null"></button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body">
+          <label class="form-label">Odgovor</label>
+          <textarea class="form-control" [(ngModel)]="forumOdgovorObject.odgovor"></textarea>
+          <label class="form-label">Korsinicko ime</label>
+          <input class="form-control" type="text" [(ngModel)]="forumOdgovorObject.autor_name" disabled>
+
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="forumOdgovorObject=null">Close</button>
+            <button type="button" class="btn btn-primary" (click)="dodajForumOdgovor()">Dodaj</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

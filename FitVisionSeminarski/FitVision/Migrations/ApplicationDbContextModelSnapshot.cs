@@ -154,6 +154,64 @@ namespace FitVision.Migrations
                     b.ToTable("Drzava");
                 });
 
+            modelBuilder.Entity("FitVision.Modul2.Models.ForumOdgovor", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("AutorIme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DatumKreiranja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Odgovor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("forumTema_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("forumTema_id");
+
+                    b.ToTable("ForumOdgovor");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.ForumTema", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime>("DatumKreiranja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Pitanje")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tema")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("korisnickiNalogID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("korisnickiNalogID");
+
+                    b.ToTable("ForumTema");
+                });
+
             modelBuilder.Entity("FitVision.Modul2.Models.Grad", b =>
                 {
                     b.Property<int>("ID")
@@ -211,7 +269,12 @@ namespace FitVision.Migrations
                     b.Property<DateTime>("DatumKreiranja")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("korisnikID")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("korisnikID");
 
                     b.ToTable("Korpa");
                 });
@@ -233,6 +296,9 @@ namespace FitVision.Migrations
                     b.Property<int>("Popust")
                         .HasColumnType("int");
 
+                    b.Property<float>("cijenaPopust")
+                        .HasColumnType("real");
+
                     b.Property<int>("korpaID")
                         .HasColumnType("int");
 
@@ -246,6 +312,35 @@ namespace FitVision.Migrations
                     b.HasIndex("proizvodID");
 
                     b.ToTable("KorpaProizvod");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Odgovor", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("AdminIme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DatumKreiranja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Sadrzaj")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("poruka_id")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("poruka_id");
+
+                    b.ToTable("Odgovor");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Oprema", b =>
@@ -305,6 +400,35 @@ namespace FitVision.Migrations
                     b.HasIndex("KategorijaId");
 
                     b.ToTable("Podkategorija");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Poruka", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime>("DatumKreiranja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Naslov")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sadrzaj")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("korisnickiNalogID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("korisnickiNalogID");
+
+                    b.ToTable("Poruka");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Proizvod", b =>
@@ -499,6 +623,28 @@ namespace FitVision.Migrations
                     b.Navigation("KorisnickiNalog");
                 });
 
+            modelBuilder.Entity("FitVision.Modul2.Models.ForumOdgovor", b =>
+                {
+                    b.HasOne("FitVision.Modul2.Models.ForumTema", "forumTema")
+                        .WithMany()
+                        .HasForeignKey("forumTema_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("forumTema");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.ForumTema", b =>
+                {
+                    b.HasOne("FitVision.Modul0_Autentifikacija.Models.KorisnickiNalog", "korisnickiNalog")
+                        .WithMany()
+                        .HasForeignKey("korisnickiNalogID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("korisnickiNalog");
+                });
+
             modelBuilder.Entity("FitVision.Modul2.Models.Grad", b =>
                 {
                     b.HasOne("FitVision.Modul2.Models.Drzava", "drzava")
@@ -508,6 +654,17 @@ namespace FitVision.Migrations
                         .IsRequired();
 
                     b.Navigation("drzava");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Korpa", b =>
+                {
+                    b.HasOne("FitVision.Modul2.Models.Korisnik", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnikID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("korisnik");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.KorpaProizvod", b =>
@@ -527,6 +684,17 @@ namespace FitVision.Migrations
                     b.Navigation("korpa");
 
                     b.Navigation("proizvod");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Odgovor", b =>
+                {
+                    b.HasOne("FitVision.Modul2.Models.Poruka", "poruka")
+                        .WithMany()
+                        .HasForeignKey("poruka_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("poruka");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Oprema", b =>
@@ -549,6 +717,17 @@ namespace FitVision.Migrations
                         .IsRequired();
 
                     b.Navigation("kategorija");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Poruka", b =>
+                {
+                    b.HasOne("FitVision.Modul0_Autentifikacija.Models.KorisnickiNalog", "korisnickiNalog")
+                        .WithMany()
+                        .HasForeignKey("korisnickiNalogID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("korisnickiNalog");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Proizvod", b =>

@@ -1,7 +1,11 @@
 using FitVision.Data;
+using FitVision.Hub;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSignalR();
+
 
 // Add services to the container.
 
@@ -36,7 +40,14 @@ app.UseCors(
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
+
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
+    endpoints.MapHub<MessageHub>("/info");
+});
 
 app.MapControllers();
 
