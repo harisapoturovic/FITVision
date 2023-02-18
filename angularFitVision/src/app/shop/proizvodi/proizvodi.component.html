@@ -149,14 +149,14 @@
         </div>
         <div class="modal-body">
           <label class="form-label">Brend</label>
-          <input class="form-control" type="text" [value]="detaljiProizvod.brend" disabled>
+          <input class="form-control border w-100" type="text" [value]="detaljiProizvod.brend" disabled>
           <label class="form-label">Potategorija</label>
-          <input class="form-control" type="text" [value]="detaljiProizvod.pod_kategorija" disabled>
+          <input class="form-control border w-100" type="text" [value]="detaljiProizvod.pod_kategorija" disabled>
           <label class="form-label">Jedinicna mjera</label>
-          <input class="form-control" type="text" [value]="detaljiProizvod.jedinicna_mjera" disabled>
+          <input class="form-control border w-100" type="text" [value]="detaljiProizvod.jedinicna_mjera" disabled>
 
           <label class="form-label">Sastav</label>
-          <textarea class="form-control" rows="3" [(ngModel)]="detaljiProizvod.sastav" disabled></textarea>
+          <textarea class="form-control border w-100" rows="4" [(ngModel)]="detaljiProizvod.sastav" disabled></textarea>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="detaljiProizvod=null">Close</button>
