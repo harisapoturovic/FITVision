@@ -76,10 +76,13 @@ export class ForumComponent implements OnInit {
   }
 
   obrsisiTemu(t: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera +`/ForumTema/Obrisi?id=${t.id}`,null ).subscribe(x=>{
+    let con= confirm("Da li zelite obrisati temu?");
+    if(con.valueOf()==true) {
+      this.httpKlijent.post(MojConfig.adresa_servera + `/ForumTema/Obrisi?id=${t.id}`, null).subscribe(x => {
 
-      this.ucitajTeme();
-    })
+        this.ucitajTeme();
+      })
+    }
   }
 
   otvoriDiskujiu(t: any) {

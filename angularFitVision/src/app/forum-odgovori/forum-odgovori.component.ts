@@ -50,8 +50,11 @@ export class ForumOdgovoriComponent implements OnInit {
   }
 
   obrisiOdgovor(o: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera + "/ForumOdgovor/Obrisi?id=" + o.id, null).subscribe(x=>{
-      this.ucitajForumOdgovorTema();
-    })
+    let con= confirm("Da li zelite obrisati odgovor?");
+    if(con.valueOf()==true) {
+      this.httpKlijent.post(MojConfig.adresa_servera + "/ForumOdgovor/Obrisi?id=" + o.id, null).subscribe(x => {
+        this.ucitajForumOdgovorTema();
+      })
+    }
   }
 }

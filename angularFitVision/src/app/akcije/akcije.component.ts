@@ -4,6 +4,9 @@ import {MojConfig} from "../moj-config";
 import {LoginInformacije} from "../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
+
 @Component({
   selector: 'app-akcije',
   templateUrl: './akcije.component.html',
@@ -72,7 +75,7 @@ export class AkcijeComponent implements OnInit {
         this.ucitajAkcije();
         this.akcijaObject=null;
       })
-      //porukaSuccess("uspjesno snimljena akcija");
+      porukaSuccess("uspjesno snimljena akcija");
     }
     else
       alert("Nista unijeli sve podatke");
@@ -85,9 +88,13 @@ export class AkcijeComponent implements OnInit {
 
 
   obrisiAkciju(a: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera +`/Akcija/Obrisi/${a.id}`, null).subscribe(x=>{
-      this.ucitajAkcije();
-    })
+    let con= confirm("Da li zelite obrisati akciju?");
+    if(con.valueOf()==true) {
+      this.httpKlijent.post(MojConfig.adresa_servera + `/Akcija/Obrisi/${a.id}`, null).subscribe(x => {
+        this.ucitajAkcije();
+      })
+      porukaSuccess("Uspjesno obrisana akcija");
+    }
   }
 
   proizvodAkcijaOtvori(a: any) {
@@ -99,13 +106,18 @@ export class AkcijeComponent implements OnInit {
       null).subscribe(x=>{
       this.ucitajAkcije();
     })
+    porukaSuccess("Uspjesno dodan proizvod u akciju");
   }
 
   ukloniProizvodAkcija(a: any, z: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera +
-      `/Akcija/UkloniProizvod?akcijaId=${a.id}&proizvdId=${z.id}`, null).subscribe(x=>{
-      this.ucitajAkcije();
-    })
+    let con= confirm("Da li zelite obrisati proizvod sa akcije?");
+    if(con.valueOf()==true) {
+      this.httpKlijent.post(MojConfig.adresa_servera +
+        `/Akcija/UkloniProizvod?akcijaId=${a.id}&proizvdId=${z.id}`, null).subscribe(x => {
+        this.ucitajAkcije();
+      })
+      porukaSuccess("Uspjesno uklonjen proizvod");
+    }
   }
 
 }

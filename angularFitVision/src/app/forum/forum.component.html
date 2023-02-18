@@ -51,7 +51,8 @@
           <label class="form-label">Naziv teme</label>
           <input class="form-control" type="text" [(ngModel)]="temaObject.tema">
           <label class="form-label">Pitanje</label>
-          <input class="form-control" type="text" [(ngModel)]="temaObject.pitanje">
+          <textarea class="form-control" rows="4" [(ngModel)]="temaObject.pitanje">
+          </textarea>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="temaObject=null">Close</button>
             <button type="button" class="btn btn-primary" (click)="dodajTemu()">Dodaj</button>

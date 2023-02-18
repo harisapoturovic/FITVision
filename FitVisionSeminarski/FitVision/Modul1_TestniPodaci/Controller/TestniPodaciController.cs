@@ -28,6 +28,7 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             data.Add("Kategorija", _dbContext.Korisnik.Count());
             data.Add("Brendova", _dbContext.Brend.Count());
             data.Add("Podkategorija", _dbContext.Podkategorija.Count());
+            data.Add("Tipova opreme: ", _dbContext.TipOpreme.Count());
             return Ok(data);
         }
 
@@ -41,6 +42,7 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             var kategorija = _dbContext.Kategorija.ToList();
             var brendovi = _dbContext.Brend.ToList();
             var podkategorija = _dbContext.Podkategorija.ToList();
+            var tipOpreme = _dbContext.TipOpreme.ToList();
 
 
             _dbContext.Drzava.RemoveRange(drzave);
@@ -50,6 +52,7 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             _dbContext.Kategorija.RemoveRange(kategorija);
             _dbContext.Brend.RemoveRange(brendovi);
             _dbContext.Podkategorija.RemoveRange(podkategorija);
+            _dbContext.TipOpreme.RemoveRange(tipOpreme);
             _dbContext.SaveChanges();
             return Count();
         }
@@ -119,6 +122,20 @@ namespace FitVision.Modul1_TestniPodaci.Controller
 
                 KorisnickoIme = "jasmin",
                 Lozinka = "test"
+            }); 
+
+            var tipoviOpreme= new List<TipOpreme>();
+            tipoviOpreme.Add(new TipOpreme()
+            {
+                Naziv = "Tegovi"
+            }); ;
+            tipoviOpreme.Add(new TipOpreme()
+            {
+                Naziv = "Sprave"
+            }); ;
+            tipoviOpreme.Add(new TipOpreme()
+            {
+                Naziv = "Masine"
             }); ;
 
             var kategorije = new List<Kategorija>();
@@ -150,6 +167,7 @@ namespace FitVision.Modul1_TestniPodaci.Controller
             _dbContext.AddRange(kategorije);
             _dbContext.AddRange(brendovi);
             _dbContext.AddRange(podkategorije);
+            _dbContext.AddRange(tipoviOpreme);
 
             _dbContext.SaveChanges();
 

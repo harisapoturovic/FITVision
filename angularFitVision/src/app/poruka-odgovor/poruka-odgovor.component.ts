@@ -58,9 +58,12 @@ export class PorukaOdgovorComponent implements OnInit {
   }
 
   obrisiOdgovor(o:any) {
-    this.httpKlijent.post(MojConfig.adresa_servera + "/Odgovor/Obrisi?id=" + o.id, null).subscribe(x=>{
-      this.ucitajPorukuOdgovor();
-    })
+    let con= confirm("Da li zelite obrisati odgovor?");
+    if(con.valueOf()==true) {
+      this.httpKlijent.post(MojConfig.adresa_servera + "/Odgovor/Obrisi?id=" + o.id, null).subscribe(x => {
+        this.ucitajPorukuOdgovor();
+      })
+    }
   }
 
 

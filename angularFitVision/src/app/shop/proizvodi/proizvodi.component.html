@@ -69,7 +69,7 @@
   <div class="d-flex justify-content-around flex-wrap" >
 
     <div *ngFor="let p of getProizvode()">
-      <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240);">
+      <div class="card mb-3 ms-2 me-2" style="width: 18rem; background-color: rgb(240,240,240);">
         <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
           <h5 class="card-title text-center mb-4">{{p.naziv}}</h5>
@@ -99,29 +99,29 @@
           <div class="modal-body">
             <div *ngIf="proizvodObject.id!=0" >
               <label class="form-label">ID</label>
-              <input class="form-control" type="text" [(ngModel)]="proizvodObject.id" disabled>
+              <input class="form-control border w-100" type="text" [(ngModel)]="proizvodObject.id" disabled>
             </div>
             <label class="form-label">Naziv proizvoda</label>
-            <input class="form-control" type="text" [(ngModel)]="proizvodObject.naziv">
+            <input class="form-control border w-100" type="text" [(ngModel)]="proizvodObject.naziv">
             <label class="form-label">Jedinicna cijena</label>
-            <input class="form-control" type="number" [(ngModel)]="proizvodObject.jedinicna_cijena">
+            <input class="form-control border w-100" type="number" [(ngModel)]="proizvodObject.jedinicna_cijena">
             <label class="form-label">Jedinicna mjera</label>
-            <input class="form-control" type="text" [(ngModel)]="proizvodObject.jedinicna_mjera">
+            <input class="form-control border w-100" type="text" [(ngModel)]="proizvodObject.jedinicna_mjera">
             <label class="form-label">Zaliha</label>
-            <input class="form-control" type="number" [(ngModel)]="proizvodObject.zaliha">
+            <input class="form-control border w-100" type="number" [(ngModel)]="proizvodObject.zaliha">
             <label class="form-label">Brend</label>
-            <select class="form-control"  name="brendovi" [(ngModel)]="proizvodObject.brend_id">
+            <select class="form-control border w-100"  name="brendovi" [(ngModel)]="proizvodObject.brend_id">
               <option  *ngFor="let t of brendovi" [value]="t.id">{{t.naziv}}</option>
             </select>
             <label class="form-label">Potkategorija</label>
-            <select class="form-control"  name="PotKategorija" [(ngModel)]="proizvodObject.pod_kategorija_id">
+            <select class="form-control border w-100"  name="PotKategorija" [(ngModel)]="proizvodObject.pod_kategorija_id">
               <option  *ngFor="let p of podKategorije" [value]="p.id">{{p.naziv}}</option>
             </select>
             <label class="form-label">Sastav</label>
-            <textarea class="form-control" rows="3" [(ngModel)]="proizvodObject.sastav" [(ngModel)]="proizvodObject.sastav"></textarea>
+            <textarea class="form-control border w-100" rows="3" [(ngModel)]="proizvodObject.sastav" [(ngModel)]="proizvodObject.sastav"></textarea>
             <div >
               <label class="form-label">Odaberi sliku</label>
-              <input type="file" class="form-control" (change)="ChosenFile($event)">
+              <input type="file" class="form-control border w-100" (change)="ChosenFile($event)">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" (click)="proizvodObject=null">Close</button>
