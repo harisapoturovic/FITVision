@@ -5,8 +5,8 @@ import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
 import {KorpaService} from "../KorpaService";
 
-//declare function porukaSuccess(a: string):any;
-//declare function porukaError(a: string):any;
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-proizvodi',
@@ -100,7 +100,7 @@ export class ProizvodiComponent implements OnInit {
           this.proizvodObject = null;
           this.ucitajProizvode();
         });
-      //porukaSuccess("uspjesno snimljen proizvod");
+      porukaSuccess("uspjesno snimljen proizvod");
     } else {
       alert("niste unijeli sve podatke");
     }
@@ -126,11 +126,14 @@ export class ProizvodiComponent implements OnInit {
   }
 
   obrisiProizvod(p: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera + `/Proizvod/Obrisi/${p.id}`, null).subscribe(x => {
-      this.ucitajProizvode();
+    let con= confirm("Da li zelite obrisati odgovor?");
+    if(con.valueOf()==true) {
+      this.httpKlijent.post(MojConfig.adresa_servera + `/Proizvod/Obrisi/${p.id}`, null).subscribe(x => {
+        this.ucitajProizvode();
 
-    })
-    //porukaSuccess("uspjesno brisanje");
+      })
+      porukaSuccess("uspjesno brisanje");
+    }
   }
 
   getProizvode() {

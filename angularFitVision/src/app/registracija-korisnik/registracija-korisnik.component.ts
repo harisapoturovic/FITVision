@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../moj-config";
 import {Router} from "@angular/router";
 
-//declare function porukaSuccess(a: string):any;
+declare function porukaSuccess(a: string):any;
 
 @Component({
   selector: 'app-registracija-korisnik',
@@ -46,7 +46,7 @@ export class RegistracijaKorisnikComponent implements OnInit {
   registrcaija() {
 
     if (this.ime != "" && this.prezime != "" && this.datum_rodjenja != null && this.datum_polaska != null
-      && this.telefon != "" && this.email != "" && this.adresa != "" && this.korisnickoIme != "" && this.lozinka != null &&
+      && this.telefon != "" && this.email != "" && this.adresa != "" && this.korisnickoIme != "" && this.lozinka != "" &&
       this.visina != "" && this.tezina != "" && this.jmbg != "" && this.spol != "" && this.spol != "...." && this.grad_ID != 0) {
       var korisnik = {
         id: 0,
@@ -66,7 +66,7 @@ export class RegistracijaKorisnikComponent implements OnInit {
         lozinka: this.lozinka
       }
       this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnik/Snimi", korisnik).subscribe(x => {
-        //porukaSuccess("Ospjesna regstracija");
+        porukaSuccess("Ospjesna regstracija");
       })
       this.router.navigateByUrl("/login");
 
