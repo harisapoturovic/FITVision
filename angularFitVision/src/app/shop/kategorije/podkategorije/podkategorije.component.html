@@ -1,10 +1,11 @@
-<h2>Podkategorije</h2>
-<br>
 <div id="podkat">
 <ul class="list-group list-group-flush" *ngFor="let p of podkategorije">
-  <li class="list-group-item" style="font-size: larger">{{p.naziv}}</li>
-  <li class="list-group-item">{{p.opis}}</li>
-  <li class="list-group-item" >{{p.nazivKat}}</li>
+  <div class="card" *ngIf="p.kategorija_id==kategorija.id">
+    <img [src]="p.slika" class="card-img-top" alt="..."/>
+    <div class="card-body">
+      <h5 class="card-title">{{p.naziv}}</h5>
+    </div>
+  </div>
 
   <div *ngIf="loginInfo().isPremisijaAdmin">
     <button type="button" class="btn btn-warning" (click)="urediPodkat=p">Uredi</button>
@@ -18,6 +19,7 @@
           *ngIf="loginInfo().isPremisijaAdmin" (click)="novaPodkat()">Dodaj podkategoriju</button>
 </div>
 </div>
+
 
 <!--Modal dodaj-->
 <div *ngIf="loginInfo().isPremisijaAdmin">
@@ -42,6 +44,10 @@
               <option *ngFor="let k of kategorije" [value]="k.id">{{k.naziv}}</option>
             </select>
           </div>
+            <div >
+              <label class="form-label">Odaberi sliku</label>
+              <input type="file" class="form-control border w-100" (change)="ChosenFile($event)">
+            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" (click)="odabranaPodkat=null">Close</button>
               <button type="button" class="btn btn-primary" (click)="dodajPodkat()">Snimi</button>
@@ -74,6 +80,10 @@
               <select class="form-control" [(ngModel)]="urediPodkat.kategorija_id" name="kategorija">
                 <option *ngFor="let k of kategorije" [value]="k.id">{{k.naziv}}</option>
               </select>
+            </div>
+            <div >
+              <label class="form-label">Odaberi sliku</label>
+              <input type="file" class="form-control border w-100" (change)="ChosenFile($event)">
             </div>
           </div>
           <div class="modal-footer">

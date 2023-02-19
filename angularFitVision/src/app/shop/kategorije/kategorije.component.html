@@ -1,44 +1,34 @@
 <div class="row">
   <div class="col">
-    <div >
-      <ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(151, 180, 255)">
+    <div id="tabovi">
+      <ul class="nav  nav-lg  pb-2 pt-2" >
         <li class="nav-item" *ngFor="let k of kategorije">
           <!-- (mouseover)="prikaziBrendove(k)"-->
-          <a class="nav-link" (click)="prikaziDodatno(k)">{{k.naziv}} </a>
+          <a class="nav-link" (click)="prikaziDodatno(k)" >{{k.naziv}} </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/akcije" routerLinkActive="active"> AKCIJE </a>
+          <a class="nav-link" routerLink="/akcije" routerLinkActive="active"> Akcije </a>
         </li>
       </ul>
 
       <div class="mb-5 d-flex justify-content-end">
         <button class="btn btn-primary m-3 "
                 *ngIf="loginInfo().isPremisijaAdmin" (click)="novaKategorija()">Dodaj kategoriju</button>
-
       </div>
     </div>
   </div>
 </div>
 
 
-<!--
 <div *ngIf="loginInfo().isPremisijaKorisnik">
-      <br>
-      <div *ngIf="odabranaBrendovi!=null">
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" >
-        <span>Brendovi</span>
-        <ul class="nav  nav-lg  pb-2 pt-2" *ngFor="let b of brendovi">
-          <li class="nav-item2" style="background-color:rgb(151, 180, 0)">
-            <a class="nav-link" (click)="detaljnoBrendovi(b)">{{b.naziv}}</a>
-          </li>
-        </ul>
+  <div *ngIf="odabranaDodatno!=null">
+    <h2>{{odabranaDodatno.naziv}}</h2>
+    <p>{{odabranaDodatno.opis}}</p>
+  </div>
 
-        </div>
-      </div>
-
-    <app-detalji-kategorije [detaljiKat]="odabranaBrendovi"> </app-detalji-kategorije>
 </div>
--->
+<app-podkategorije [kategorija]="odabranaDodatno"></app-podkategorije>
+
 <!--Modal dodaj-->
 <div *ngIf="loginInfo().isPremisijaAdmin">
 <div *ngIf="odabranaKategorija!=null" class="modal fade show" id="exampleModalLive" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
@@ -66,28 +56,7 @@
 </div>
 </div>
 
-        <!--Modal detalji-->
-<div *ngIf="loginInfo().isPremisijaKorisnik">
-        <div *ngIf="odabranaDodatno!=null" class="modal fade show" id="exa" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampl">Detljne informacije </h5>
-                <button type="button" class="btn-close" aria-label="Close" (click)="odabranaDodatno=null"></button>
-              </div>
-              <div class="modal-body">
-                <label class="form-label">Naziv</label>
-                <input class="form-control" type="text" [value]="odabranaDodatno.naziv" disabled>
-                <label class="form-label">Opis</label>
-                <textarea class="form-control" rows="3" [(ngModel)]="odabranaDodatno.opis" disabled></textarea>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="odabranaDodatno=null">Close</button>
-              </div>
-            </div>
-          </div>
-        </div>
-</div>
+
         <!--Modal uredi-->
 <div *ngIf="loginInfo().isPremisijaAdmin">
         <div *ngIf="odabranaDodatno!=null" class="modal fade show" id="exampleMo" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
@@ -121,8 +90,3 @@
   <button type="button" class="btn btn-success" routerLink="/podkategorije" routerLinkActive="active">Podkategorije</button>
 </div>
 
-<div id="zaKorisnika" *ngIf="loginInfo().isPremisijaKorisnik">
-  <app-brendovi></app-brendovi>
-  <br>
-  <app-podkategorije></app-podkategorije>
-</div>

@@ -34,7 +34,8 @@ namespace FitVision.Modul2.Controllers
                     pod_kategorija_id = p.pod_kategorijaid,
                     pod_kategorija = p.pod_kategorija.Naziv,
                     brend_id = p.brendid,
-                    brend = p.brend.Naziv
+                    brend = p.brend.Naziv,
+                    kategorija=p.pod_kategorija.kategorija.Naziv
 
                 });
             return data.Take(100).ToList();

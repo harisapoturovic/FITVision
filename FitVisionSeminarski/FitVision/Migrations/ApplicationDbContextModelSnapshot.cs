@@ -129,6 +129,9 @@ namespace FitVision.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Slika")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Brend");
@@ -393,6 +396,9 @@ namespace FitVision.Migrations
 
                     b.Property<string>("Opis")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slika")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

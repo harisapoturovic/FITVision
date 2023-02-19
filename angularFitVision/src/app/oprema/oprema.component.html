@@ -1,11 +1,11 @@
 <div class="continer mt-4">
   <div>
-    <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Naziv</span> <br>
-    <input [(ngModel)]="naziv" [disabled]="!filter_naziv"><br>
+    <span style="font-weight: bold">Naziv</span> <br>
+    <input [(ngModel)]="naziv" ><br>
   </div>
   <div>
-    <input [(ngModel)] = "filter_tip" type="checkbox"> Filter by <span style="font-weight: bold">Tip</span> <br>
-    <input [(ngModel)]="tip_naziv" [disabled]="!filter_tip"><br>
+    <span style="font-weight: bold">Tip</span> <br>
+    <input [(ngModel)]="tip_naziv"><br>
   </div>
   <div class="mb-5 d-flex justify-content-end">
     <button class="btn btn-primary m-3 "
@@ -14,13 +14,11 @@
 
   <div class="d-flex justify-content-around flex-wrap">
 
-    <div *ngFor="let o of filtrirano()">
+    <div *ngFor="let o of filtrirano()" (click)="detaljno(o)">
       <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240);">
         <img [src]="o.slika" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
           <h5 class="card-title text-center mb-4">{{o.naziv}}</h5>
-        <button class="btn mb-3" style="background-color:rgb(200,200,200) " (click)="detaljno(o)">Pogledaj detalje</button>
-          <p class="card-text">Kolicina: {{o.broj}}</p>
           <button  class="btn btn-warning" *ngIf="loginInfo().isPremisijaAdmin" (click)="urediFunc(o)"
           >Uredi</button>
           <button class="btn btn-danger float-end" *ngIf="loginInfo().isPremisijaAdmin" (click)="obrisiOpremu(o)">Obrisi</button>
@@ -44,9 +42,6 @@
         </div>
         <div class="modal-body">
           <div class="modal-body">
-
-
-
             <label class="form-label">Naziv opreme</label>
             <input class="form-control" type="text" [(ngModel)]="opremaObject.naziv">
             <label class="form-label">Kolicina</label>
@@ -116,6 +111,8 @@
         <div class="modal-body">
           <label class="form-label">Tip opreme</label>
           <input class="form-control" type="text" [value]="detaljiOprema.tipOpreme" disabled>
+          <label class="form-label">Količina</label>
+          <textarea class="form-control" rows="1" [(ngModel)]="detaljiOprema.broj" disabled></textarea>
           <label class="form-label">Opis</label>
           <textarea class="form-control" rows="3" [(ngModel)]="detaljiOprema.opis" disabled></textarea>
           </div>

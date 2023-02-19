@@ -1,13 +1,11 @@
+.card
+{
+  width: 200px;
+  height: 150px;
+  padding: 20px;
+}
+
 #podkat{
-  background-color: #d2f3d2;
-}
-
-li{
-  background-color: palegreen;
-}
-
-h2{
-  font-style: italic;
-  border-bottom: 1px solid black;
-  width: 6cm;
+  display: flex;
+  flex-direction: row;
 }

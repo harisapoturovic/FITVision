@@ -1,5 +1,7 @@
 a{
-  color: white;
+  color: black;
+  border-bottom: 1px solid #9898ff;
+  font-family: Tahoma;
 }
 
 span{
@@ -17,12 +19,13 @@ span{
   width: 100%;
 }
 
-#zaKorisnika{
-  display: flex;
-  flex-direction: row;
-}
 
 .nav-link{
   font-size: 18px;
   margin: 8px;
+}
+
+#tabovi
+{
+  margin-left: 450px;
 }

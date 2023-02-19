@@ -77,4 +77,5 @@ export class KategorijeComponent implements OnInit {
       this.ucitajKategorije();
     })
   }
+
 }

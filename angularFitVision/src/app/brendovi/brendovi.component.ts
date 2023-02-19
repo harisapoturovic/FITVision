@@ -13,6 +13,7 @@ export class BrendoviComponent implements OnInit {
   brendovi: any;
   odabraniBrend:any;
   urediBrend:any;
+  url:any;
 
   constructor(private httpKlijent: HttpClient) {
   }
@@ -35,7 +36,8 @@ export class BrendoviComponent implements OnInit {
     this.odabraniBrend={
       id:0,
       naziv:"",
-      opis:""
+      opis:"",
+      slika:""
     };
   }
 
@@ -46,16 +48,27 @@ export class BrendoviComponent implements OnInit {
     })
   }
 
-  UrediBrend(b: any) {
-    this.httpKlijent.post(MojConfig.adresa_servera+"/Brend/Snimi", b).subscribe(x=>{
-      this.urediBrend=null;
-      this.ucitajBrendove();
-    })
-  }
+  //UrediBrend(b: any) {
+  //  this.httpKlijent.post(MojConfig.adresa_servera+"/Brend/Snimi", b).subscribe(x=>{
+  //    this.urediBrend=null;
+  //    this.ucitajBrendove();
+  //  })
+  //}
 
   obrisi(b: any) {
     this.httpKlijent.post(`${MojConfig.adresa_servera}/Brend/Obrisi/${b.id}`, null).subscribe(x=>{
       this.ucitajBrendove();
     })
+  }
+
+  ChosenFile($event: Event) {
+    let file = (event.target as HTMLInputElement).files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e: any) => {
+      this.url = e.target.result;
+      this.odabraniBrend.slika = this.url;
+
+    }
   }
 }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import  {RouterModule, RouterOutlet} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {MdbModalModule, MdbModalService} from "mdb-angular-ui-kit/modal";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';

@@ -1,5 +1,5 @@
 <div id="nav">
-<img src="assets/logo2.png" alt="..." id="logo" *ngIf="loginInfo().isPremisijaKorisnik"/>
+<img src="assets/logo2.png" alt="..." id="logo" *ngIf="loginInfo().isPremisijaKorisnik" routerLink="/pocetna"/>
 
 <a class="nav-link " routerLink="/login" routerLinkActive="active" *ngIf="!loginInfo().isLogiran">LOGIN</a>
 

@@ -126,10 +126,8 @@ export class OpremaComponent implements OnInit {
       return [];
     return this.oprema.filter(
       (x:any)=>
-        (!this.filter_naziv ||
           (x.naziv).toLowerCase().startsWith(this.naziv.toLowerCase())
-          ) && (!this.filter_tip ||
-          (x.tipOpreme).toLowerCase().startsWith(this.tip_naziv.toLowerCase())
-        )) ;
+           && (x.tipOpreme).toLowerCase().startsWith(this.tip_naziv.toLowerCase())
+        );
   }
 }
