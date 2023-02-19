@@ -1,12 +1,10 @@
 <div id="nav">
-<img src="assets/logo2.png" alt="..." id="logo"/>
+<img src="assets/logo2.png" alt="..." id="logo" *ngIf="loginInfo().isPremisijaKorisnik"/>
 
+<a class="nav-link " routerLink="/login" routerLinkActive="active" *ngIf="!loginInfo().isLogiran">LOGIN</a>
 
-<ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(240,245,255)" id="nav2">
+<ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(240,245,255)" id="nav2" *ngIf="loginInfo().isLogiran">
 
- <li class="nav-item" *ngIf="!loginInfo().isLogiran" style="background-color: rgb(180,180,180)">
-    <a class="nav-link " routerLink="/login" routerLinkActive="active">LOGIN</a>
-  </li>
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
     <a class="nav-link " routerLink="/pocetna" routerLinkActive="active">POČETNA</a>
   </li>
