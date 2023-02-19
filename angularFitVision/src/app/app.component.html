@@ -1,29 +1,33 @@
-<ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(220,220,220)" >
+<div id="nav">
+<img src="assets/logo2.png" alt="..." id="logo"/>
+
+
+<ul class="nav  nav-lg  pb-2 pt-2" style="background-color:rgb(240,245,255)" id="nav2">
 
  <li class="nav-item" *ngIf="!loginInfo().isLogiran" style="background-color: rgb(180,180,180)">
-    <a class="nav-link " routerLink="/login" routerLinkActive="active">Login</a>
+    <a class="nav-link " routerLink="/login" routerLinkActive="active">LOGIN</a>
   </li>
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
-    <a class="nav-link " routerLink="/pocetna" routerLinkActive="active">Pocetna</a>
+    <a class="nav-link " routerLink="/pocetna" routerLinkActive="active">POČETNA</a>
   </li>
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
-    <a class="nav-link " routerLink="/oprema" routerLinkActive="active">Oprema</a>
+    <a class="nav-link " routerLink="/oprema" routerLinkActive="active">OPREMA</a>
   </li>
   <li class="nav-item" *ngIf="loginInfo().isPremisijaAdmin">
-    <a class="nav-link " routerLink="/korisnici" routerLinkActive="active">Korisnici</a>
+    <a class="nav-link " routerLink="/korisnici" routerLinkActive="active">KORISNICI</a>
   </li>
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
-    <a class="nav-link " routerLink="/shop" routerLinkActive="active">Shop</a>
+    <a class="nav-link " routerLink="/shop" routerLinkActive="active">SHOP</a>
   </li>
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
-    <a class="nav-link " routerLink="/poruke" routerLinkActive="active">Poruke</a>
+    <a class="nav-link " routerLink="/poruke" routerLinkActive="active">PORUKE</a>
   </li>
   <li class="nav-item" *ngIf="loginInfo().isLogiran">
-    <a class="nav-link " routerLink="/forum" routerLinkActive="active">Forum</a>
+    <a class="nav-link " routerLink="/forum" routerLinkActive="active">FORUM</a>
   </li>
   <div class="dropdown" *ngIf="loginInfo().isLogiran">
     <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Profil
+      PROFIL
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
       <li><a class="dropdown-item" routerLink="/postavke-profila">Postavke profila</a></li>
@@ -31,6 +35,7 @@
     </ul>
   </div>
 </ul>
+</div>
 <div class="container">
 
   <router-outlet></router-outlet>
