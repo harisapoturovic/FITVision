@@ -26,6 +26,7 @@ import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.componen
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { AdminComponent } from './pocetna/admin/admin.component';
 import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
+import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 
 @NgModule({
   declarations: [
@@ -70,12 +71,13 @@ import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
       {path: 'proizvodi', component: ProizvodiComponent},
       {path: 'akcije', component: AkcijeComponent},
       {path: 'poruke', component: PorukeComponent},
-      {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent},
+      {path: "poruka-odgovor/:porukaid", component: PorukaOdgovorComponent},
       {path: 'forum', component: ForumComponent},
-      {path:"forum-odgovor/:forumid", component:ForumOdgovoriComponent},
-      {path:"pocetna", component:PocetnaComponent},
-      {path:"narudzba", component:NarudzbaComponent}
-    ])
+      {path: "forum-odgovor/:forumid", component: ForumOdgovoriComponent},
+      {path: "pocetna", component: PocetnaComponent},
+      {path: "narudzba", component: NarudzbaComponent}
+    ]),
+    MdbCarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]
