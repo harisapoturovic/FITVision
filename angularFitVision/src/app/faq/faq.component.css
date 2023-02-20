@@ -1,0 +1,33 @@
+#zafaq
+{
+  font-size: 4.5mm;
+  font-style: italic;
+  width: 70%;
+  padding: 70px;
+}
+
+#faq
+{
+  display: flex;
+  flex-direction: row;
+}
+
+#info
+{
+  width: 30%;
+  padding: 60px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 60px;
+}
+
+#info img
+{
+  width: 100px;
+  height: 130px;
+}
+
+.vr{
+  margin-top: 40px;
+  height: 400px;
+}

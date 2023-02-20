@@ -28,6 +28,8 @@ import { PocetnaComponent } from './pocetna/pocetna.component';
 import { AdminComponent } from './pocetna/admin/admin.component';
 import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
 import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
+import { FaqComponent } from './faq/faq.component';
+import {MdbAccordionModule} from "mdb-angular-ui-kit/accordion";
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
     ForumOdgovoriComponent,
     PocetnaComponent,
     AdminComponent,
-    NarudzbaComponent
+    NarudzbaComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
@@ -76,9 +79,11 @@ import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
       {path: 'forum', component: ForumComponent},
       {path: "forum-odgovor/:forumid", component: ForumOdgovoriComponent},
       {path: "pocetna", component: PocetnaComponent},
-      {path: "narudzba", component: NarudzbaComponent}
+      {path: "narudzba", component: NarudzbaComponent},
+      {path: "faq", component: FaqComponent}
     ]),
-    MdbCarouselModule
+    MdbCarouselModule,
+    MdbAccordionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
