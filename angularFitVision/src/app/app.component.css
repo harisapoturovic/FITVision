@@ -28,3 +28,8 @@ a{
   display: flex;
   flex-direction: row;
 }
+
+.text-center text-lg-start bg-light text-muted
+{
+  margin-top: 250px;
+}

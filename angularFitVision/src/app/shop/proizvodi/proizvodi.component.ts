@@ -14,7 +14,7 @@ declare function porukaError(a: string):any;
   templateUrl: './proizvodi.component.html',
   styleUrls: ['./proizvodi.component.css']
 })
-export class ProizvodiComponent implements OnInit {
+export class ProizvodiComponent implements OnInit{
   popust: any;
   novaCijena:any;
 
@@ -32,6 +32,7 @@ export class ProizvodiComponent implements OnInit {
     if (this.loginInfo().isPremisijaKorisnik) {
       this.korpaID=this.korpaService.getKorpaID();
     }
+
   }
 
   ucitajProizvode() {

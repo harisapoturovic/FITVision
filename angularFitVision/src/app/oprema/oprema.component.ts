@@ -130,4 +130,5 @@ export class OpremaComponent implements OnInit {
            && (x.tipOpreme).toLowerCase().startsWith(this.tip_naziv.toLowerCase())
         );
   }
+
 }
