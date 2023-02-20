@@ -5,7 +5,7 @@ button{
 #brend{
   display: flex;
   flex-direction: row;
-  margin-left: 120px;
+  margin-left: 250px;
 }
 
 img
@@ -51,4 +51,15 @@ img
 h2
 {
   font-family: Tahoma;
+}
+
+#opcije
+{
+  margin-left: 50px;
+}
+
+#glavni
+{
+  display: flex;
+  flex-direction: row;
 }

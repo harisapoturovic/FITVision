@@ -1,4 +1,5 @@
-<button type="button" class="btnKorpa" (click)="prikaziSadrzaj()" *ngIf="loginInfo().isPremisijaKorisnik"> KORPA </button>
+<button type="button" class="btnKorpa" (click)="prikaziSadrzaj()" *ngIf="loginInfo().isPremisijaKorisnik">
+  <div id="btnKorpa"><img src="assets/shopping-cart.png"> KORPA </div></button>
 <!-- sadrzaj korpe -->
 <div *ngIf="korpaObject!=null" class="glavni">
   <div>
@@ -6,34 +7,34 @@
   <div class="mojaKorpa" *ngFor="let k of this.korpaObject">
     <img [src]="k.slika" alt="..." style="height:220px; padding-top: 50px"  width="250px">
     <div class="sadrzaj">
-    <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}</h5>
+    <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}g</h5>
       <div class="zaKolicinu">
       <p class="list-group-item">Količina:</p>
       <input class="form-control" type="number" [(ngModel)]="k.kolicina" (change)="izmijeniKolicinu(k.kolicina, k.korpaID, k.proizvodID)">
       </div>
       <div>
-        <p class="list-group-item">Cijena bez popusta: {{k.cijena}} KM</p>
-      <p class="list-group-item">Cijena sa popustom: {{k.cijenaPopust}} KM</p>
-    <p class="list-group-item" style="color: grey">Popust: {{k.popust}}%</p>
+        <p>Cijena bez popusta: {{k.cijena}} KM</p>
+      <p>Cijena sa popustom: {{k.cijenaPopust}} KM</p>
+    <p style="color: grey">Popust: {{k.popust}}%</p>
       </div>
       <button type="button" class="btn btn-outline-danger" (click)="ukloniProizvod(k.proizvodID)"> X  UKLONI</button>
     </div>
     </div>
   </div>
   <div class="zaPlatiti">
-    <p class="list-group-item">Proizvodi: {{this.cijena2}} KM</p>
-    <p class="list-group-item">Popust: -{{this.popust2}} KM</p>
-    <p class="list-group-item">Dostava: 0KM</p>
-    <p class="list-group-item" style="font-weight: bold">Ukupno za platiti: {{this.ukupno}} KM</p>
+    <p>Proizvodi: {{this.cijena2}} KM</p>
+    <p>Popust: -{{this.popust2}} KM</p>
+    <p>Dostava: 0KM</p>
+    <p style="font-weight: bold">Ukupno za platiti: {{this.ukupno}} KM</p>
     <button type="button" class="btn btn-success" routerLink="/narudzba">Dovrši narudžbu</button>
   </div>
 
 </div>
-<hr>
+<hr class="hr hr-blurry"/>
 <div class="proizvodi">
   <div class="filteri">
 <div class="filter_naziv">
-  <input [(ngModel)] = "filter_naziv" type="checkbox"> Filter by <span style="font-weight: bold">Naziv proizvoda</span> <br>
+  <input [(ngModel)] = "filter_naziv" type="checkbox"> <span style="font-weight: bold"> Naziv proizvoda</span> <br>
   <input [(ngModel)]="naziv" [disabled]="!filter_naziv"><br>
   <hr>
 </div>
@@ -69,12 +70,11 @@
   <div class="d-flex justify-content-around flex-wrap" >
 
     <div *ngFor="let p of getProizvode()">
-      <div class="card mb-3 ms-2 me-2" style="width: 18rem; background-color: rgb(240,240,240);" *ngIf="p.kategorija=='Dodaci prehrani'">
-        <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px">
+      <div class="card mb-3 ms-2 me-2" style="width: 18rem; background-color: rgb(240,240,240);" >
+        <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px" (click)="detaljno(p)">
         <div class="card-body">
           <h5 class="card-title text-center mb-4">{{p.naziv}}</h5>
-          <button class="btn mb-3" style="background-color:rgb(200,200,200) " (click)="detaljno(p)">Pogledaj detalje</button>
-          <p>Na zalihi: {{p.zaliha}} , Cijena: {{p.jedinicna_cijena}} KM</p>
+          <p style="font-family: Tahoma; font-size: 6mm"> {{p.jedinicna_cijena}} KM</p>
           <div class="zaKorpu" *ngIf="loginInfo().isPremisijaKorisnik">
           <input class="form-control" type="number" value=0 (change)="onKey($event)">
           <button class="btn btn-info mb-4" (click)="dodajUKorpu(p)">Dodaj u korpu</button>
@@ -141,22 +141,26 @@
 
   <!--Modal detalji-->
   <div *ngIf="detaljiProizvod" class="modal fade show" id="exa" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampl">Detljne informacije </h5>
           <button type="button" class="btn-close" aria-label="Close" (click)="detaljiProizvod=null"></button>
         </div>
         <div class="modal-body">
+          <label class="form-label">Naziv</label>
+          <input class="form-control border w-100" type="text" [value]="detaljiProizvod.naziv" disabled>
           <label class="form-label">Brend</label>
           <input class="form-control border w-100" type="text" [value]="detaljiProizvod.brend" disabled>
-          <label class="form-label">Potategorija</label>
+          <label class="form-label">Podkategorija</label>
           <input class="form-control border w-100" type="text" [value]="detaljiProizvod.pod_kategorija" disabled>
           <label class="form-label">Jedinicna mjera</label>
-          <input class="form-control border w-100" type="text" [value]="detaljiProizvod.jedinicna_mjera" disabled>
+          <input class="form-control border w-100" type="text" [value]="detaljiProizvod.jedinicna_mjera + 'g'" disabled>
 
           <label class="form-label">Sastav</label>
           <textarea class="form-control border w-100" rows="4" [(ngModel)]="detaljiProizvod.sastav" disabled></textarea>
+          <label class="form-label">Zaliha</label>
+          <input class="form-control border w-100" type="text" [value]="detaljiProizvod.zaliha + ' kom.'" disabled>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="detaljiProizvod=null">Close</button>

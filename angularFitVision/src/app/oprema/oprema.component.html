@@ -101,6 +101,7 @@
 </div>
 
   <!--Modal detalji-->
+  <div *ngIf="loginInfo().isPremisijaKorisnik">
   <div *ngIf="detaljiOprema" class="modal fade show" id="exa" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -124,3 +125,4 @@
     </div>
   </div>
 
+</div>

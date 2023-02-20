@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {LoginInformacije} from "../../../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../../../_helpers/autentifikacija-helper";
 import {MojConfig} from "../../../moj-config";
+import {PodkategorijaService} from "../../../Podkategorija service";
 
 
 @Component({
@@ -18,6 +19,8 @@ export class PodkategorijeComponent implements OnInit {
   url:any;
   @Input()
   kategorija:any;
+  podkat:any;
+
   constructor(private httpKlijent: HttpClient) { }
 
   ngOnInit(): void {
@@ -80,5 +83,9 @@ export class PodkategorijeComponent implements OnInit {
       this.odabranaPodkat.slika = this.url;
 
     }
+  }
+
+  setujPodkat(p: any) {
+    this.podkat=p;
   }
 }

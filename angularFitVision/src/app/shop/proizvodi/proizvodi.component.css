@@ -6,14 +6,13 @@
 .filteri{
   display: flex;
   flex-direction: column;
-  background-color: #d9eaff;
-  width: 400px;
+  background-color:rgb(240,245,255);
+  width: 250px;
 }
 
 .zaKorpu{
   display: flex;
   flex-direction: row;
-  padding: 10px;
 }
 
 .form-control{
@@ -25,20 +24,21 @@
 }
 
 .btnKorpa {
-  background-color: #ff855e;
-  color: white;
-  font-size: 20px;
-  width: 250px;
+  background-color: #ffad93;
+  color: black;
+  font-size: 25px;
+  width: 230px;
   height: 50px;
   margin-left: 900px;
   border: none;
+  font-family: Tahoma;
 }
 
 .mojaKorpa{
   display: flex;
   flex-direction: row;
-  border: 1px solid #fc6000;
-  height: 350px;
+  border: 3px solid #ffad93;
+  height: 300px;
 }
 
 h5, p{
@@ -64,3 +64,9 @@ h5, p{
   padding-left: 400px;
 }
 
+#btnKorpa img
+{
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}

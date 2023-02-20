@@ -1,18 +1,19 @@
 <br>
 <div id="brend">
 <ul class="list-group list-group-flush" *ngFor="let b of brendovi">
-  <img [src]="b.slika" alt="..." style="height:150px; padding-top: 50px;  width:200px" (click)="odabraniBrend=b">
-  <div *ngIf="loginInfo().isPremisijaAdmin">
+  <img [src]="b.slika" alt="..." style="height:120px; padding-top: 50px;  width:150px" (click)="odabraniBrend=b">
+  <div *ngIf="loginInfo().isPremisijaAdmin" id="opcije">
   <button type="button" class="btn btn-warning" (click)="odabraniBrend=b">Uredi</button>
   <button type="button" class="btn btn-danger"(click)="obrisi(b)">Obriši</button>
   </div>
   <br>
 </ul>
+</div>
 <div class="mb-5 d-flex justify-content-end">
   <button class="btn btn-primary m-3 "
           *ngIf="loginInfo().isPremisijaAdmin" (click)="noviBrend()">Dodaj brend</button>
 </div>
-</div>
+
 
 <!--Modal dodaj-->
 <div *ngIf="loginInfo().isPremisijaAdmin">
@@ -78,13 +79,14 @@
 
 </div>
 -->
-
+<div *ngIf="loginInfo().isPremisijaKorisnik">
 <div class="prompt" *ngIf="odabraniBrend!=null" >
-  <div class="promptImg_label">
+  <div class="promptImg_label" >
     <h2>{{odabraniBrend.naziv}}</h2> <br>
     <p>{{odabraniBrend.opis}}</p>
   </div>
   <div class="OkButton">
     <button class="OkBtn" (click)="odabraniBrend=null">OK</button>
   </div>
+</div>
 </div>

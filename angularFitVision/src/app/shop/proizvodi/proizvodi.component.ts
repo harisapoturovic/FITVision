@@ -4,6 +4,7 @@ import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
 import {KorpaService} from "../KorpaService";
+import {PodkategorijaService} from "../../Podkategorija service";
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
@@ -14,7 +15,6 @@ declare function porukaError(a: string):any;
   styleUrls: ['./proizvodi.component.css']
 })
 export class ProizvodiComponent implements OnInit {
-  korisnik_id:any;
   popust: any;
   novaCijena:any;
 
@@ -102,7 +102,7 @@ export class ProizvodiComponent implements OnInit {
         });
       porukaSuccess("uspjesno snimljen proizvod");
     } else {
-      alert("niste unijeli sve podatke");
+      porukaError("niste unijeli sve podatke");
     }
   }
 
@@ -126,7 +126,7 @@ export class ProizvodiComponent implements OnInit {
   }
 
   obrisiProizvod(p: any) {
-    let con= confirm("Da li zelite obrisati odgovor?");
+    let con= confirm("Da li zelite obrisati proizvod?");
     if(con.valueOf()==true) {
       this.httpKlijent.post(MojConfig.adresa_servera + `/Proizvod/Obrisi/${p.id}`, null).subscribe(x => {
         this.ucitajProizvode();
@@ -183,23 +183,24 @@ export class ProizvodiComponent implements OnInit {
             .subscribe(x => {
               this.prikaziSadrzaj();
               this.kolicina = 0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
+              porukaSuccess("Uspješno dodan proizvod u korpu!");
             })
         }
         else
-          alert(`Na zalihi imamo ${p.zaliha} proizvoda!`);
+          porukaError(`Na zalihi imamo ${p.zaliha} proizvoda!`);
       } else
-        alert("Niste odabrali količinu");
+        porukaError("Niste odabrali količinu");
   }
 
 
   prikaziSadrzaj() {
     if(this.korpaID==null)
-      alert("Korpa je prazna");
+      porukaError("Korpa je prazna");
     else {
       this.httpKlijent.get(MojConfig.adresa_servera + `/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x => {
         this.korpaObject = x;
         if (this.korpaObject.length == 0)
-          alert("Korpa je prazna");
+          porukaError("Korpa je prazna");
         else {
           let cijena=0;
           let popust=0;
@@ -253,7 +254,7 @@ export class ProizvodiComponent implements OnInit {
             this.prikaziSadrzaj();
           })
       } else
-        alert(`Na zalihi imamo ${this.p.zaliha} proizvoda`);
+        porukaError(`Na zalihi imamo ${this.p.zaliha} proizvoda`);
   }
 
   onKey(event: Event) {

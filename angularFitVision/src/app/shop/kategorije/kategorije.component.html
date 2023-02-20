@@ -7,6 +7,9 @@
           <a class="nav-link" (click)="prikaziDodatno(k)" >{{k.naziv}} </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="/proizvodi" routerLinkActive="active"> Proizvodi </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="/akcije" routerLinkActive="active"> Akcije </a>
         </li>
       </ul>
@@ -22,12 +25,12 @@
 
 <div *ngIf="loginInfo().isPremisijaKorisnik">
   <div *ngIf="odabranaDodatno!=null">
-    <h2>{{odabranaDodatno.naziv}}</h2>
+    <span>{{odabranaDodatno.naziv}}</span>
     <p>{{odabranaDodatno.opis}}</p>
   </div>
 
 </div>
-<app-podkategorije [kategorija]="odabranaDodatno"></app-podkategorije>
+<app-podkategorije [kategorija]="odabranaDodatno" *ngIf="loginInfo().isPremisijaKorisnik"></app-podkategorije>
 
 <!--Modal dodaj-->
 <div *ngIf="loginInfo().isPremisijaAdmin">

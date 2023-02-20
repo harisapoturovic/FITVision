@@ -1,0 +1,11 @@
+.dot {
+  height: 70px;
+  width: 70px;
+  background-color: #ffad93;
+  border-radius: 50%;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 7mm;
+  padding-top: 10px;
+  padding-left: 5px;
+}

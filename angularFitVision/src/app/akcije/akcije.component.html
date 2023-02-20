@@ -7,8 +7,8 @@
   <hr class="w-100">
   <div *ngFor="let a of akcije" class="w-100"  >
     <h4 class="">{{a.naziv}}</h4>
-    <p>Od: {{a.datum_pocetka}},     Do: {{a.datum_zavrsetka}}</p>
-    <p>Iznos: {{a.iznos}} %</p>
+    <p>Od <span style="font-weight: bold">{{a.datum_pocetka}}</span> do <span style="font-weight: bold">{{a.datum_zavrsetka}}</span></p>
+    <p class="dot">{{a.iznos}}%</p>
     <div class="zaAkcije" *ngIf="loginInfo().isPremisijaAdmin">
       <button class="btn btn-warning mb-4 me-2" (click)="urediAkciju(a)">Uredi akciju</button>
       <button class="btn btn-danger mb-4 me-2" (click)="obrisiAkciju(a)">Obrisi akciju</button>
@@ -20,8 +20,8 @@
         <div class="card mb-3" style="width: 18rem; background-color: rgb(240,240,240)">
           <img [src]="z.slika" class="card-img-top" alt="..." style="height:220px">
           <div class="card-body">
-            <h5 class="card-title">{{z.naziv}}</h5>
-            <p>Na zalihi: {{z.zaliha}} , Cijena: {{z.jedinicnaCijena}} KM</p>
+            <h5 class="card-title" style="margin-left: 50px">{{z.naziv}}</h5>
+            <p style="font-family: Tahoma; font-size: 5mm; margin-top: 10px; color: #ff855e"> {{z.jedinicnaCijena}} KM</p>
             <button class="btn btn-danger" (click)="ukloniProizvodAkcija(a,z)" *ngIf="loginInfo().isPremisijaAdmin">Ukloni sa akcije</button>
           </div>
         </div>
