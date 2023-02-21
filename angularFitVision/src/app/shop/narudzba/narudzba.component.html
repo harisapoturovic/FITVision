@@ -1,63 +1,130 @@
 <br>
 <div class="narudzba">
+
   <div class="forma">
     <h4>1. Unesite podatke za dostavu</h4>
-    <form>
-      <!-- 2 column grid layout with text inputs for the first and last names -->
+    <form [formGroup]="validationForm" (ngSubmit)="onSubmit()">
       <div class="col">
-        <div class="form-outline">
-          <label class="form-label" for="form6Example1">Ime</label>
-          <input type="text" id="form6Example1" class="form-control" required/>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form1">Ime</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form1"
+              class="form-control"
+              formControlName="ime"
+              required/>
+            <mdb-error *ngIf="ime?.invalid && (ime?.dirty || ime?.touched)">Potrebno je upisati ime</mdb-error>
+          </mdb-form-control>
+        </div>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form2">Prezime</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form2"
+              class="form-control"
+              formControlName="prezime"
+              required/>
+            <mdb-error *ngIf="prezime?.invalid && (prezime?.dirty || prezime?.touched)">Potrebno je upisati prezime</mdb-error>
+          </mdb-form-control>
+        </div>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form1">Država</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form3"
+              class="form-control"
+              formControlName="drzava"
+              required/>
+            <mdb-error *ngIf="drzava?.invalid && (drzava?.dirty || drzava?.touched)">Potrebno je upisati državu</mdb-error>
+          </mdb-form-control>
+        </div>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form2">Grad</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form4"
+              class="form-control"
+              formControlName="grad"
+              required/>
+            <mdb-error *ngIf="grad?.invalid && (grad?.dirty || grad?.touched)">Potrebno je upisati grad</mdb-error>
+          </mdb-form-control>
+        </div>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form1">Adresa</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form5"
+              class="form-control"
+              formControlName="adresa"
+              required/>
+            <mdb-error *ngIf="adresa?.invalid && (adresa?.dirty || adresa?.touched)">Potrebno je upisati adresu</mdb-error>
+          </mdb-form-control>
+        </div>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form2">Poštanski broj</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form6"
+              class="form-control"
+              formControlName="postanskiBroj"
+              required/>
+            <mdb-error *ngIf="postanskiBroj?.invalid && (postanskiBroj?.dirty || postanskiBroj?.touched)">Potrebno je upisati postanski broj</mdb-error>
+
+          </mdb-form-control>
+        </div>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form1">Email</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form7"
+              class="form-control"
+              formControlName="email"
+              required/>
+            <mdb-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">Potrebno je upisati email</mdb-error>
+          </mdb-form-control>
+        </div>
+        <div class="col-md-6">
+          <mdb-form-control>
+            <label mdbLabel class="form-label" for="form2">Kontakt broj telefona</label>
+            <input
+              mdbValidate
+              mdbInput
+              type="text"
+              id="form8"
+              class="form-control"
+              formControlName="telefon"
+              required/>
+            <mdb-error *ngIf="telefon?.invalid && (telefon?.dirty || telefon?.touched)">Potrebno je upisati broj telefona</mdb-error>
+          </mdb-form-control>
         </div>
       </div>
-      <div class="col">
-        <div class="form-outline">
-          <label class="form-label" for="form6Example2">Prezime</label>
-          <input type="text" id="form6Example2" class="form-control" />
-        </div>
-      </div>
-
-      <!-- Text input -->
-      <div class="form-outline mb-4">
-        <label class="form-label" >Država</label>
-        <select class="form-control" [(ngModel)]="drzava_ID" name="grad">
-          <option *ngFor="let d of drzave" [value]="d.id">{{d.naziv}}</option>
-        </select>
-      </div>
-
-      <!-- Text input -->
-      <div class="form-outline mb-4">
-        <label class="form-label">Grad</label>
-        <select class="form-control" [(ngModel)]="grad_ID" name="grad">
-          <option *ngFor="let g of gradovi" [value]="g.id">{{g.naziv}}</option>
-        </select>
-      </div>
-
-      <!-- Email input -->
-      <div class="form-outline mb-4">
-        <label class="form-label" for="form6Example5">Adresa</label>
-        <input type="text" id="form6Example5" class="form-control" />
-      </div>
-
-      <!-- Number input -->
-      <div class="form-outline mb-4">
-        <label class="form-label" for="form6Example6">Poštanski broj</label>
-        <input type="text" id="form6Example6" class="form-control" />
-      </div>
-
-      <!-- Number input -->
-      <div class="form-outline mb-4">
-        <label class="form-label" for="form6Example6">Email</label>
-        <input type="email" id="form6Example9" class="form-control" />
-      </div>
-
-      <!-- Number input -->
-      <div class="form-outline mb-4">
-        <label class="form-label" for="form6Example6">Kontakt broj telefona</label>
-        <input type="text" id="form6Example11" class="form-control" />
-      </div>
+      <button type="submit" class="btn btn-primary mt-4">Submit</button>
     </form>
+
   </div>
+
+
 
   <div class="dostava">
     <h4>2. Odaberite način dostave</h4>

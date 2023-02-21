@@ -10,6 +10,7 @@ import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
   styleUrls: ['./pocetna.component.css']
 })
 export class PocetnaComponent implements OnInit {
+
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
   }
@@ -17,6 +18,5 @@ export class PocetnaComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {
   }
-
 
 }

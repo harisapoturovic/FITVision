@@ -68,9 +68,9 @@ namespace FitVision.Modul2.Controllers
                 grad_ID = korisnik.gradid,
                 datum_rodjenja = korisnik.DatumRodjenja.ToString("yyyy-MM-dd"),
 
-                visina= korisnik.Visina,
-                tezina= korisnik.Tezina,
-                datum_polaska= korisnik.DatumPolasaka.ToString("yyyy-MM-dd"),
+                visina = korisnik.Visina,
+                tezina = korisnik.Tezina,
+                datum_polaska = korisnik.DatumPolasaka.ToString("yyyy-MM-dd"),
                 
                 korisnickoIme = korisnik.KorisnickoIme,
                 lozinka = korisnik.Lozinka

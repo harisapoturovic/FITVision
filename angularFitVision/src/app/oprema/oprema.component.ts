@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MojConfig} from "../moj-config";
 import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 import {LoginInformacije} from "../_helpers/login-informacije";
@@ -13,7 +13,6 @@ declare function porukaError(a: string):any;
   styleUrls: ['./oprema.component.css']
 })
 export class OpremaComponent implements OnInit {
-
   constructor(private httpKlijent:HttpClient) { }
 
   ngOnInit(): void {
