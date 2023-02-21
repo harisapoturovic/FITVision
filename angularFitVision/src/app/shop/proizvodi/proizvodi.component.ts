@@ -17,6 +17,8 @@ declare function porukaError(a: string):any;
 export class ProizvodiComponent implements OnInit{
   popust: any;
   novaCijena:any;
+  od:any=0;
+  do:any=100;
 
   constructor(private httpKlijent: HttpClient, private korpaService:KorpaService ) {
   }
@@ -61,10 +63,6 @@ export class ProizvodiComponent implements OnInit{
   url: "";
   filter_naziv: any;
   naziv: any;
-  filter_cijena1: any;
-  filter_cijena2: any;
-  filter_cijena3: any;
-  filter_cijena4: any;
   filter_podkat: any;
   podkatID: number;
   filter_brend: any;
@@ -143,12 +141,8 @@ export class ProizvodiComponent implements OnInit{
       return [];
     var pr = this.proizvodi.filter(
       (x: any) =>
-        (!this.filter_naziv ||
-          (x.naziv).toLowerCase().startsWith(this.naziv)) &&
-        ((!this.filter_cijena1 || x.jedinicna_cijena > 0 && x.jedinicna_cijena < 20) &&
-          (!this.filter_cijena2 || x.jedinicna_cijena >= 20 && x.jedinicna_cijena < 50) &&
-          (!this.filter_cijena3 || x.jedinicna_cijena >= 50 && x.jedinicna_cijena < 100) &&
-          (!this.filter_cijena4 || x.jedinicna_cijena >= 100)) &&
+        (!this.filter_naziv || (x.naziv).toLowerCase().startsWith(this.naziv)) &&
+        (x.jedinicna_cijena>=this.od && x.jedinicna_cijena<this.do) &&
         (!this.filter_podkat || x.pod_kategorija_id == this.podkatID) &&
         (!this.filter_brend || x.brend_id == this.brendID)
     );

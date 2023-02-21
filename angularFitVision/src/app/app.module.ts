@@ -30,6 +30,7 @@ import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
 import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
 import { FaqComponent } from './faq/faq.component';
 import {MdbAccordionModule} from "mdb-angular-ui-kit/accordion";
+import {MdbRangeModule} from "mdb-angular-ui-kit/range";
 
 @NgModule({
   declarations: [
@@ -57,34 +58,35 @@ import {MdbAccordionModule} from "mdb-angular-ui-kit/accordion";
     NarudzbaComponent,
     FaqComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    RouterModule.forRoot([
-      {path: 'login', component: LoginComponent},
-      {path: 'oprema', component: OpremaComponent},
-      {path: 'registracija-admin', component: RegistracijaAdminComponent},
-      {path: 'registracija-korisnik', component: RegistracijaKorisnikComponent},
-      {path: 'postavke-profila', component: PostavkeProfilaComponent},
-      {path: 'korisnici', component: KorisniciComponent},
-      {path: 'shop', component: ShopComponent},
-      {path: 'kategorije', component: KategorijeComponent},
-      {path: 'brendovi', component: BrendoviComponent},
-      {path: 'podkategorije', component: PodkategorijeComponent},
-      {path: 'proizvodi', component: ProizvodiComponent},
-      {path: 'akcije', component: AkcijeComponent},
-      {path: 'poruke', component: PorukeComponent},
-      {path: "poruka-odgovor/:porukaid", component: PorukaOdgovorComponent},
-      {path: 'forum', component: ForumComponent},
-      {path: "forum-odgovor/:forumid", component: ForumOdgovoriComponent},
-      {path: "pocetna", component: PocetnaComponent},
-      {path: "narudzba", component: NarudzbaComponent},
-      {path: "faq", component: FaqComponent}
-    ]),
-    MdbCarouselModule,
-    MdbAccordionModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        RouterModule.forRoot([
+            {path: 'login', component: LoginComponent},
+            {path: 'oprema', component: OpremaComponent},
+            {path: 'registracija-admin', component: RegistracijaAdminComponent},
+            {path: 'registracija-korisnik', component: RegistracijaKorisnikComponent},
+            {path: 'postavke-profila', component: PostavkeProfilaComponent},
+            {path: 'korisnici', component: KorisniciComponent},
+            {path: 'shop', component: ShopComponent},
+            {path: 'kategorije', component: KategorijeComponent},
+            {path: 'brendovi', component: BrendoviComponent},
+            {path: 'podkategorije', component: PodkategorijeComponent},
+            {path: 'proizvodi', component: ProizvodiComponent},
+            {path: 'akcije', component: AkcijeComponent},
+            {path: 'poruke', component: PorukeComponent},
+            {path: "poruka-odgovor/:porukaid", component: PorukaOdgovorComponent},
+            {path: 'forum', component: ForumComponent},
+            {path: "forum-odgovor/:forumid", component: ForumOdgovoriComponent},
+            {path: "pocetna", component: PocetnaComponent},
+            {path: "narudzba", component: NarudzbaComponent},
+            {path: "faq", component: FaqComponent}
+        ]),
+        MdbCarouselModule,
+        MdbAccordionModule,
+        MdbRangeModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

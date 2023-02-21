@@ -4,10 +4,10 @@
 }
 
 .filteri{
-  display: flex;
-  flex-direction: column;
+  display: block;
   background-color:rgb(240,245,255);
-  width: 250px;
+  width: 188.44px;
+  font-family: Tahoma;
 }
 
 .zaKorpu{
@@ -70,3 +70,14 @@ h5, p{
   height: 40px;
   margin-right: 10px;
 }
+
+mdb-range
+{
+  color: grey;
+}
+
+.d-flex justify-content-around flex-wrap
+{
+
+}
+
