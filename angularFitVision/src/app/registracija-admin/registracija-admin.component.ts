@@ -34,7 +34,7 @@ export class RegistracijaAdminComponent implements OnInit {
   strucna_sprema:string="";
   korisnickoIme:string="";
   lozinka:any="";
-
+  pomocna:any;
 
 
 
@@ -73,7 +73,7 @@ export class RegistracijaAdminComponent implements OnInit {
 
     }
     else{
-      alert("niste unijeli sve podatke");
+      this.pomocna='';
     }
   }
 

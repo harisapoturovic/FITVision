@@ -1,4 +1,4 @@
-﻿using FitVision.Modul0_Autentifikacija.Models;
+﻿    using FitVision.Modul0_Autentifikacija.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FitVision.Modul2.Models

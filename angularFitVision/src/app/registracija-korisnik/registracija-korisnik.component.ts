@@ -11,7 +11,7 @@ declare function porukaSuccess(a: string):any;
   styleUrls: ['./registracija-korisnik.component.css']
 })
 export class RegistracijaKorisnikComponent implements OnInit {
-
+  pomocna:any;
   constructor(private httpKlijent: HttpClient, private router: Router) {
   }
 
@@ -72,7 +72,7 @@ export class RegistracijaKorisnikComponent implements OnInit {
 
 
     } else {
-      alert("niste unijeli sve podatke");
+      this.pomocna='';
     }
 
 

@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   txtKorisnickiIme:any;
   txtLozinka:any;
   korisnik_id:any;
+  pomocna:any;
   constructor(private httpKlijent:HttpClient,private  router:Router, private korpaService:KorpaService) { }
 
   ngOnInit(): void {
@@ -28,6 +29,10 @@ export class LoginComponent implements OnInit {
     let saljemo={
       korisnickoIme:this.txtKorisnickiIme,
       lozinka:this.txtLozinka
+    }
+    if(saljemo.korisnickoIme==null || saljemo.lozinka==null)
+    {
+      this.pomocna=saljemo;
     }
     this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login", saljemo).subscribe(
       (x:LoginInformacije)=>{
