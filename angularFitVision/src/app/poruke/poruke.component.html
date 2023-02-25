@@ -1,7 +1,8 @@
-<div class="d-flex justify-content-end" *ngIf="loginInfo().isPremisijaKorisnik">
+<div class="d-flex justify-content-end" *ngIf="loginInfo().isLogiran">
   <button class="btn btn-primary mb-4 mt-4" (click)="otvoriPoruku()">Nova poruka</button>
-
 </div>
+
+<!-- filteri
 <div class="m-2">
   <div>
     <input [(ngModel)] ="filter_naslov"  type="checkbox"> Filter by <span style="font-weight: bold">Naslov</span> <br>
@@ -12,17 +13,60 @@
     <input  [(ngModel)]="korisnik_naziv" [disabled]="!filter_korisnik"><br>
   </div>
 </div>
+-->
 
+<ul class="nav  nav-lg  pb-2 pt-2" *ngIf="loginInfo().isPremisijaKorisnik">
+  <li class="nav-item" (click)="ucitajNovosti()">Novosti</li>
+  <li class="nav-item" (click)="ucitajZasebnoKorisnik()"> Poslano</li>
+</ul>
 
-<div id="poruke-hub-admin " class="mt-4" >
-  <div *ngFor="let p of filtrirano()" >
-    <div class="w-100 bg-info m-2 p-2 text-brightng ">
-      <h3> Korinsik: {{p.korisnik}}</h3>
-      <p>Pitanje: {{p.naslov}}</p>
-      <p > Sadrzaj: {{p.sadrzaj}} ?</p>
-      <p>Datum: {{p.datum_kreiranja}}</p>
+<ul class="nav  nav-lg  pb-2 pt-2" *ngIf="loginInfo().isPremisijaAdmin">
+  <li class="nav-item" (click)="ucitajPorukeZaAdmina()">Nove poruke</li>
+  <li class="nav-item" (click)="ucitajZasebnoAdmin()"> Poslano</li>
+</ul>
+<!-- poslano admin -->
+<div id="poruke-hub-admin " class="mt-4" *ngIf="loginInfo().isPremisijaAdmin && poslanoAdmin!=null">
+  <div *ngFor="let p of poslanoAdmin" >
+    <div style="background-color: rgba(169,169,255,0.49)">
+      <h5>{{p.korisnik}}</h5>
+      <p style="font-style: italic">{{p.datum_kreiranja}}</p>
+      <p style="font-size: 5mm">{{p.sadrzaj}}</p>
       <button class="btn btn-warning" (click)="otvoriOdgovore(p)">Otvori</button>
-      <button class="btn btn-danger ms-2" *ngIf="loginInfo().isPremisijaKorisnik" (click)="obrsisiPoruku(p)">Ukloni</button>
+      <button class="btn btn-danger ms-2" (click)="obrsisiPoruku(p)">Ukloni</button>
+    </div>
+  </div>
+</div>
+<!-- poruke za admina -->
+<div id="poruke-hub-admin2 " class="mt-4" *ngIf="loginInfo().isPremisijaAdmin && poslanoKorisnik!=null && poslanoAdmin==null">
+  <div *ngFor="let p of poslanoKorisnik" >
+    <div style="background-color: rgba(169,169,255,0.49)">
+      <h5>{{p.sadrzaj}}</h5>
+      <p style="font-size: 5mm">- {{p.korisnik}}, <span style="font-style: italic; font-size: 4mm">{{p.datum_kreiranja}} </span></p>
+      <button class="btn btn-warning" (click)="otvoriOdgovore(p)">Otvori</button>
+      <button class="btn btn-danger ms-2" (click)="obrsisiPoruku(p)">Ukloni</button>
+    </div> <br>
+  </div>
+</div>
+
+<!-- poslano korisnik -->
+<div id="poruke-hub-admin" class="mt-4" *ngIf="loginInfo().isPremisijaKorisnik && poslanoKorisnik!=null" >
+  <div *ngFor="let p of poslanoKorisnik" >
+    <div style="background-color: rgba(169,169,255,0.49)">
+      <h5>{{p.korisnik}}</h5>
+      <p style="font-style: italic">{{p.datum_kreiranja}}</p>
+      <p style="font-size: 5mm">{{p.sadrzaj}}</p>
+      <button class="btn btn-warning" (click)="otvoriOdgovore(p)">Otvori</button>
+      <button class="btn btn-danger ms-2" (click)="obrsisiPoruku(p)">Ukloni</button>
+    </div>
+  </div>
+</div>
+<!-- novosti za korisnika -->
+<div id="poruke-hub" class="mt-4" *ngIf="loginInfo().isPremisijaKorisnik && poslanoAdmin!=null" >
+  <div *ngFor="let p of poslanoAdmin" >
+    <div style="background-color: rgba(169,169,255,0.49)">
+      <h5>{{p.sadrzaj}}</h5>
+      <p style="font-size: 5mm">- {{p.korisnik}}, <span style="font-style: italic; font-size: 4mm">{{p.datum_kreiranja}} </span></p>
+      <button id="detalji" (click)="otvoriOdgovore(p)">Više detalja</button>
     </div>
   </div>
 </div>
@@ -31,14 +75,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLiveLabel"> Novi odgovor </h5>
+        <h5 class="modal-title" id="exampleModalLiveLabel"> Nova poruka </h5>
         <button type="button" class="btn-close" aria-label="Close" (click)="porukaObject=null"></button>
       </div>
       <div class="modal-body">
         <div class="modal-body">
-          <label class="form-label">Naslov</label>
-          <input class="form-control" type="text" [(ngModel)]="porukaObject.naslov">
-          <label class="form-label">Pitanje</label>
           <textarea rows="3" class="form-control"  [(ngModel)]="porukaObject.sadrzaj"></textarea>
 
 

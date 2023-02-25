@@ -18,10 +18,6 @@ export class PorukaOdgovorComponent implements OnInit {
   porukaOdgovori:any;
   odgovorObject:any;
 
-
-
-
-
   loginInfo():LoginInformacije {
     return AutentifikacijaHelper.getLoginInfo();
   }
@@ -37,7 +33,6 @@ export class PorukaOdgovorComponent implements OnInit {
   ucitajPorukuOdgovor(){
     this.httpKlijent.get(MojConfig.adresa_servera + "/Poruka/GetPorukaOdgovori?id=" + this.porukaID).subscribe(x=>{
       this.porukaOdgovori=x;
-
     });
   }
 

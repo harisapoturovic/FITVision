@@ -1,0 +1,21 @@
+li{
+  color: black;
+  border-bottom: 1px solid #9898ff;
+  font-family: Tahoma;
+  margin-left: 20px;
+  font-size: 7mm;
+}
+
+ul
+{
+  margin-left: 500px;
+}
+
+#detalji
+{
+  background-color: lightgrey;
+  border: none;
+  width: 110px;
+  height: 45px;
+  margin: 5px;
+}
