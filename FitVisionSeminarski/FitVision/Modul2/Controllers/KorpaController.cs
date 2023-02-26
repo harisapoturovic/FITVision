@@ -36,7 +36,9 @@ namespace FitVision.Modul2.Controllers
         public ActionResult Snimi(int korisnikId, int dostavljacId)
         {
             Korpa? korpa;
-            if(dostavljacId == 1)
+            List<Korpa>korpe = _dbContext.Korpa.Where(k=>k.korisnikID==korisnikId).ToList();    
+
+            if(korpe.Count == 0)
             {
                 korpa = new Korpa();
                 _dbContext.Add(korpa);

@@ -66,7 +66,7 @@ export class RegistracijaKorisnikComponent implements OnInit {
         lozinka: this.lozinka
       }
       this.httpKlijent.post(MojConfig.adresa_servera + "/Korisnik/Snimi", korisnik).subscribe(x => {
-        porukaSuccess("Ospjesna regstracija");
+        porukaSuccess("Uspješna registracija");
       })
       this.router.navigateByUrl("/login");
 
