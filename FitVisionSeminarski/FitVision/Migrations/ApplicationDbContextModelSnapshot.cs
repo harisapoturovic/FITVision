@@ -137,6 +137,32 @@ namespace FitVision.Migrations
                     b.ToTable("Brend");
                 });
 
+            modelBuilder.Entity("FitVision.Modul2.Models.Dostavljac", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<float>("CijenaDostave")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dostavljac");
+                });
+
             modelBuilder.Entity("FitVision.Modul2.Models.Drzava", b =>
                 {
                     b.Property<int>("ID")
@@ -272,10 +298,15 @@ namespace FitVision.Migrations
                     b.Property<DateTime>("DatumKreiranja")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("dostavljacID")
+                        .HasColumnType("int");
+
                     b.Property<int>("korisnikID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("dostavljacID");
 
                     b.HasIndex("korisnikID");
 
@@ -664,11 +695,19 @@ namespace FitVision.Migrations
 
             modelBuilder.Entity("FitVision.Modul2.Models.Korpa", b =>
                 {
+                    b.HasOne("FitVision.Modul2.Models.Dostavljac", "dostavljac")
+                        .WithMany()
+                        .HasForeignKey("dostavljacID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FitVision.Modul2.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("dostavljac");
 
                     b.Navigation("korisnik");
                 });

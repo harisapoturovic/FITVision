@@ -1,6 +1,5 @@
 <br>
 <div class="narudzba">
-
   <div class="forma">
     <h4>1. Unesite podatke za dostavu</h4>
     <form [formGroup]="validationForm" (ngSubmit)="onSubmit()">
@@ -15,7 +14,8 @@
               id="form1"
               class="form-control"
               formControlName="ime"
-              required/>
+              required
+            [(ngModel)]="polje1"/>
             <mdb-error *ngIf="ime?.invalid && (ime?.dirty || ime?.touched)">Potrebno je upisati ime</mdb-error>
           </mdb-form-control>
         </div>
@@ -29,7 +29,8 @@
               id="form2"
               class="form-control"
               formControlName="prezime"
-              required/>
+              required
+              [(ngModel)]="polje2"/>
             <mdb-error *ngIf="prezime?.invalid && (prezime?.dirty || prezime?.touched)">Potrebno je upisati prezime</mdb-error>
           </mdb-form-control>
         </div>
@@ -43,7 +44,8 @@
               id="form3"
               class="form-control"
               formControlName="drzava"
-              required/>
+              required
+              [(ngModel)]="polje3"/>
             <mdb-error *ngIf="drzava?.invalid && (drzava?.dirty || drzava?.touched)">Potrebno je upisati državu</mdb-error>
           </mdb-form-control>
         </div>
@@ -57,7 +59,8 @@
               id="form4"
               class="form-control"
               formControlName="grad"
-              required/>
+              required
+              [(ngModel)]="polje4"/>
             <mdb-error *ngIf="grad?.invalid && (grad?.dirty || grad?.touched)">Potrebno je upisati grad</mdb-error>
           </mdb-form-control>
         </div>
@@ -71,7 +74,8 @@
               id="form5"
               class="form-control"
               formControlName="adresa"
-              required/>
+              required
+              [(ngModel)]="polje5"/>
             <mdb-error *ngIf="adresa?.invalid && (adresa?.dirty || adresa?.touched)">Potrebno je upisati adresu</mdb-error>
           </mdb-form-control>
         </div>
@@ -85,7 +89,8 @@
               id="form6"
               class="form-control"
               formControlName="postanskiBroj"
-              required/>
+              required
+              [(ngModel)]="polje6"/>
             <mdb-error *ngIf="postanskiBroj?.invalid && (postanskiBroj?.dirty || postanskiBroj?.touched)">Potrebno je upisati postanski broj</mdb-error>
 
           </mdb-form-control>
@@ -100,7 +105,8 @@
               id="form7"
               class="form-control"
               formControlName="email"
-              required/>
+              required
+              [(ngModel)]="polje7"/>
             <mdb-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">Potrebno je upisati email</mdb-error>
           </mdb-form-control>
         </div>
@@ -114,20 +120,32 @@
               id="form8"
               class="form-control"
               formControlName="telefon"
-              required/>
+              required
+              [(ngModel)]="polje8"/>
             <mdb-error *ngIf="telefon?.invalid && (telefon?.dirty || telefon?.touched)">Potrebno je upisati broj telefona</mdb-error>
           </mdb-form-control>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary mt-4">Submit</button>
+      <button type="submit" class="btnNaruci" (click)="naruci()">NARUČI</button>
     </form>
 
   </div>
 
 
-
+<div id="desni">
   <div class="dostava">
     <h4>2. Odaberite način dostave</h4>
+    <div class="form-check" *ngFor="let d of dostavljaci">
+      <input
+        mdbRadio
+        class="form-check-input"
+        type="radio"
+        name="flexRadioDefault"
+        id="flexRadioDefault1"
+        (click)="preuzmiID(d.id)"
+      />
+      <label class="form-check-label" for="flexRadioDefault1"> {{d.naziv}} </label>
+    </div>
   </div>
 
   <div class="placanje">
@@ -142,7 +160,7 @@
       <div class="mojaKorpa" *ngFor="let k of this.korpaObject">
         <img [src]="k.slika" alt="..." style="height:170px" width="150px">
         <div class="sadrzaj">
-          <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}</h5>
+          <h5 class="list-group-item">{{k.nazivProizvoda}} - {{k.jedinicnaMjera}}g</h5>
           <p class="list-group-item">Količina: {{k.kolicina}} </p>
           <p class="list-group-item">Cijena: {{k.cijenaPopust}} KM</p>
         </div>
@@ -150,12 +168,12 @@
       <div class="zaPlatiti">
         <p>Proizvodi: {{this.cijena2}} KM</p>
         <p>Popust: -{{this.popust2}} KM</p>
-        <p>Dostava: 0KM</p>
-        <p style="font-weight: bold">Ukupno za platiti: {{this.ukupno}} KM</p>
+        <p>Dostava: {{this.cijenaDostave}} KM</p>
+        <p style="font-weight: bold">Ukupno za platiti: {{this.ukupno2}} KM</p>
       </div>
       <button type="button" class="btn btn-light" routerLink="/proizvodi">UREDI SADRŽAJ KORPE</button>
-      <button type="button" class="btnNaruci"> NARUČI </button>
   </div>
 
+</div>
 </div>
 </div>

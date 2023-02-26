@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   napraviKorpu() {
-    this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
+    this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}&dostavljacId=1`, null).subscribe(x => {
       this.korpaService.setKorpaID(x);
     })
   }

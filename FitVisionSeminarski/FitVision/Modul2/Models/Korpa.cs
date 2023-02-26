@@ -8,9 +8,14 @@ namespace FitVision.Modul2.Models
         [Key]
         public int Id { get; set; }
         public DateTime DatumKreiranja { get; set; }
+
         [ForeignKey(nameof(korisnik))]
         public int korisnikID { get; set; }
         public Korisnik korisnik { get; set; }
+
+        [ForeignKey(nameof(dostavljac))]
+        public int dostavljacID { get; set; }
+        public Dostavljac dostavljac { get; set; }
 
     }
 }

@@ -33,11 +33,27 @@ namespace FitVision.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Slika = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Slika = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Brend", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dostavljac",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Telefon = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CijenaDostave = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dostavljac", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -124,7 +140,7 @@ namespace FitVision.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naziv = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Slika = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Slika = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     KategorijaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -377,11 +393,18 @@ namespace FitVision.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DatumKreiranja = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    korisnikID = table.Column<int>(type: "int", nullable: false)
+                    korisnikID = table.Column<int>(type: "int", nullable: false),
+                    dostavljacID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Korpa", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Korpa_Dostavljac_dostavljacID",
+                        column: x => x.dostavljacID,
+                        principalTable: "Dostavljac",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Korpa_Korisnik_korisnikID",
                         column: x => x.korisnikID,
@@ -480,6 +503,11 @@ namespace FitVision.Migrations
                 column: "gradid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Korpa_dostavljacID",
+                table: "Korpa",
+                column: "dostavljacID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Korpa_korisnikID",
                 table: "Korpa",
                 column: "korisnikID");
@@ -565,6 +593,9 @@ namespace FitVision.Migrations
 
             migrationBuilder.DropTable(
                 name: "TipOpreme");
+
+            migrationBuilder.DropTable(
+                name: "Dostavljac");
 
             migrationBuilder.DropTable(
                 name: "Korisnik");
