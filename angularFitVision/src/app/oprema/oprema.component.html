@@ -1,16 +1,18 @@
 <div class="continer mt-4">
-  <div>
-    <span style="font-weight: bold">Naziv</span> <br>
-    <input [(ngModel)]="naziv" ><br>
+  <div id="filteri">
+    <input placeholder="Naziv opreme" [(ngModel)]="naziv" ><br>
+    <input placeholder="Tip opreme" [(ngModel)]="tip_naziv" style="margin-left: 15px">
+    <div *ngIf="this.poruka!=null && loginInfo().isPremisijaKorisnik" id="poruka">
+      {{poruka}}
+    </div>
+    <div *ngIf="loginInfo().isPremisijaAdmin" style="margin-left: 400px">
+      <button class="obavijest"(click)="obavijesti()"> Obavijesti korisnike</button>
+    </div>
+    <div *ngIf="loginInfo().isPremisijaAdmin" style="margin-left: 15px">
+      <button class="obavijest" (click)="dodajFunc()">Dodaj opremu</button>
+    </div>
   </div>
-  <div>
-    <span style="font-weight: bold">Tip</span> <br>
-    <input [(ngModel)]="tip_naziv"><br>
-  </div>
-  <div class="mb-5 d-flex justify-content-end">
-    <button class="btn btn-primary m-3 "
-            *ngIf="loginInfo().isPremisijaAdmin" (click)="dodajFunc()">Dodaj Opremu</button>
-  </div>
+</div>
 
   <div class="d-flex justify-content-around flex-wrap">
 
@@ -121,4 +123,3 @@
     </div>
   </div>
 
-</div>
