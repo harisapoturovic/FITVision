@@ -1,4 +1,6 @@
 ﻿using FitVision.Data;
+using FitVision.Helpers;
+using FitVision.Helpers.AutentifikacijaAutorizacija;
 using FitVision.Modul2.Models;
 using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -18,8 +20,61 @@ namespace FitVision.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
-       
+        [HttpPost]
+        public ActionResult Snimi([FromBody] AdminAddVM x)
+        {
+            Admin? admin;
+            if (x.id == 0)
+            {
+                admin = new Admin();
+            }
+            else
+            {
+                admin = _dbContext.Admin.FirstOrDefault(a => a.ID == x.id);
+                if (admin == null)
+                    return BadRequest("Ne postoji admin");
+            }
+            admin.ID = x.id;
+            admin.Ime = x.ime;
+            admin.Prezime = x.prezime;
+            admin.DatumRodjenja = DateTime.Parse(x.datum_rodjenja);
+            admin.Telefon = x.telefon;
+            admin.Email = x.email;
+            admin.Adresa = x.adresa;
+            admin.JMBG = x.jmbg;
+            admin.Spol = x.spol;
+            admin.DatumZaposlenja = DateTime.Parse(x.datum_zaposlenja);
+            admin.StrucnaSprema = x.strucna_sprema;
+            admin.gradid = x.grad_ID;
+            admin.KorisnickoIme = x.korisnickoIme;
+            admin.Lozinka = x.lozinka;
 
+            if (x.id == 0)
+            {
+                List<Admin> adminList = _dbContext.Admin.ToList();
+                foreach (var a in adminList)
+                {
+                    if (admin.Lozinka == a.Lozinka && admin.KorisnickoIme == a.KorisnickoIme)
+                        return BadRequest("Korisnicko ime i lozinka vec postoje");
+                }
+
+                List<Korisnik> korisnici = _dbContext.Korisnik.ToList();
+                foreach (var k in korisnici)
+                {
+                    if (admin.KorisnickoIme == k.KorisnickoIme && admin.Lozinka == k.Lozinka)
+                        return BadRequest("Korisnicko ime i lozinka vec postoje");
+                }
+
+                _dbContext.Add(admin);
+                //provjeriti da ne postoje dva ista korisnicka imena i lozinke
+            }
+           
+
+            _dbContext.SaveChanges();
+            return Ok(admin);
+        }
+
+       
         [HttpGet]
         public ActionResult<List<AdminGetVM>> GetAll()
         {
@@ -71,59 +126,6 @@ namespace FitVision.Modul2.Controllers
             return adminGetVM;
         }
 
-        
-        [HttpPost]
-        public ActionResult Snimi([FromBody] AdminAddVM x)
-        {
-            Admin? admin;
-            if (x.id == 0)
-            {
-                admin = new Admin();
-                
-            }
-            else
-            {
-                admin = _dbContext.Admin.FirstOrDefault(a => a.ID == x.id);
-                if (admin == null)
-                    return BadRequest("Ne postoji admin");
-            }
-            admin.ID = x.id;
-            admin.Ime = x.ime;
-            admin.Prezime = x.prezime;
-            admin.DatumRodjenja = DateTime.Parse(x.datum_rodjenja);
-            admin.Telefon = x.telefon;
-            admin.Email = x.email;
-            admin.Adresa = x.adresa;
-            admin.JMBG = x.jmbg;
-            admin.Spol = x.spol;
-            admin.DatumZaposlenja = DateTime.Parse(x.datum_zaposlenja);
-            admin.StrucnaSprema = x.strucna_sprema;
-            admin.gradid = x.grad_ID;
-            admin.KorisnickoIme = x.korisnickoIme;
-            admin.Lozinka = x.lozinka;
-
-            if (x.id == 0)
-            {
-                List<Admin> adminList = _dbContext.Admin.ToList();
-                foreach (var a in adminList)
-                {
-                    if (admin.Lozinka == a.Lozinka && admin.KorisnickoIme == a.KorisnickoIme)
-                        return BadRequest("Korisnicko ime i lozinka vec postoje");
-                }
-
-                List<Korisnik> korisnici = _dbContext.Korisnik.ToList();
-                foreach (var k in korisnici)
-                {
-                    if (admin.KorisnickoIme == k.KorisnickoIme && admin.Lozinka == k.Lozinka)
-                        return BadRequest("Korisnicko ime i lozinka vec postoje");
-                }
-
-                _dbContext.Add(admin);
-                //provjeriti da ne postoje dva ista korisnicka imena i lozinke
-            }
-                        
-            _dbContext.SaveChanges();
-            return Ok(admin);
-        }
+     
     }
 }

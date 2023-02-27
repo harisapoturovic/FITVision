@@ -82,9 +82,51 @@ namespace FitVision.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("aktivacijaGUID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAktiviran")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
                     b.ToTable("KorisnickiNalog");
+                });
+
+            modelBuilder.Entity("FitVision.Modul0_Autentifikacija.Models.LogKretanjePoSistemu", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("exceptionMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ipAdresa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isException")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("korisnikID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("postData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("queryPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("vrijeme")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("korisnikID");
+
+                    b.ToTable("LogKretanjePoSistemu");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Akcija", b =>
@@ -658,6 +700,15 @@ namespace FitVision.Migrations
                         .IsRequired();
 
                     b.Navigation("KorisnickiNalog");
+                });
+
+            modelBuilder.Entity("FitVision.Modul0_Autentifikacija.Models.LogKretanjePoSistemu", b =>
+                {
+                    b.HasOne("FitVision.Modul0_Autentifikacija.Models.KorisnickiNalog", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnikID");
+
+                    b.Navigation("korisnik");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.ForumOdgovor", b =>

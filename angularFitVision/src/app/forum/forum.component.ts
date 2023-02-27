@@ -43,7 +43,7 @@ export class ForumComponent implements OnInit {
     })
   }
   ucitajKorisnike(){
-    this.httpKlijent.get(MojConfig.adresa_servera +"/Korisnik/GetAll").subscribe(x=>{
+    this.httpKlijent.get(MojConfig.adresa_servera +"/Korisnik/GetAll", MojConfig.http_opcije()).subscribe(x=>{
       this.koisnici=x;
     })
   }

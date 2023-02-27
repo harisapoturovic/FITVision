@@ -102,7 +102,9 @@ namespace FitVision.Modul1_TestniPodaci.Controller
 
 
                 KorisnickoIme = "denis",
-                Lozinka = "test"
+                Lozinka = "test",
+
+                isAktiviran=true
 
             });
 

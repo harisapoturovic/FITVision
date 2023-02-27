@@ -1,4 +1,5 @@
 using FitVision.Data;
+using FitVision.Helpers.AutentifikacijaAutorizacija;
 using FitVision.Hub;
 using FitVision.Modul3_SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.OperationFilter<AutorizacijaSwaggerHeader>();
+});
 builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
