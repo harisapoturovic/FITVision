@@ -49,6 +49,8 @@ namespace FitVision.Modul0_Autentifikacija.Controllers
             _dbContext.Add(noviToken);
             _dbContext.SaveChanges();
 
+            EmailLog.uspjesnoLogiranKorisnik(logiraniKorisnik, Request.HttpContext);
+
             //4- vratiti token string
             return new MyAuthTokenExtension.LoginInformacije(noviToken);
         }
