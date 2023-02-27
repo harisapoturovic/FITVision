@@ -7,9 +7,10 @@ namespace FitVision.Helpers
     {
         public static void uspjesnoLogiranKorisnik(KorisnickiNalog logiraniKorisnik, HttpContext httpContext)
         {
-            if (logiraniKorisnik.isKorisnik)
+            //slanje maila pri loginu admina
+            if (logiraniKorisnik.isAdmin)
             {
-                EmailSender.Posalji(logiraniKorisnik.korisnik.Email, "Logiran korisnik", $"Login info {DateTime.Now}");
+                EmailSender.Posalji(logiraniKorisnik.admin.Email, "Logiran admin", $"Login info {DateTime.Now}");
             }
         }
 
@@ -24,6 +25,7 @@ namespace FitVision.Helpers
 
                 string url = location + "/korisnik/Aktivacija/" + korisnik.aktivacijaGUID;
                 string poruka = $"Postovani/a {korisnik.Ime}, <br> Link za aktivaciju <a href='{url}'>{url}</a>... {DateTime.Now}";
+                //slanje maila pri aktivaciji korisnika
                 EmailSender.Posalji(korisnik.Email, "Aktivacija korisnika", poruka, true);
 
             }
