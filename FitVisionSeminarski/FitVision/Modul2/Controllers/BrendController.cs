@@ -25,7 +25,8 @@ namespace FitVision.Modul2.Controllers
                     id = k.Id,
                     naziv = k.Naziv,
                     opis=k.Opis,
-                    slika=k.Slika
+                    slika=k.Slika,
+                    brend_jel_selektovan = false
                 });
             return data.Take(100).ToList();
         }

@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import  {RouterModule, RouterOutlet} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {MdbModalModule, MdbModalService} from "mdb-angular-ui-kit/modal";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +32,11 @@ import {MdbAccordionModule} from "mdb-angular-ui-kit/accordion";
 import {MdbRangeModule} from "mdb-angular-ui-kit/range";
 import {MdbValidationModule} from "mdb-angular-ui-kit/validation";
 import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
+import { UserNotActiveComponent } from './user-not-active/user-not-active.component';
+import {AutorizacijaLoginProvjera} from "./_guards/AutorizacijaLoginProvjera";
+import { TwoFOtkljucajComponent } from './two-f-otkljucaj/two-f-otkljucaj.component';
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +61,9 @@ import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
     PocetnaComponent,
     AdminComponent,
     NarudzbaComponent,
-    FaqComponent
+    FaqComponent,
+    UserNotActiveComponent,
+    TwoFOtkljucajComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +75,7 @@ import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
       {path: 'registracija-admin', component: RegistracijaAdminComponent},
       {path: 'registracija-korisnik', component: RegistracijaKorisnikComponent},
       {path: 'postavke-profila', component: PostavkeProfilaComponent},
-      {path: 'korisnici', component: KorisniciComponent},
+      {path: 'korisnici', component: KorisniciComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'shop', component: ShopComponent},
       {path: 'kategorije', component: KategorijeComponent},
       {path: 'brendovi', component: BrendoviComponent},
@@ -81,9 +86,11 @@ import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
       {path: "poruka-odgovor/:porukaid", component: PorukaOdgovorComponent},
       {path: 'forum', component: ForumComponent},
       {path: "forum-odgovor/:forumid", component: ForumOdgovoriComponent},
-      {path: "pocetna", component: PocetnaComponent},
+      {path: "pocetna", component: PocetnaComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: "narudzba", component: NarudzbaComponent},
-      {path: "faq", component: FaqComponent}
+      {path: "faq", component: FaqComponent},
+      {path: "user-not-active", component: UserNotActiveComponent},
+      {path: "two-f-otkljucaj", component: TwoFOtkljucajComponent}
     ]),
     MdbCarouselModule,
     MdbAccordionModule,
@@ -92,7 +99,10 @@ import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
     MdbFormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AutorizacijaLoginProvjera
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

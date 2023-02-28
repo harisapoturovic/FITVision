@@ -43,8 +43,11 @@ export class LoginComponent implements OnInit {
           {
             this.korisnik_id = x.autentifikacijaToken.korisnickiNalogId;
             this.napraviKorpu();
+            this.router.navigateByUrl("/pocetna");
           }
-          this.router.navigateByUrl("/pocetna");
+          if (x.autentifikacijaToken?.korisnickiNalog.isAdmin)
+            this.router.navigateByUrl("/two-f-otkljucaj");
+          
         }
         else{
           AutentifikacijaHelper.setLoginInfo(null);

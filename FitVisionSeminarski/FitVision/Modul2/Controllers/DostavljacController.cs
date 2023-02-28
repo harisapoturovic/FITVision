@@ -21,7 +21,6 @@ namespace FitVision.Modul2.Controllers
 
 
         [HttpGet]
-        [Autorizacija(true, false)]
         public ActionResult<List<DostavljacGetVM>> GetAll()
         {
             var data = _dbContext.Dostavljac

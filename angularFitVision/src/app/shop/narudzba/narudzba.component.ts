@@ -138,7 +138,7 @@ export class NarudzbaComponent implements OnInit {
 
   ucitajDostavljace()
   {
-    this.httpKlijent.get(MojConfig.adresa_servera + "/Dostavljac/GetAll", MojConfig.http_opcije()).subscribe(x => {
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Dostavljac/GetAll").subscribe(x => {
       this.dostavljaci = x;
     })
   }

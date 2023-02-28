@@ -4,7 +4,6 @@ import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
 import {KorpaService} from "../KorpaService";
-import {PodkategorijaService} from "../../Podkategorija service";
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
@@ -136,17 +135,17 @@ export class ProizvodiComponent implements OnInit{
   }
 
   getProizvode() {
-
     if (this.proizvodi == null)
       return [];
     var pr = this.proizvodi.filter(
       (x: any) =>
         (!this.filter_naziv || (x.naziv).toLowerCase().startsWith(this.naziv)) &&
         (x.jedinicna_cijena>=this.od && x.jedinicna_cijena<this.do) &&
-        (!this.filter_podkat || x.pod_kategorija_id == this.podkatID) &&
-        (!this.filter_brend || x.brend_id == this.brendID)
+        //(!this.filter_podkat || x.pod_kategorija_id == this.podkatID) &&
+        //(!this.filter_brend || x.brend_id == this.brendID) &&
+        (x.podkat_jel_selektovan || x.pod_kategorija_id == this.podkatID) &&
+        (x.brend_jel_selektovan || x.brend_id == this.brendID)
     );
-
     if (pr.length == 0)
       console.log("Nema proizvoda");
     else
@@ -269,5 +268,6 @@ export class ProizvodiComponent implements OnInit{
         this.kolicina = event.target.value;
       }
   }
+
 }
 

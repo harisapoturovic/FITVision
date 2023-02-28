@@ -5,12 +5,24 @@ namespace FitVision.Helpers
 {
     public class EmailLog
     {
-        public static void uspjesnoLogiranKorisnik(KorisnickiNalog logiraniKorisnik, HttpContext httpContext)
+        public static void uspjesnoLogiranKorisnik(AutentifikacijaToken token, HttpContext httpContext)
         {
             //slanje maila pri loginu admina
+            //if (logiraniKorisnik.isAdmin)
+            //{
+            //    EmailSender.Posalji(logiraniKorisnik.admin.Email, "Logiran admin", $"Login info {DateTime.Now}");
+            //}
+
+            var logiraniKorisnik = token.KorisnickiNalog;
             if (logiraniKorisnik.isAdmin)
             {
-                EmailSender.Posalji(logiraniKorisnik.admin.Email, "Logiran admin", $"Login info {DateTime.Now}");
+                var poruka = $"Postovani {logiraniKorisnik.KorisnickoIme}, <br> " +
+                              $"Code za 2F je <br>" +
+                              $"{token.twoFCode}<br>" +
+                              $"Login info {DateTime.Now}";
+
+
+                EmailSender.Posalji(logiraniKorisnik.admin.Email, "Code za 2F autorizaciju", poruka, true);
             }
         }
 

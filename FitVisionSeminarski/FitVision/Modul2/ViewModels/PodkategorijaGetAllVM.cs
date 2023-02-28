@@ -10,5 +10,6 @@ namespace FitVision.Modul2.ViewModels
         public int kategorija_id { get; set; }
         public string nazivKat { get; set; }
         public string slika { get; set; }
+        public bool podkat_jel_selektovan { get; set; }
     }
 }

@@ -52,6 +52,13 @@ namespace FitVision.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("twoFCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("twoFJelOtkljucano")
+                        .HasColumnType("bit");
+
                     b.Property<string>("vrijednost")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

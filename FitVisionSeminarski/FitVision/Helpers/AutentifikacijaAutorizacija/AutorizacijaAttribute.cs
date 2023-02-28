@@ -46,6 +46,11 @@ namespace FitVision.Helpers.AutentifikacijaAutorizacija
 
             if (loginInfo.korisnickiNalog.isAdmin && _admini)
             {
+                if (loginInfo.autentifikacijaToken == null || !loginInfo.autentifikacijaToken.twoFJelOtkljucano)
+                {
+                    filterContext.Result = new UnauthorizedObjectResult("potrebno je otkljucati login sa codom poslat na email " + loginInfo.korisnickiNalog.admin.Email);
+                    return;
+                }
                 return;//ok - ima pravo pristupa
             }
 

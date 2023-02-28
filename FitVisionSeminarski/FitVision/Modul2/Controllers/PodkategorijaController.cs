@@ -27,7 +27,8 @@ namespace FitVision.Modul2.Controllers
                     opis = k.Opis,
                     kategorija_id=k.KategorijaId,
                     nazivKat=k.kategorija.Naziv,
-                    slika=k.Slika
+                    slika=k.Slika,
+                    podkat_jel_selektovan=false
                 });
             return data.Take(100).ToList();
         }

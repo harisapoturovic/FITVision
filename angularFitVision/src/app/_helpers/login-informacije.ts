@@ -23,4 +23,5 @@ export interface KorisnickiNalog {
   isAdmin: boolean;
   isKorisnik: boolean;
   isTrener:boolean;
+  isAktiviran:boolean;
 }
