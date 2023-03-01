@@ -93,6 +93,49 @@ namespace FitVision.Modul2.Controllers
             return Ok(proizvod);
         }
 
+        [HttpGet]
+        public ActionResult<List<ProizvodGetVM>> GetByPodkatID(int id)
+        {
+            var proizvodi = _dbContext.Proizvod.Where(x => x.pod_kategorijaid == id).Select
+                (p=> new ProizvodGetVM
+                {
+                    id = p.ID,
+                    naziv = p.Naziv,
+                    sastav = p.Sastav,
+                    zaliha = p.Zaliha,
+                    jedinicna_cijena = ((int)p.JedinicnaCijena),
+                    jedinicna_mjera = p.JedinicnaMjera,
+                    slika = p.Slika,
+                    pod_kategorija_id = p.pod_kategorijaid,
+                    pod_kategorija = p.pod_kategorija.Naziv,
+                    brend_id = p.brendid,
+                    brend = p.brend.Naziv,
+                    kategorija = p.pod_kategorija.kategorija.Naziv
+                });
+            return proizvodi.Take(100).ToList();
+        }
+
+        [HttpGet]
+        public ActionResult<List<ProizvodGetVM>> GetByBrendID(int id)
+        {
+            var proizvodi = _dbContext.Proizvod.Where(x => x.brendid == id).Select
+                (p => new ProizvodGetVM
+                {
+                    id = p.ID,
+                    naziv = p.Naziv,
+                    sastav = p.Sastav,
+                    zaliha = p.Zaliha,
+                    jedinicna_cijena = ((int)p.JedinicnaCijena),
+                    jedinicna_mjera = p.JedinicnaMjera,
+                    slika = p.Slika,
+                    pod_kategorija_id = p.pod_kategorijaid,
+                    pod_kategorija = p.pod_kategorija.Naziv,
+                    brend_id = p.brendid,
+                    brend = p.brend.Naziv,
+                    kategorija = p.pod_kategorija.kategorija.Naziv
+                });
+            return proizvodi.Take(100).ToList();
+        }
 
     }
 }

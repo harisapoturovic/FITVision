@@ -76,4 +76,15 @@ mdb-range
   color: grey;
 }
 
+.filter
+{
+  background-color: #dcdcdc;
+  width: 85%;
+  height: 50px;
+  font-size: 4.5mm;
+  padding-top: 2px;
+  border-radius: 5px;
+  font-family: Tahoma;
+  border: none;
+}
 

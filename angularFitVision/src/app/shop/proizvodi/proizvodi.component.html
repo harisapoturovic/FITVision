@@ -49,26 +49,24 @@
 </section>
 <hr>
     <section class="example-section">
-      <h4>Podkategorije:</h4>
-     <!-- <div class="podkat" *ngFor="let p of podKategorije">
-      <input [(ngModel)]= "filter_podkat" type="checkbox" (click)="podkatID=p.id" >
-        <span> {{p.naziv}} </span> <br>
-      </div>-->
-      <div class="form-check" *ngFor="let p of podKategorije">
+      <h4 (click)="ucitajProizvode()">Podkategorije:</h4>
+     <!-- <div class="form-check" *ngFor="let p of podKategorije">
           <input type="checkbox" class="form-check-input" [(ngModel)]="p.podkat_jel_selektovan" (click)="podkatID=p.id">
         <label class="form-check-label">{{p.naziv}}</label>
+      </div>-->
+      <div class="form-check" *ngFor="let p of podKategorije">
+        <button class="filter" (click)="prikazi(p.id)"> {{p.naziv}} </button>
       </div>
     </section>
   <hr>
   <section class="example-section">
-    <h4>Brendovi:</h4>
-    <!--<div class="podkat" *ngFor="let b of brendovi">
-      <input [(ngModel)]= "filter_brend" type="checkbox" (click)="brendID=b.id" >
-      <span> {{b.naziv}} </span> <br>
-    </div>-->
-    <div class="form-check" *ngFor="let b of brendovi">
+    <h4 (click)="ucitajProizvode()">Brendovi:</h4>
+    <!--<div class="form-check" *ngFor="let b of brendovi">
       <input type="checkbox" class="form-check-input" [(ngModel)]="b.brend_jel_selektovan" (click)="brendID=b.id">
       <label class="form-check-label">{{b.naziv}}</label>
+    </div>-->
+    <div class="form-check" *ngFor="let b of brendovi">
+      <button class="filter" (click)="prikazi2(b.id)"> {{b.naziv}} </button>
     </div>
   </section>
   </div>

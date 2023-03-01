@@ -6,6 +6,5 @@
         public string naziv { get; set; }
         public string opis { get; set; }
         public string slika { get; set; }
-        public bool brend_jel_selektovan  { get; set; }
     }
 }

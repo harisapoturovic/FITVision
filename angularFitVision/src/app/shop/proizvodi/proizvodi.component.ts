@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {LoginInformacije} from "../../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
@@ -7,7 +7,6 @@ import {KorpaService} from "../KorpaService";
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
-
 @Component({
   selector: 'app-proizvodi',
   templateUrl: './proizvodi.component.html',
@@ -133,7 +132,8 @@ export class ProizvodiComponent implements OnInit{
       porukaSuccess("uspjesno brisanje");
     }
   }
-
+pomocna:boolean=true; //samo zbog pocetnog prikaza proizvoda
+pomocna2:boolean=true;
   getProizvode() {
     if (this.proizvodi == null)
       return [];
@@ -143,8 +143,8 @@ export class ProizvodiComponent implements OnInit{
         (x.jedinicna_cijena>=this.od && x.jedinicna_cijena<this.do) &&
         //(!this.filter_podkat || x.pod_kategorija_id == this.podkatID) &&
         //(!this.filter_brend || x.brend_id == this.brendID) &&
-        (x.podkat_jel_selektovan || x.pod_kategorija_id == this.podkatID) &&
-        (x.brend_jel_selektovan || x.brend_id == this.brendID)
+        (this.pomocna || x.pod_kategorija_id == this.podkatID) &&
+        (this.pomocna2 || x.brend_id == this.brendID)
     );
     if (pr.length == 0)
       console.log("Nema proizvoda");
@@ -269,5 +269,20 @@ export class ProizvodiComponent implements OnInit{
       }
   }
 
+  prikazi(id:any) {
+    this.podkatID=id;
+    this.httpKlijent.get(MojConfig.adresa_servera + `/Proizvod/GetByPodkatID?id=${id}`).subscribe((x:any) => {
+      this.proizvodi = x;
+      this.getProizvode();
+    })
+  }
+
+  prikazi2(id:any) {
+    this.brendID=id;
+    this.httpKlijent.get(MojConfig.adresa_servera + `/Proizvod/GetByBrendID?id=${id}`).subscribe((x:any) => {
+      this.proizvodi = x;
+      this.getProizvode();
+    })
+  }
 }
 

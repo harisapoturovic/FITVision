@@ -27,11 +27,11 @@ namespace FitVision.Modul2.Controllers
                 .Select(kp => new KPGetAllVM
                 {
                     id = kp.Id,
-                    kolicina= kp.Kolicina,
-                    cijena= kp.Cijena,
-                    popust=kp.Popust,
-                    proizvodID=kp.proizvodID,
-                    korpaID=kp.korpaID
+                    kolicina = kp.Kolicina,
+                    cijena = kp.Cijena,
+                    popust = kp.Popust,
+                    proizvodID = kp.proizvodID,
+                    korpaID = kp.korpaID
                 });
 
             return data.Take(100).ToList();
@@ -55,9 +55,9 @@ namespace FitVision.Modul2.Controllers
             }
 
             kp.Kolicina = x.kolicina;
-            kp.Cijena=x.cijena;
-            kp.Popust=x.popust;
-            kp.korpaID=x.korpaID;
+            kp.Cijena = x.cijena;
+            kp.Popust = x.popust;
+            kp.korpaID = x.korpaID;
             kp.proizvodID = x.proizvodID;
 
             _dbContext.SaveChanges();
@@ -79,19 +79,19 @@ namespace FitVision.Modul2.Controllers
         public ActionResult GetByKorpa(int korpa_id)
         {
             var data = _dbContext.KorpaProizvod.Where(x => x.korpaID == korpa_id)
-                .OrderBy(s => s.korpaID) 
+                .OrderBy(s => s.korpaID)
                 .Select(s => new KPGetByKorpaVM
                 {
-                   id = s.Id,
-                   kolicina=s.Kolicina,
-                   popust=s.Popust,
-                   cijena=s.Cijena,
-                   cijenaPopust=s.cijenaPopust,
-                   proizvodID=s.proizvodID,
-                   korpaID=s.korpaID,
-                   nazivProizvoda=s.proizvod.Naziv,
-                   jedinicnaMjera=s.proizvod.JedinicnaMjera,
-                   slika=s.proizvod.Slika
+                    id = s.Id,
+                    kolicina = s.Kolicina,
+                    popust = s.Popust,
+                    cijena = s.Cijena,
+                    cijenaPopust = s.cijenaPopust,
+                    proizvodID = s.proizvodID,
+                    korpaID = s.korpaID,
+                    nazivProizvoda = s.proizvod.Naziv,
+                    jedinicnaMjera = s.proizvod.JedinicnaMjera,
+                    slika = s.proizvod.Slika
                 })
                 .AsQueryable();
             return Ok(data.Take(100).ToList());
@@ -101,7 +101,7 @@ namespace FitVision.Modul2.Controllers
         public ActionResult DodajProizvod(int korpaId, int proizvdId, int kolicina)
         {
             Korpa? korpa = _dbContext.Korpa.Find(korpaId);
-            if (korpa == null) 
+            if (korpa == null)
                 return BadRequest("korpa ne postoji");
 
             List<Proizvod> proizvodi = _dbContext.Proizvod.Include(p => p.Akcije).ToList();
@@ -109,9 +109,9 @@ namespace FitVision.Modul2.Controllers
             if (proizvod == null)
                 return BadRequest("proizvod ne postoji");
 
-            int popust=0;
+            int popust = 0;
             float jedCijena = proizvod.JedinicnaCijena;
-            float cijena=0;
+            float cijena = 0;
             float cijenaP = 0;
 
             foreach (var i in proizvod.Akcije) //provjera za popust
@@ -121,12 +121,12 @@ namespace FitVision.Modul2.Controllers
 
             KorpaProizvod kp = new KorpaProizvod()
             {
-                Popust=popust,
-                Kolicina=kolicina,
-                Cijena=jedCijena*kolicina,
-                cijenaPopust= (jedCijena * kolicina) - ((popust * (jedCijena * kolicina)) / 100),
-                korpaID =korpaId,
-                proizvodID=proizvdId
+                Popust = popust,
+                Kolicina = kolicina,
+                Cijena = jedCijena * kolicina,
+                cijenaPopust = (jedCijena * kolicina) - ((popust * (jedCijena * kolicina)) / 100),
+                korpaID = korpaId,
+                proizvodID = proizvdId
             };
 
             List<KorpaProizvod> kp2 = _dbContext.KorpaProizvod.Where(x => x.proizvodID == proizvdId && x.korpaID == korpaId).ToList();
@@ -160,8 +160,8 @@ namespace FitVision.Modul2.Controllers
         [HttpPost]
         public ActionResult UkloniProizvod(int korpaId, int proizvdId)
         {
-            Korpa? korpa = _dbContext.Korpa.Find(korpaId);;
-            if (korpa == null) 
+            Korpa? korpa = _dbContext.Korpa.Find(korpaId); ;
+            if (korpa == null)
                 return BadRequest("akcija ne postoji");
 
             Proizvod? proizvod = _dbContext.Proizvod.Find(proizvdId);
