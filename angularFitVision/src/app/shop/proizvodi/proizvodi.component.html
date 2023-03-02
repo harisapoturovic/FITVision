@@ -76,8 +76,8 @@
   <div class="d-flex justify-content-around flex-wrap" >
 
     <div *ngFor="let p of getProizvode()">
-      <div class="card mb-3 ms-2 me-2" style="width: 18rem; background-color: rgb(240,240,240);" >
-        <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px" (click)="detaljno(p)">
+      <div class="card mb-3 ms-2 me-2" style="width: 18rem; background-color: rgb(240,240,240);" routerLink="/proizvod-detalji" routerLinkActive="active" (click)="detaljno(p)">
+        <img [src]="p.slika" class="card-img-top" alt="..." style="height:220px" >
         <div class="card-body">
           <h5 class="card-title text-center mb-4">{{p.naziv}}</h5>
           <p style="font-family: Tahoma; font-size: 6mm"> {{p.jedinicna_cijena}} KM</p>

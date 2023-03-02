@@ -4,6 +4,7 @@ import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
 import {HttpClient} from "@angular/common/http";
 import {MojConfig} from "../../moj-config";
 import {KorpaService} from "../KorpaService";
+import {ProizvodService} from "./ProizvodService";
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
@@ -18,7 +19,7 @@ export class ProizvodiComponent implements OnInit{
   od:any=0;
   do:any=100;
 
-  constructor(private httpKlijent: HttpClient, private korpaService:KorpaService ) {
+  constructor(private httpKlijent: HttpClient, private korpaService:KorpaService, private proizvodService:ProizvodService ) {
   }
 
   loginInfo(): LoginInformacije {
@@ -104,7 +105,7 @@ export class ProizvodiComponent implements OnInit{
   }
 
   detaljno(p: any) {
-    this.detaljiProizvod = p;
+    this.proizvodService.setProizvodID(p.id);
   }
 
   urediFunc(p: any) {

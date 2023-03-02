@@ -1,0 +1,75 @@
+<div id="sve">
+<img [src]="proizvod?.slika" class="card-img-top" alt="..." style="height:500px; width:500px" >
+<div id="detalji-proizvod">
+<mdb-form-control class="polje">
+  <label mdbLabel class="form-label" for="formControlReadonly" >Naziv:</label>
+  <input
+    mdbInput
+    class="form-control"
+    id="formControlReadonly"
+    type="text"
+    placeholder="Readonly input here..."
+    aria-label="readonly input example"
+    [readonly]="true"
+    style="width: 60%"
+    [value]="proizvod?.naziv"
+  />
+</mdb-form-control>
+<mdb-form-control class="polje">
+  <label mdbLabel class="form-label" for="formControlReadonly">Sastav:</label>
+  <input
+    mdbInput
+    class="form-control"
+    id="formControlReadonly2"
+    type="text"
+    placeholder="Readonly input here..."
+    aria-label="readonly input example"
+    [readonly]="true"
+    style="width: 60%"
+    [value]="proizvod?.sastav"
+  />
+</mdb-form-control>
+<mdb-form-control class="polje">
+  <label mdbLabel class="form-label" for="formControlReadonly">Cijena (KM):</label>
+  <input
+    mdbInput
+    class="form-control"
+    id="formControlReadonly3"
+    type="text"
+    placeholder="Readonly input here..."
+    aria-label="readonly input example"
+    [readonly]="true"
+    style="width: 60%"
+    [value]="proizvod?.jedinicnaCijena"
+  />
+</mdb-form-control>
+<mdb-form-control class="polje">
+  <label mdbLabel class="form-label" for="formControlReadonly">Mjera (g):</label>
+  <input
+    mdbInput
+    class="form-control"
+    id="formControlReadonly4"
+    type="text"
+    placeholder="Readonly input here..."
+    aria-label="readonly input example"
+    [readonly]="true"
+    style="width: 60%"
+    [value]="proizvod?.jedinicnaMjera"
+  />
+</mdb-form-control>
+<mdb-form-control class="polje">
+  <label mdbLabel class="form-label" for="formControlReadonly">Na zalihi:</label>
+  <input
+    mdbInput
+    class="form-control"
+    id="formControlReadonly5"
+    type="text"
+    placeholder="Readonly input here..."
+    aria-label="readonly input example"
+    [readonly]="true"
+    style="width: 60%"
+    [value]="proizvod?.zaliha"
+  />
+</mdb-form-control>
+</div>
+</div>

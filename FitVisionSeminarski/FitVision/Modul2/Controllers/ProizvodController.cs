@@ -137,5 +137,14 @@ namespace FitVision.Modul2.Controllers
             return proizvodi.Take(100).ToList();
         }
 
+
+        [HttpGet]
+        public Proizvod GetByProizvodID(int id)
+        {
+            Proizvod proizvod = _dbContext.Proizvod.Find(id);
+            return proizvod;
+   
+        }
+
     }
 }

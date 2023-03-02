@@ -35,6 +35,7 @@ import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
 import { UserNotActiveComponent } from './user-not-active/user-not-active.component';
 import {AutorizacijaLoginProvjera} from "./_guards/AutorizacijaLoginProvjera";
 import { TwoFOtkljucajComponent } from './two-f-otkljucaj/two-f-otkljucaj.component';
+import { ProizvodDetaljiComponent } from './shop/proizvodi/proizvod-detalji/proizvod-detalji.component';
 
 // @ts-ignore
 @NgModule({
@@ -63,7 +64,8 @@ import { TwoFOtkljucajComponent } from './two-f-otkljucaj/two-f-otkljucaj.compon
     NarudzbaComponent,
     FaqComponent,
     UserNotActiveComponent,
-    TwoFOtkljucajComponent
+    TwoFOtkljucajComponent,
+    ProizvodDetaljiComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ import { TwoFOtkljucajComponent } from './two-f-otkljucaj/two-f-otkljucaj.compon
       {path: "narudzba", component: NarudzbaComponent},
       {path: "faq", component: FaqComponent},
       {path: "user-not-active", component: UserNotActiveComponent},
-      {path: "two-f-otkljucaj", component: TwoFOtkljucajComponent}
+      {path: "two-f-otkljucaj", component: TwoFOtkljucajComponent},
+      {path: "proizvod-detalji", component: ProizvodDetaljiComponent}
     ]),
     MdbCarouselModule,
     MdbAccordionModule,
