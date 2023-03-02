@@ -40,6 +40,10 @@ export class ProizvodiComponent implements OnInit{
     this.httpKlijent.get(MojConfig.adresa_servera + "/Proizvod/GetAll").subscribe(x => {
       this.proizvodi = x;
     })
+    this.od=0;
+    this.do=100;
+    this.filter_naziv=false;
+    this.naziv=null;
   }
 
   ucitajBrendove() {
@@ -61,9 +65,7 @@ export class ProizvodiComponent implements OnInit{
   url: "";
   filter_naziv: any;
   naziv: any;
-  filter_podkat: any;
   podkatID: number;
-  filter_brend: any;
   brendID: number;
   korpaID: any;
   kolicina: any = 0;
@@ -82,7 +84,6 @@ export class ProizvodiComponent implements OnInit{
       jedinicna_mjera: "",
       zaliha: 0,
       slika: "assets/empty.png",
-
       pod_kategorija_id: 0,
       brend_id: 0
     }
