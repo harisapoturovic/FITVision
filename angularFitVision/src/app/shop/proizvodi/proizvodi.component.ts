@@ -58,7 +58,6 @@ export class ProizvodiComponent implements OnInit{
   brendovi: any;
   podKategorije: any
   proizvodi: any;
-  detaljiProizvod: any;
   url: "";
   filter_naziv: any;
   naziv: any;
