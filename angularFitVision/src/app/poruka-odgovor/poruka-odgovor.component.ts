@@ -5,6 +5,9 @@ import {MojConfig} from "../moj-config";
 import {LoginInformacije} from "../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
+
 @Component({
   selector: 'app-poruka-odgovor',
   templateUrl: './poruka-odgovor.component.html',
@@ -51,10 +54,22 @@ export class PorukaOdgovorComponent implements OnInit {
   }
 
   dodajOdgovor() {
-    this.httpKlijent.post(MojConfig.adresa_servera + "/Odgovor/Dodaj", this.odgovorObject).subscribe(x=>{
-      this.ucitajPorukuOdgovor();
-      this.odgovorObject=null;
-    });
+
+    if(this.odgovorObject.sadrzaj!=""){
+      this.httpKlijent.post(MojConfig.adresa_servera + "/Odgovor/Dodaj", this.odgovorObject).subscribe(x=>{
+        this.ucitajPorukuOdgovor();
+        this.odgovorObject=null;
+      });
+
+      porukaSuccess("Uspjesno oddan odgovor");
+    }
+    else {
+      alert("Ne mozete poslati praznu poruku");
+    }
+
+
+
+
   }
 
   obrisiOdgovor(o:any) {
