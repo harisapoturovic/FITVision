@@ -10,7 +10,6 @@ export class AutorizacijaLoginProvjera implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     try {
-      //nedovrseno privremeno rjesenje
       if (AutentifikacijaHelper.getLoginInfo().isLogiran) {
 
         let isAktiviran = AutentifikacijaHelper.getLoginInfo().autentifikacijaToken?.korisnickiNalog?.isAktiviran;

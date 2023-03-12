@@ -16,9 +16,12 @@ export class TwoFOtkljucajComponent implements OnInit {
   }
 
   otkljucaj() {
-    this.httpKlijent.get(MojConfig.adresa_servera+ "/Autentifikacija/Otkljucaj/" + this.code, MojConfig.http_opcije()).subscribe(x=>{
+    this.httpKlijent.get(MojConfig.adresa_servera+ "/Autentifikacija/Otkljucaj/" + this.code, MojConfig.http_opcije())
+      .subscribe(x=>{
       this.router.navigateByUrl("/korisnici");
     });
   }
 
 }
+
+

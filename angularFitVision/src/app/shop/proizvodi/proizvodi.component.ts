@@ -178,7 +178,8 @@ pomocna2:boolean=true;
           else
           {
             // @ts-ignore
-            this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
+            this.httpKlijent.post(MojConfig.adresa_servera +
+              `/KorpaProizvod/DodajProizvod?korpaId=${this.korpaID}&proizvdId=${p.id}&kolicina=${this.kolicina}`)
               .subscribe(x => {
                 this.prikaziSadrzaj();
                 this.kolicina = 0; // kako se ne bi mogli dodavati proizvodi sa kolicinom = 0
@@ -197,7 +198,8 @@ pomocna2:boolean=true;
     if(this.korpaID==null)
       porukaError("Korpa je prazna");
     else {
-      this.httpKlijent.get(MojConfig.adresa_servera + `/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x => {
+      this.httpKlijent.get(MojConfig.adresa_servera +
+        `/KorpaProizvod/GetByKorpa?korpa_id=${this.korpaID}`).subscribe(x => {
         this.korpaObject = x;
         if (this.korpaObject.length == 0)
           porukaError("Korpa je prazna");
@@ -209,7 +211,6 @@ pomocna2:boolean=true;
           this.korpaObject.forEach((k:any)=>popust+=(k.popust*k.cijena/100));
           this.korpaObject.forEach((k:any)=>ukupno+=k.cijenaPopust);
           this.zaPrikaz(cijena, popust, ukupno);
-         // console.log("Cijena" + cijena, "popust" + popust, "Ukupno" + ukupno);
         }
       })
     }
@@ -230,20 +231,19 @@ pomocna2:boolean=true;
   }
   p:any;
   izmijeniKolicinu(kolicina: any, korpaID:any, proizvodID:any) {
-   // this.kolicina=kolicina;
     for (let p of this.proizvodi)
     {
       if(p.id==proizvodID)
         this.p=p;
     }
-
       if (this.p.id == proizvodID && kolicina<=this.p.zaliha) {
         if(kolicina<0)
           porukaError("Količina mora biti veća od 0!");
         else
         {
           // @ts-ignore
-          this.httpKlijent.post(MojConfig.adresa_servera + `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
+          this.httpKlijent.post(MojConfig.adresa_servera +
+            `/KorpaProizvod/DodajProizvod?korpaId=${korpaID}&proizvdId=${proizvodID}&kolicina=${kolicina}`)
             .subscribe((x: any) => {
               this.cijenaProizvoda = x._cijena;
               this.popust = x._popust;

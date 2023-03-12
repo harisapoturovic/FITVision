@@ -33,3 +33,11 @@ a{
 {
   margin-top: 250px;
 }
+
+body {
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: 200px;
+}
