@@ -1,23 +1,40 @@
-<h2>Podkategorije</h2>
-<br>
 <div id="podkat">
-<ul class="list-group list-group-flush" *ngFor="let p of podkategorije">
-  <li class="list-group-item" style="font-size: larger">{{p.naziv}}</li>
-  <li class="list-group-item">{{p.opis}}</li>
-  <li class="list-group-item" >{{p.nazivKat}}</li>
+  <div class="btn-group shadow-0" role="group" aria-label="Basic example" *ngFor="let p of podkategorije">
+    <div *ngIf="p.kategorija_id==kategorija?.id" class="zabutton">
+    <button type="button" *ngIf="loginInfo().isPremisijaKorisnik" (click)="setujPodkat(p)">
+      {{p.naziv}}
+    </button>
+    </div>
+  </div>
 
-  <div *ngIf="loginInfo().isPremisijaAdmin">
+
+
+<div *ngIf="loginInfo().isPremisijaAdmin" id="glavni">
+  <div>
+  <ul class="list-group list-group-flush" *ngFor="let p of podkategorije" >
+    <div class="bg-light">
+      <div class="card-body">
+        <p class="card-title">{{p.naziv}}</p>
+      </div>
+
+
+  <div *ngIf="loginInfo().isPremisijaAdmin" id="opcije">
     <button type="button" class="btn btn-warning" (click)="urediPodkat=p">Uredi</button>
     <button type="button" class="btn btn-danger"(click)="obrisi(p)">Obriši</button>
   </div>
+    </div>
 
   <br>
 </ul>
+  </div>
+</div>
+</div>
 <div class="mb-5 d-flex justify-content-end">
   <button class="btn btn-primary m-3 "
           *ngIf="loginInfo().isPremisijaAdmin" (click)="novaPodkat()">Dodaj podkategoriju</button>
 </div>
-</div>
+
+
 
 <!--Modal dodaj-->
 <div *ngIf="loginInfo().isPremisijaAdmin">
@@ -42,6 +59,10 @@
               <option *ngFor="let k of kategorije" [value]="k.id">{{k.naziv}}</option>
             </select>
           </div>
+            <div >
+              <label class="form-label">Odaberi sliku</label>
+              <input type="file" class="form-control border w-100" (change)="ChosenFile($event)">
+            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" (click)="odabranaPodkat=null">Close</button>
               <button type="button" class="btn btn-primary" (click)="dodajPodkat()">Snimi</button>
@@ -75,10 +96,47 @@
                 <option *ngFor="let k of kategorije" [value]="k.id">{{k.naziv}}</option>
               </select>
             </div>
+            <div >
+              <label class="form-label">Odaberi sliku</label>
+              <input type="file" class="form-control border w-100" (change)="ChosenFile($event)">
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="urediPodkat=null">Close</button>
             <button type="button" class="btn btn-primary" (click)="Uredi(urediPodkat)">Snimi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!--Modal prikaz-->
+<div *ngIf="loginInfo().isPremisijaKorisnik">
+  <div *ngIf="podkat!=null" class="modal fade show" id="exampleMooo" tabindex="-1" aria-labelledby="exampleModalLiveLabel" aria-modal="true" role="dialog" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleMi">Detalji o podkategoriji </h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="podkat=null"></button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+            <label class="form-label">Naziv</label>
+            <input class="form-control" type="text" [(ngModel)]="podkat.naziv">
+            <label class="form-label">Opis</label>
+            <textarea class="form-control" rows="10" [(ngModel)]="podkat.opis"></textarea>
+            <div class="mb-3">
+              <label class="form-label">Kategorija</label>
+              <select class="form-control" [(ngModel)]="podkat.kategorija_id" name="kategorija">
+                <option *ngFor="let k of kategorije" [value]="k.id">{{k.naziv}}</option>
+              </select>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="podkat=null">Close</button>
           </div>
         </div>
       </div>

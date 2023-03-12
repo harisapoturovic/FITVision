@@ -77,3 +77,12 @@
   </div>
 </div>
 
+<div class="prompt" *ngIf="pomocna!=null" >
+  <div class="promptImg_label" >
+    <img class="promptImg" src="assets/warning.png">
+    <label>Morate popuniti sva polja!</label>
+  </div>
+  <div class="OkButton">
+    <button class="OkBtn" (click)="pomocna=null">OK</button>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 ﻿using FitVision.Data;
+using FitVision.Helpers.AutentifikacijaAutorizacija;
 using FitVision.Modul2.Models;
 using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;

@@ -4,8 +4,6 @@ export class LoginInformacije{
   isLogiran:                   boolean=false;
   isPremisijaAdmin:boolean=false;
   isPremisijaKorisnik:boolean=false;
-  isPremisijaTrener:boolean=false;
-
 }
 
 export interface AutentifikacijaToken {
@@ -23,4 +21,5 @@ export interface KorisnickiNalog {
   isAdmin: boolean;
   isKorisnik: boolean;
   isTrener:boolean;
+  isAktiviran:boolean;
 }

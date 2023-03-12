@@ -52,6 +52,13 @@ namespace FitVision.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("twoFCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("twoFJelOtkljucano")
+                        .HasColumnType("bit");
+
                     b.Property<string>("vrijednost")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -82,9 +89,51 @@ namespace FitVision.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("aktivacijaGUID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAktiviran")
+                        .HasColumnType("bit");
+
                     b.HasKey("ID");
 
                     b.ToTable("KorisnickiNalog");
+                });
+
+            modelBuilder.Entity("FitVision.Modul0_Autentifikacija.Models.LogKretanjePoSistemu", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("exceptionMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ipAdresa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isException")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("korisnikID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("postData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("queryPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("vrijeme")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("korisnikID");
+
+                    b.ToTable("LogKretanjePoSistemu");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Akcija", b =>
@@ -129,9 +178,38 @@ namespace FitVision.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Slika")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Brend");
+                });
+
+            modelBuilder.Entity("FitVision.Modul2.Models.Dostavljac", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<float>("CijenaDostave")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dostavljac");
                 });
 
             modelBuilder.Entity("FitVision.Modul2.Models.Drzava", b =>
@@ -269,10 +347,15 @@ namespace FitVision.Migrations
                     b.Property<DateTime>("DatumKreiranja")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("dostavljacID")
+                        .HasColumnType("int");
+
                     b.Property<int>("korisnikID")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("dostavljacID");
 
                     b.HasIndex("korisnikID");
 
@@ -393,6 +476,9 @@ namespace FitVision.Migrations
 
                     b.Property<string>("Opis")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Slika")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -623,6 +709,15 @@ namespace FitVision.Migrations
                     b.Navigation("KorisnickiNalog");
                 });
 
+            modelBuilder.Entity("FitVision.Modul0_Autentifikacija.Models.LogKretanjePoSistemu", b =>
+                {
+                    b.HasOne("FitVision.Modul0_Autentifikacija.Models.KorisnickiNalog", "korisnik")
+                        .WithMany()
+                        .HasForeignKey("korisnikID");
+
+                    b.Navigation("korisnik");
+                });
+
             modelBuilder.Entity("FitVision.Modul2.Models.ForumOdgovor", b =>
                 {
                     b.HasOne("FitVision.Modul2.Models.ForumTema", "forumTema")
@@ -658,11 +753,19 @@ namespace FitVision.Migrations
 
             modelBuilder.Entity("FitVision.Modul2.Models.Korpa", b =>
                 {
+                    b.HasOne("FitVision.Modul2.Models.Dostavljac", "dostavljac")
+                        .WithMany()
+                        .HasForeignKey("dostavljacID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FitVision.Modul2.Models.Korisnik", "korisnik")
                         .WithMany()
                         .HasForeignKey("korisnikID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("dostavljac");
 
                     b.Navigation("korisnik");
                 });

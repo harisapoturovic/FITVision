@@ -33,13 +33,24 @@ namespace FitVision.Modul2.Controllers
         //}
 
         [HttpPost]
-        public ActionResult Snimi(int korisnikId)
+        public ActionResult Snimi(int korisnikId, int dostavljacId)
         {
-            Korpa? korpa = new Korpa();
+            Korpa? korpa;
+            List<Korpa>korpe = _dbContext.Korpa.Where(k=>k.korisnikID==korisnikId).ToList();    
+
+            if(korpe.Count == 0)
+            {
+                korpa = new Korpa();
+                _dbContext.Add(korpa);
+            }
+            else
+            {
+                korpa = _dbContext.Korpa.FirstOrDefault(k => k.korisnikID == korisnikId);
+            }
             korpa.DatumKreiranja = DateTime.Now;
             korpa.korisnikID = korisnikId;
+            korpa.dostavljacID = dostavljacId;
 
-            _dbContext.Add(korpa);
             _dbContext.SaveChanges();
             return Ok(korpa.Id);
         }

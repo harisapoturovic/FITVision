@@ -5,8 +5,6 @@ import {MojConfig} from "./moj-config";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 
-//declare function porukaSuccess(a: string):any;
-//declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-root',
@@ -32,5 +30,4 @@ export class AppComponent {
         //porukaSuccess("logout uspjesan");
       });
   }
-
 }

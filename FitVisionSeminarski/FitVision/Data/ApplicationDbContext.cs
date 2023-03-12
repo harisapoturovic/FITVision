@@ -29,7 +29,8 @@ namespace FitVision.Data
         public DbSet<Odgovor> Odgovor { get; set; }
         public DbSet<ForumTema> ForumTema { get; set; }
         public DbSet<ForumOdgovor> ForumOdgovor { get; set; }
-
+        public DbSet<Dostavljac> Dostavljac { get; set; }
+        public DbSet<LogKretanjePoSistemu> LogKretanjePoSistemu { get; set; }
 
     }
 }

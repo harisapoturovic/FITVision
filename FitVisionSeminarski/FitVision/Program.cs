@@ -1,10 +1,12 @@
 using FitVision.Data;
+using FitVision.Helpers.AutentifikacijaAutorizacija;
 using FitVision.Hub;
+using FitVision.Modul3_SignalR;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSignalR();
+
 
 
 // Add services to the container.
@@ -12,8 +14,11 @@ builder.Services.AddSignalR();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.OperationFilter<AutorizacijaSwaggerHeader>();
+});
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
@@ -29,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
 
 app.UseCors(
     options => options
@@ -47,6 +54,7 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints => {
     endpoints.MapControllers();
     endpoints.MapHub<MessageHub>("/info");
+    endpoints.MapHub<PorukeHub>("/poruke-hub");
 });
 
 app.MapControllers();

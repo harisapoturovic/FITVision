@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import  {RouterModule, RouterOutlet} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
@@ -26,7 +26,18 @@ import { ForumOdgovoriComponent } from './forum-odgovori/forum-odgovori.componen
 import { PocetnaComponent } from './pocetna/pocetna.component';
 import { AdminComponent } from './pocetna/admin/admin.component';
 import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
+import {MdbCarouselModule} from "mdb-angular-ui-kit/carousel";
+import { FaqComponent } from './faq/faq.component';
+import {MdbAccordionModule} from "mdb-angular-ui-kit/accordion";
+import {MdbRangeModule} from "mdb-angular-ui-kit/range";
+import {MdbValidationModule} from "mdb-angular-ui-kit/validation";
+import {MdbFormsModule} from "mdb-angular-ui-kit/forms";
+import { UserNotActiveComponent } from './user-not-active/user-not-active.component';
+import {AutorizacijaLoginProvjera} from "./_guards/AutorizacijaLoginProvjera";
+import { TwoFOtkljucajComponent } from './two-f-otkljucaj/two-f-otkljucaj.component';
+import { ProizvodDetaljiComponent } from './shop/proizvodi/proizvod-detalji/proizvod-detalji.component';
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +61,11 @@ import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
     ForumOdgovoriComponent,
     PocetnaComponent,
     AdminComponent,
-    NarudzbaComponent
+    NarudzbaComponent,
+    FaqComponent,
+    UserNotActiveComponent,
+    TwoFOtkljucajComponent,
+    ProizvodDetaljiComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +77,7 @@ import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
       {path: 'registracija-admin', component: RegistracijaAdminComponent},
       {path: 'registracija-korisnik', component: RegistracijaKorisnikComponent},
       {path: 'postavke-profila', component: PostavkeProfilaComponent},
-      {path: 'korisnici', component: KorisniciComponent},
+      {path: 'korisnici', component: KorisniciComponent, canActivate: [AutorizacijaLoginProvjera]},
       {path: 'shop', component: ShopComponent},
       {path: 'kategorije', component: KategorijeComponent},
       {path: 'brendovi', component: BrendoviComponent},
@@ -70,14 +85,27 @@ import { NarudzbaComponent } from './shop/narudzba/narudzba.component';
       {path: 'proizvodi', component: ProizvodiComponent},
       {path: 'akcije', component: AkcijeComponent},
       {path: 'poruke', component: PorukeComponent},
-      {path:"poruka-odgovor/:porukaid", component:PorukaOdgovorComponent},
+      {path: "poruka-odgovor/:porukaid", component: PorukaOdgovorComponent},
       {path: 'forum', component: ForumComponent},
-      {path:"forum-odgovor/:forumid", component:ForumOdgovoriComponent},
-      {path:"pocetna", component:PocetnaComponent},
-      {path:"narudzba", component:NarudzbaComponent}
-    ])
+      {path: "forum-odgovor/:forumid", component: ForumOdgovoriComponent},
+      {path: "pocetna", component: PocetnaComponent, canActivate: [AutorizacijaLoginProvjera]},
+      {path: "narudzba", component: NarudzbaComponent},
+      {path: "faq", component: FaqComponent},
+      {path: "user-not-active", component: UserNotActiveComponent},
+      {path: "two-f-otkljucaj", component: TwoFOtkljucajComponent},
+      {path: "proizvod-detalji", component: ProizvodDetaljiComponent}
+    ]),
+    MdbCarouselModule,
+    MdbAccordionModule,
+    MdbRangeModule,
+    MdbValidationModule,
+    MdbFormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AutorizacijaLoginProvjera
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

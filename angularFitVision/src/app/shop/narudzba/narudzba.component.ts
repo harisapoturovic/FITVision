@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {MojConfig} from "../../moj-config";
 import {HttpClient} from "@angular/common/http";
 import {KorpaService} from "../KorpaService";
+import {LoginInformacije} from "../../_helpers/login-informacije";
+import {AutentifikacijaHelper} from "../../_helpers/autentifikacija-helper";
+import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
+
+declare function porukaSuccess(a: string):any;
+declare function porukaError(a: string):any;
 
 @Component({
   selector: 'app-narudzba',
@@ -11,22 +17,88 @@ import {KorpaService} from "../KorpaService";
 export class NarudzbaComponent implements OnInit {
   gradovi:any;
   drzave:any;
-  drzava_ID: any;
-  grad_ID: any;
   korpaObject: any;
   korpaID:any;
   cijena:any;
   cijena2:any;
   popust2:any;
   ukupno:any;
-  constructor(private httpKlijent: HttpClient, private korpaService:KorpaService) { }
+  dostavljaci:any;
+  dostavljacID:any;
+  cijenaDostave:any = 0;
+  ukupno2:any;
+  polje1:any;
+  polje2:any;
+  polje3:any;
+  polje4:any;
+  polje5:any;
+  polje6:any;
+  polje7:any;
+  polje8:any;
+  validationForm: FormGroup;
+
+  constructor(private httpKlijent: HttpClient, private korpaService:KorpaService) {
+    this.validationForm = new FormGroup({
+      ime: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+      prezime: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+      drzava: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+      grad: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+      adresa: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+      postanskiBroj: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+      email: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+      telefon: new FormControl(null, { validators: Validators.required, updateOn: 'submit' }),
+    });
+  }
+
+  get ime(): AbstractControl {
+    return this.validationForm.get('ime')!;
+  }
+
+  get prezime(): AbstractControl {
+    return this.validationForm.get('prezime')!;
+  }
+
+  get drzava(): AbstractControl {
+    return this.validationForm.get('drzava')!;
+  }
+
+  get grad(): AbstractControl {
+    return this.validationForm.get('grad')!;
+  }
+
+  get adresa(): AbstractControl {
+    return this.validationForm.get('adresa')!;
+  }
+
+  get postanskiBroj(): AbstractControl {
+    return this.validationForm.get('postanskiBroj')!;
+  }
+
+  get email(): AbstractControl {
+    return this.validationForm.get('email')!;
+  }
+
+  get telefon(): AbstractControl {
+    return this.validationForm.get('telefon')!;
+  }
+
+  onSubmit(): void {
+    this.validationForm.markAllAsTouched();
+  }
+
 
   ngOnInit(): void {
     this.ucitajDrzave();
     this.ucitajGradove();
+    this.ucitajDostavljace();
     this.korpaID=this.korpaService.getKorpaID();
     this.prikaziSadrzaj();
   }
+
+  loginInfo():LoginInformacije {
+    return AutentifikacijaHelper.getLoginInfo();
+  }
+
   ucitajGradove() {
     this.httpKlijent.get(MojConfig.adresa_servera + "/Grad/GetAll").subscribe(x => {
       this.gradovi = x;
@@ -60,5 +132,27 @@ export class NarudzbaComponent implements OnInit {
     this.cijena2=c;
     this.popust2=p;
     this.ukupno=u;
+    this.ukupno2=this.ukupno+this.cijenaDostave;
+    this.prikaziSadrzaj();
+  }
+
+  ucitajDostavljace()
+  {
+    this.httpKlijent.get(MojConfig.adresa_servera + "/Dostavljac/GetAll").subscribe(x => {
+      this.dostavljaci = x;
+    })
+  }
+
+  preuzmiID(id:any) {
+    this.dostavljacID=id;
+    this.httpKlijent.get(MojConfig.adresa_servera + `/Dostavljac/GetByDostavljacID?id=${this.dostavljacID}`).subscribe((x:any) => {
+      this.cijenaDostave = x;
+    })
+  }
+
+  naruci() {
+    if(this.polje1!=null && this.polje2!=null && this.polje3!=null && this.polje4!=null && this.polje5!=null && this.polje6!=null
+      && this.polje7!=null && this.polje8!=null)
+      porukaSuccess("Narudžba uspješno poslana!");
   }
 }

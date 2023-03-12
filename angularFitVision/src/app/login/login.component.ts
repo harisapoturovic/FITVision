@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   txtKorisnickiIme:any;
   txtLozinka:any;
   korisnik_id:any;
+  pomocna:any;
   constructor(private httpKlijent:HttpClient,private  router:Router, private korpaService:KorpaService) { }
 
   ngOnInit(): void {
@@ -29,6 +30,10 @@ export class LoginComponent implements OnInit {
       korisnickoIme:this.txtKorisnickiIme,
       lozinka:this.txtLozinka
     }
+    if(saljemo.korisnickoIme==null || saljemo.lozinka==null)
+    {
+      this.pomocna=saljemo;
+    }
     this.httpKlijent.post<LoginInformacije>(MojConfig.adresa_servera+ "/Autentifikacija/Login", saljemo).subscribe(
       (x:LoginInformacije)=>{
         if(x.isLogiran){
@@ -38,8 +43,11 @@ export class LoginComponent implements OnInit {
           {
             this.korisnik_id = x.autentifikacijaToken.korisnickiNalogId;
             this.napraviKorpu();
+            this.router.navigateByUrl("/pocetna");
           }
-          this.router.navigateByUrl("/pocetna");
+          if (x.autentifikacijaToken?.korisnickiNalog.isAdmin)
+            this.router.navigateByUrl("/two-f-otkljucaj");
+          
         }
         else{
           AutentifikacijaHelper.setLoginInfo(null);
@@ -50,7 +58,7 @@ export class LoginComponent implements OnInit {
   }
 
   napraviKorpu() {
-    this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}`, null).subscribe(x => {
+    this.httpKlijent.post(MojConfig.adresa_servera + `/Korpa/Snimi?korisnikId=${this.korisnik_id}&dostavljacId=1`, null).subscribe(x => {
       this.korpaService.setKorpaID(x);
     })
   }

@@ -1,3 +1,43 @@
 a{
   color:black;
+  font-family: Tahoma;
+  font-size: 4.5mm;
+}
+
+#dropdownMenuButton1
+{
+  font-family: Tahoma;
+  font-size: 4.5mm;
+}
+
+#nav2
+{
+  padding: 350px;
+}
+
+#logo
+{
+  width: 200px;
+  height: 60px;
+}
+
+#nav
+{
+  padding: 10px;
+  padding-top: 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.text-center text-lg-start bg-light text-muted
+{
+  margin-top: 250px;
+}
+
+body {
+  min-height: 100vh;
+}
+
+footer {
+  margin-top: 200px;
 }

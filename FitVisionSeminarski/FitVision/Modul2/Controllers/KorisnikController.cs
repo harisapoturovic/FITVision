@@ -1,4 +1,6 @@
 ﻿using FitVision.Data;
+using FitVision.Helpers;
+using FitVision.Helpers.AutentifikacijaAutorizacija;
 using FitVision.Modul2.Models;
 using FitVision.Modul2.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -18,9 +20,22 @@ namespace FitVision.Modul2.Controllers
             this._dbContext = dbContext;
         }
 
-       
+        [HttpGet("{guid}")]
+        public ActionResult Aktivacija(string guid)
+        {
+            var korisnik = _dbContext.Korisnik.FirstOrDefault(s => s.aktivacijaGUID == guid);
+            if (korisnik != null)
+            {
+                korisnik.isAktiviran = true;
+                _dbContext.SaveChanges();
+                return Redirect("http://localhost:4200/korisnici");
+            }
+
+            return BadRequest("pogresan URL");
+        }
 
         [HttpGet]
+        [Autorizacija(false, true)]
         public ActionResult<List<KorisnikGetVM>> GetAll()
         {
             var data = _dbContext.Korisnik
@@ -46,9 +61,6 @@ namespace FitVision.Modul2.Controllers
         }
 
 
-
-       
-
         [HttpGet]
         public ActionResult<KorisnikAddVM> GetById(int id)
         {
@@ -68,9 +80,9 @@ namespace FitVision.Modul2.Controllers
                 grad_ID = korisnik.gradid,
                 datum_rodjenja = korisnik.DatumRodjenja.ToString("yyyy-MM-dd"),
 
-                visina= korisnik.Visina,
-                tezina= korisnik.Tezina,
-                datum_polaska= korisnik.DatumPolasaka.ToString("yyyy-MM-dd"),
+                visina = korisnik.Visina,
+                tezina = korisnik.Tezina,
+                datum_polaska = korisnik.DatumPolasaka.ToString("yyyy-MM-dd"),
                 
                 korisnickoIme = korisnik.KorisnickoIme,
                 lozinka = korisnik.Lozinka
@@ -80,12 +92,15 @@ namespace FitVision.Modul2.Controllers
         }
 
         [HttpPost]
+        [Autorizacija(false, true)] //admin dodaje korisnike
         public ActionResult Snimi([FromBody] KorisnikAddVM x)
-        {
-           
+        {       
             Korisnik? korisnik;
-            if(x.id== 0) 
-                korisnik=new Korisnik();
+            if(x.id== 0)
+            {
+                korisnik = new Korisnik();
+                korisnik.aktivacijaGUID = Guid.NewGuid().ToString();
+            }
             else
             {
                 korisnik=_dbContext.Korisnik.FirstOrDefault(k=>k.ID==x.id);
@@ -131,12 +146,14 @@ namespace FitVision.Modul2.Controllers
 
                 _dbContext.Korisnik.Add(korisnik);
             }
+            EmailLog.noviKorisnik(korisnik, HttpContext);
 
-                _dbContext.SaveChanges();
+            _dbContext.SaveChanges();
             return Ok(korisnik);
         }
 
         [HttpPost("{id}")]
+        [Autorizacija(false, true)]
         public ActionResult Obrisi(int id)
         {
             Korisnik? korisnik = _dbContext.Korisnik.Find(id);

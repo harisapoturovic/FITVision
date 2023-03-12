@@ -34,7 +34,7 @@ export class RegistracijaAdminComponent implements OnInit {
   strucna_sprema:string="";
   korisnickoIme:string="";
   lozinka:any="";
-
+  pomocna:any;
 
 
 
@@ -66,14 +66,14 @@ export class RegistracijaAdminComponent implements OnInit {
         lozinka:this.lozinka
       }
       this.httpKlijent.post(MojConfig.adresa_servera + "/Admin/Snimi", korisnik).subscribe(x=>{
-        porukaSuccess("Ospjesna regstracija");
+        porukaSuccess("Uspješna registracija");
       })
       this.router.navigateByUrl("/login");
 
 
     }
     else{
-      alert("niste unijeli sve podatke");
+      this.pomocna='';
     }
   }
 

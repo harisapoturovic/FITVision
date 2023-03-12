@@ -4,7 +4,7 @@
   font-size: 20px;
   width: 250px;
   height: 50px;
-  margin-left: 900px;
+  margin-top: 20px;
   border: none;
 }
 
@@ -24,4 +24,26 @@
 .zaPlatiti{
   background-color: #e5e3e3;
   width: 400px;
+}
+
+mdb-error
+{
+  color: red;
+}
+.narudzba
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 20px;
+}
+#desni
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.forma
+{
+  width: 60%;
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MojConfig} from "../moj-config";
 import {AutentifikacijaHelper} from "../_helpers/autentifikacija-helper";
 import {LoginInformacije} from "../_helpers/login-informacije";
 import {HttpClient} from "@angular/common/http";
+import {HubConnection, HubConnectionBuilder, LogLevel} from "@microsoft/signalr";
 
 declare function porukaSuccess(a: string):any;
 declare function porukaError(a: string):any;
@@ -14,13 +15,26 @@ declare function porukaError(a: string):any;
 })
 export class OpremaComponent implements OnInit {
 
-  constructor(private httpKlijent:HttpClient) { }
+  private hubConnectionBuilder!: HubConnection;
+  poruka:string;
+  constructor(private httpKlijent:HttpClient) {
+  }
 
   ngOnInit(): void {
+    this.hubConnectionBuilder = new HubConnectionBuilder()
+      .withUrl('https://localhost:7300/poruke-hub')
+      .configureLogging(LogLevel.Information)
+      .build();
+    this.hubConnectionBuilder
+      .start()
+      .then(() => console.log('Connection started.......!'))
+      .catch(err => console.log('Error while connect with server'));
+    this.hubConnectionBuilder.on('PosaljiPoruku', (result: any) => {
+      this.poruka=result;
+    });
     this.ucitajOpremu()
     this.ucitajTipove();
   }
-
 
   tipoviOpreme:any;
   oprema:any;
@@ -126,10 +140,13 @@ export class OpremaComponent implements OnInit {
       return [];
     return this.oprema.filter(
       (x:any)=>
-        (!this.filter_naziv ||
           (x.naziv).toLowerCase().startsWith(this.naziv.toLowerCase())
-          ) && (!this.filter_tip ||
-          (x.tipOpreme).toLowerCase().startsWith(this.tip_naziv.toLowerCase())
-        )) ;
+           && (x.tipOpreme).toLowerCase().startsWith(this.tip_naziv.toLowerCase())
+        );
+  }
+
+  obavijesti() {
+    this.poruka="...";
+    this.httpKlijent.post(MojConfig.adresa_servera + "/api/SignalR", null).subscribe();
   }
 }

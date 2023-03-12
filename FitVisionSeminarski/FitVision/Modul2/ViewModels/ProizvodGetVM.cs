@@ -17,6 +17,7 @@
 
             public string brend { get; set; }
             public int brend_id { get; set; }
+            public string kategorija { get; set; }
         }
     }
 }

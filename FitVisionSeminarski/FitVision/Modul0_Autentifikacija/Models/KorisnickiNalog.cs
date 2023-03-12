@@ -22,5 +22,9 @@ namespace FitVision.Modul0_Autentifikacija.Models
 
         public bool isAdmin => admin != null;
         public bool isKorisnik => korisnik != null;
+
+        //za aktivaciju korisnika preko maila
+        public bool isAktiviran { get; set; }
+        public string? aktivacijaGUID { get; set; }
     }
 }

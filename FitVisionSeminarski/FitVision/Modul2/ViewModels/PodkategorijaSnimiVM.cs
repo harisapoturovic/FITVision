@@ -6,5 +6,6 @@
         public string naziv { get; set; }
         public string opis { get; set; }
         public int kategorija_id { get; set; }
+        public string? slika { get; set; }
     }
 }

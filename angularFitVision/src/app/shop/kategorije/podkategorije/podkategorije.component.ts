@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {LoginInformacije} from "../../../_helpers/login-informacije";
 import {AutentifikacijaHelper} from "../../../_helpers/autentifikacija-helper";
 import {MojConfig} from "../../../moj-config";
+import {PodkategorijaService} from "../../../Podkategorija service";
 
 
 @Component({
@@ -15,6 +16,10 @@ export class PodkategorijeComponent implements OnInit {
   odabranaPodkat:any;
   urediPodkat:any;
   kategorije:any;
+  url:any;
+  @Input()
+  kategorija:any;
+  podkat:any;
 
   constructor(private httpKlijent: HttpClient) { }
 
@@ -38,6 +43,7 @@ export class PodkategorijeComponent implements OnInit {
       id:0,
       naziv:"",
       opis:"",
+      slika:"",
       kategorija_id:0
     }
   }
@@ -66,5 +72,20 @@ export class PodkategorijeComponent implements OnInit {
     this.httpKlijent.get(MojConfig.adresa_servera + "/Kategorija/GetAll").subscribe(x=>{
       this.kategorije=x;
     })
+  }
+
+  ChosenFile($event: Event) {
+    let file = (event.target as HTMLInputElement).files[0];
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e: any) => {
+      this.url = e.target.result;
+      this.odabranaPodkat.slika = this.url;
+
+    }
+  }
+
+  setujPodkat(p: any) {
+    this.podkat=p;
   }
 }

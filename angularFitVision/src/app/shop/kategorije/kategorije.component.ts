@@ -13,8 +13,6 @@ export class KategorijeComponent implements OnInit {
   kategorije:any;
   odabranaKategorija:any;
   brendovi: any;
-  //odabranaBrendovi:any;
-  //odabraniBrend:any;
   odabranaDodatno:any;
 
   constructor(private httpKlijent:HttpClient) { }
@@ -77,4 +75,5 @@ export class KategorijeComponent implements OnInit {
       this.ucitajKategorije();
     })
   }
+
 }
