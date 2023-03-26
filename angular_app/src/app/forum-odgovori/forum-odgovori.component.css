@@ -1,0 +1,36 @@
+.okvir {
+  background-color: #9cffd5;
+  margin: 4px;
+  padding: 10px;
+}
+
+.diskusija
+{
+  background-color: #dcdcdc;
+  width: 12%;
+  height: 30px;
+  font-size: 4mm;
+  padding-top: 2px;
+  border-radius: 5px;
+  font-family: Tahoma;
+  border: 1px solid grey;
+}
+
+.odg
+{
+  background-color: #edd7ff;
+  padding: 10px;
+  margin: 4px;
+}
+
+.btn
+{
+  background-color: #f6b8b8;
+  width: 12%;
+  height: 30px;
+  font-size: 4mm;
+  padding-top: 2px;
+  border-radius: 5px;
+  font-family: Tahoma;
+  border: 1px solid grey;
+}
